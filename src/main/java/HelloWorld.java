@@ -12,8 +12,10 @@ public class HelloWorld {
     @Produces("text/plain")
     public String getClichedMessage() {
         // Return some cliched textual content
-       Equipo equipo = this.testService.recuperarEntidad(Equipo.class, "Islandia");
-       return equipo.getNombre();
+       Equipo equipo1 = this.testService.recuperarEntidad(Equipo.class, "Argentina");
+      // Equipo equipo2 = this.testService.recuperarEntidad(Equipo.class, "Islandia");
+       //Equipo equipo3 = this.testService.recuperarEntidad(Equipo.class, "Croacia");
+       return equipo1.getNombre(); //+ equipo2.getNombre();// + equipo3.getNombre();
 
     }
 }
