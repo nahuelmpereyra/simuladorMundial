@@ -4,3 +4,10 @@ language: java
 build:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
+services:
+  - mysql
+
+before_install:
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('root') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - mysql -e 'CREATE SCHEMA simulacionmundial DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;'
+  - mysql -e 'USE simulacionmundial;'
