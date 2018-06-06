@@ -1,12 +1,19 @@
-
 language: java
-
-build:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 services:
   - mysql
 
+build:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+script:
+#  - mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
+  - mvn clean verify
+
 before_install:
-  - mysql -u root -e "GRANT ALL PRIVILEGES ON simulacionmundial.* TO 'travis'@'%';"
-  - mysql -e 'SET PASSWORD FOR "root"@"localhost" = PASSWORD("");' -uroot
+  - mysql -e 'CREATE DATABASE simulacionmundial;'
+  - mysql -e 'USE simulacionmundial;'
+#  - mysql -u root -e "GRANT ALL PRIVILEGES ON pizzappdb.* TO 'travis'@'%';";
+
+test:
+  - mvn test -B
