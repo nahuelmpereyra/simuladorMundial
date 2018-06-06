@@ -22,6 +22,12 @@
           <element id="library" level="project" name="Maven: org.jboss:jandex:2.0.3.Final" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:2.6.0" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.11" />
+          <element id="library" level="project" name="Maven: info.cukes:cucumber-core:1.2.5" />
+          <element id="library" level="project" name="Maven: info.cukes:cucumber-html:0.2.3" />
+          <element id="library" level="project" name="Maven: info.cukes:cucumber-java:1.2.5" />
+          <element id="library" level="project" name="Maven: info.cukes:cucumber-jvm-deps:1.0.5" />
+          <element id="library" level="project" name="Maven: info.cukes:gherkin:2.12.2" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:javax.ws.rs-api:2.1" />
         </element>
       </element>
     </root>
