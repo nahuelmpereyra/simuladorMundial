@@ -1,11 +1,6 @@
 
 language: java
 
-services:
-  - mysql
+build:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
-script:
-  - mvn clean verify
-
-test:
-  - mvn test -B
