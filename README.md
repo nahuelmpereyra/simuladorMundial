@@ -12,19 +12,19 @@ Nro | Nombre | Legajo | Mail
 3   |Esteban Matas        |28466        |estebanmatas13@gmail.com
 4   |Ramiro Belluardo        |29625        |ramirobelluardo1993@gmail.com
 
-#####VSM
+###VSM
 
 [Ir a VSM](https://realtimeboard.com/app/board/o9J_kz8U6ZE=/)
 
 
 
-#####BurnDown Chart
+###BurnDown Chart
 
 ![Screenshot](BD.png)
 
-#####Sprints
+###Sprints
 
-######Sprint 30/05/2018
+###Sprint 30/05/2018
 - Backlog priorizado.
 - Ambiente de tecnologia listo.
 - Retroespectiva.
@@ -32,7 +32,7 @@ Nro | Nombre | Legajo | Mail
 - Organizacion de documentos.
 - Users Storys del Sprint 1 estimadas.
 
-####Sprint 06/06/2018
+###Sprint 06/06/2018
 - Burndown Chart
 - VSM completo (sumar los user stories faltantes)
 - CI completo (con DB).
