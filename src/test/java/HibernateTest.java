@@ -1,3 +1,5 @@
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,9 @@ public class HibernateTest {
     @Before
     public void prepare(){
         System.out.println("Empezando el Before");
+
+        SessionFactoryProvider.getInstance().setSessionFactoryTest();
+
 
         this.testService = new TestService();
         Torneo torneo = Torneo.getTorneo();
@@ -34,9 +39,6 @@ public class HibernateTest {
         this.testService.crearEntidad(equipo1);
         this.testService.crearEntidad(equipo2);
         this.testService.crearEntidad(equipo3);
-/*        torneo.agregarEquipo(equipo1);
-        torneo.agregarEquipo(equipo2);
-        torneo.agregarEquipo(equipo3);*/
         System.out.println("Terminando el Before");
     }
 
