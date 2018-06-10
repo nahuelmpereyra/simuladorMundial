@@ -12,7 +12,7 @@ public class Torneo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @OneToMany
-    @Cascade({ CascadeType.ALL })
+    //@Cascade({ CascadeType.ALL })
     private List<Equipo> equipos = new ArrayList<>();
     private static Torneo miTorneo;
 
