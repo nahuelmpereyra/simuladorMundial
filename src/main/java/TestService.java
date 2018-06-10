@@ -1,4 +1,5 @@
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.io.Serializable;
 
@@ -33,4 +34,21 @@ public class TestService {
             return null;
         });
     }
+
+    public Equipo recuperarPorNombre(String nombre){
+
+        Session session = Runner.getCurrentSession();
+        String hql = "FROM Equipo WHERE nombre = :elNombre";
+        Query<Equipo> query = session.createQuery(hql, Equipo.class)
+                .setParameter("elNombre", nombre);
+        if (!query.getResultList().isEmpty()){
+            return query.getResultList().get(0);
+        }
+        else {
+            return null;
+        }
+    }
+
+
+
 }

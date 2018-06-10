@@ -1,4 +1,4 @@
-import org.junit.Before;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +13,8 @@ public class HibernateTest {
 
     @Before
     public void prepare(){
+        System.out.println("Empezando el Before");
+
         this.testService = new TestService();
         Torneo torneo = Torneo.getTorneo();
         if(this.testService.recuperarEntidad(Torneo.class, 1) == null ){
@@ -32,22 +34,49 @@ public class HibernateTest {
         this.testService.crearEntidad(equipo1);
         this.testService.crearEntidad(equipo2);
         this.testService.crearEntidad(equipo3);
-        torneo.agregarEquipo(equipo1);
+/*        torneo.agregarEquipo(equipo1);
         torneo.agregarEquipo(equipo2);
-        torneo.agregarEquipo(equipo3);
-
+        torneo.agregarEquipo(equipo3);*/
+        System.out.println("Terminando el Before");
     }
 
+    @After
+    public void cleanup() {
+        SessionFactoryProvider.destroy();
+        System.out.println("Terminando el After");
+    }
 
     @Test
     public void test_recuperarEquipo() {
         Runner.runInSession(() -> {
+
             Equipo equipo = this.testService.recuperarEntidad(Equipo.class, "Islandia");
             assertEquals("Islandia", equipo.getNombre());
             assertEquals("D", equipo.getZona());
-            //this.testService.eliminarEntidad(equipo);
+            System.out.println("Terminando test_recuperarEquipo");
             return null;
         });
 
+    }
+
+    @Test
+    public void  test_recuperarEquipoPorNombre() {
+        Runner.runInSession(() -> {
+            Equipo equipo = this.testService.recuperarPorNombre("Islandia");
+            assertEquals("Islandia", equipo.getNombre());
+            assertEquals("D", equipo.getZona());
+            System.out.println("Terminando test_recuperarEquipoPorNombre");
+            return null;
+        });
+    }
+
+    @Test
+    public void test_RecuperarEquipoInexistente() {
+        Runner.runInSession(() -> {
+            Equipo equipo = this.testService.recuperarPorNombre("Chipre");
+            assertEquals(null, equipo);
+            System.out.println("Terminando test_recuperarEquipoInexistente");
+            return null;
+        });
     }
 }
