@@ -28,8 +28,17 @@ public class SessionFactoryProvider {
         this.sessionFactory = configuration.buildSessionFactory();
     }
 
+    public void setSessionFactoryTest(){
+        Configuration configuration = new Configuration();
+        configuration.configure("hibernateTest.cfg.xml");
+        this.sessionFactory = configuration.buildSessionFactory();
+    }
+
     public Session createSession() {
         return this.sessionFactory.openSession();
     }
 
+    public SessionFactory getSessionFactory() {
+       return this.sessionFactory;
+    }
 }
