@@ -1,0 +1,39 @@
+<title>Iniciar Sesión</title>
+<div class="container" ng-controller="LoginController as loginCtrl">
+    <form class="form-horizontal" role="form" name="loginForm">
+        <h2>Iniciar Sesión</h2>
+
+        <div>
+            <div class="alert alert-danger" ng-show="login.errorMessage">
+                {{loginCtrl.errorMessage}}</div>
+        </div>
+
+        <div class="form-group">
+            <label for="username" class="col-sm-3 control-label">Usuario</label>
+            <div class="col-sm-9">
+                <input ng-model="loginCtrl.usuarioALoguear.username" type="text" id="username" placeholder="Ingresá tu usuario" class="form-control" required="true" autofocus>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="password" class="col-sm-3 control-label">Contraseña</label>
+            <div class="col-sm-9">
+                <input ng-model="loginCtrl.usuarioALoguear.password" type="password" id="password" placeholder="Ingresá tu contraseña" class="form-control" required="true">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <button ng-click="loginCtrl.loginUsuario()" type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <button ui-sref="register" type="button" class="btn btn-link">Registrarse</button>
+            </div>
+        </div>
+    </form>
+</div>
