@@ -1,0 +1,43 @@
+<title>Cargar Equipo</title>
+<div class="container" ng-controller="CargarEquipoController as cargarEquipoCtrl">
+    <form class="form-horizontal" role="form" name="cargarEquipoForm">
+        <h2>Cargar Equipo</h2>
+
+        <div>
+            <div class="alert alert-danger" ng-show="cargarEquipoCtrl.errorMessage">
+                {{cargarEquipoCtrl.errorMessage}}</div>
+        </div>
+
+        <div class="form-group">
+            <label for="nombre" class="col-sm-3 control-label">País</label>
+            <div class="col-sm-9">
+                <input ng-model="cargarEquipoCtrl.equipoACargar.nombre" type="text" id="nombre" placeholder="Ingresá país a cargar" class="form-control"
+                    required="true" autofocus>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="grupo" class="col-sm-3 control-label">Grupo</label>
+            <div class="col-sm-9">
+                <input ng-model="cargarEquipoCtrl.equipoACargar.zona" type="text" id="grupo" placeholder="Ingresá grupo" class="form-control"
+                    required="true">
+            </div>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+                Es cabeza de serie
+            </label>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <button ng-click="cargarEquipoCtrl.cargarEquipo()" type="submit" class="btn btn-primary btn-block">Cargar Equipo</button>
+            </div>
+        </div>
+
+    </form>
+</div>
