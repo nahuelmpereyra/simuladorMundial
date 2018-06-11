@@ -34,13 +34,13 @@ public class Services{
     @POST
     @Path("/agregarequipo")
     @Consumes({"application/json"})
-    @Produces({"text/plain"})
+    @Produces({"application/json"})
     public Response createEquipo(Equipo equipo){
 
         this.testService.crearEntidad(equipo);
 
-        return Response.ok(this.testService.recuperarEntidad(Equipo.class, equipo.getNombre()).getNombre() + " agregado con éxito").build();
-//        return Response.ok(this.testService.recuperarEntidad(Equipo.class, equipo.getNombre())).build();
+       return Response.ok(this.testService.recuperarEntidad(Equipo.class, equipo.getNombre())).header("Access-Control-Allow-Origin", "http://localhost:8080").build();
+       //return Response.ok(this.testService.recuperarEntidad(Equipo.class, equipo.getNombre()).getNombre()).build();
     }
 
 

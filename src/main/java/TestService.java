@@ -8,7 +8,8 @@ import java.io.Serializable;
  * Servicio generico para guardar o recuperar objetos de forma genreica. Usado
  * principalmente en tests
  */
-public class TestService {
+public class
+TestService {
 
     public void crearEntidad(Object object) {
         Runner.runInSession(() -> {
