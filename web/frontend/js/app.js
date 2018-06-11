@@ -3,10 +3,9 @@ angular.module('simuladorApp', ['ui.router', 'ui.bootstrap', 'angular-growl'])
         growlProvider.globalTimeToLive(2000);
     }])
     .factory("usuarioService", usuarioService)
+    .factory("cargarEquipoService", cargarEquipoService)
     .controller('LoginController', LoginController)
     .controller('RegisterController', RegisterController)
     .controller('UsuarioController', UsuarioController)
+    .controller('CargarEquipoController', CargarEquipoController)
     .config(routes)
-
-
-    
