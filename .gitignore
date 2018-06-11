@@ -15,6 +15,9 @@
 .idea/inspectionProfiles/
 
 
+/web/frontend/node_modules
+/web/frontend/npm-debug.log
+
 # Sensitive or high-churn files:
 .idea/**/dataSources/
 .idea/**/dataSources.ids
