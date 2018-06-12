@@ -4,7 +4,7 @@ const cargarEquipoService = ($http) => {
       cargarEquipo: (equipo) => {
         return $http({
           method: "POST",
-          url: baseurl + "agregarEquipo",
+          url: baseurl + "agregarequipo",
           data: equipo
         })
       }
