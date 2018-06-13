@@ -4,6 +4,7 @@ class CargarEquipoController {
     this.state = $state
     this.cargarEquipoService = cargarEquipoService
     this.equipoACargar = null
+    this.zonasValidas = ["A", "B", "C", "D", "E", "F", "G", "H"]
     this.growl = growl
     this.errorHandler = (response) => {
       if (response.data) {
@@ -25,11 +26,25 @@ class CargarEquipoController {
   }
 
   cargarEquipo() {
+    this.validarZona(this.equipoACargar.zona)
     this.cargarEquipoService.cargarEquipo(this.equipoACargar)
       .then((response) => {
-        this.notificarMensaje("Cargaste: " + response.data.nombre)
+        this.notificarMensaje("Registraste a " + response.data.equipo + " exitosamente")
         //this.state.go("equipos")
       }, this.errorHandler)
+  }
+
+  upperCase(zona) {
+    if (zona !== undefined) {
+      this.equipoACargar.zona = zona.toLocaleUpperCase()
+    }
+  }
+
+  validarZona(zona){
+    if (!this.zonasValidas.includes(zona)){
+      this.notificarError("Zona incorrecta")
+      throw 'Zona incorrecta' // Necesario para que corte la ejecución.
+    }
   }
 
 }
