@@ -1,12 +1,12 @@
 import gherkin.deps.com.google.gson.JsonObject;
 
-import javax.persistence.PostRemove;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
 @Path("")
-public class Services{
+public class Services {
     // The Java method will process HTTP GET requests
     TestService testService = new TestService();
 
@@ -34,19 +34,29 @@ public class Services{
     @POST
     @Path("/agregarequipo")
     @Consumes({"application/json"})
-    @Produces({"application/json"})
-    public Response createEquipo(Equipo equipo){
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createEquipo(Equipo equipo) {
+        if (testService.recuperarPorNombre(equipo.getNombre()) == null) {
+            this.testService.crearEntidad(equipo);
 
-        this.testService.crearEntidad(equipo);
+            JsonObject okay = new JsonObject();
+            okay.addProperty("nombre", equipo.getNombre());
+            okay.addProperty("zona", equipo.getZona());
+            return Response.status(Response.Status.OK)
+                    .entity(okay.toString())
+                    .build();
+        } else {
+            JsonObject error = new JsonObject();
+            error.addProperty("error", "Equipo ya existente");
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(error.toString())
+                    .build();
+        }
 
-       return Response.ok(this.testService.recuperarEntidad(Equipo.class, equipo.getNombre())).header("Access-Control-Allow-Origin", "http://localhost:8080").build();
-       //return Response.ok(this.testService.recuperarEntidad(Equipo.class, equipo.getNombre()).getNombre()).build();
     }
 
 
-
 }
-// The Java class will be hosted at the URI path "/index"
 
 
 

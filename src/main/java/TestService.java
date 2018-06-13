@@ -37,7 +37,7 @@ TestService {
     }
 
     public Equipo recuperarPorNombre(String nombre){
-
+        return Runner.runInSession(() -> {
         Session session = Runner.getCurrentSession();
         String hql = "FROM Equipo WHERE nombre = :elNombre";
         Query<Equipo> query = session.createQuery(hql, Equipo.class)
@@ -48,6 +48,7 @@ TestService {
         else {
             return null;
         }
+        });
     }
 
 
