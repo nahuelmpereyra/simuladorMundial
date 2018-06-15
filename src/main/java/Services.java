@@ -38,14 +38,19 @@ public class Services {
             if (equipoRecuperado != null) {
                 throw new Exception("Equipo ya existente");
             } else {
-                this.testService.crearEntidad(equipo);
+                if (testService.recuperarCantidadDeEquiposPorZona(equipo.getZona()) < 4) {
+                    this.testService.crearEntidad(equipo);
 
-                String nombre = "\"" + equipo.getNombre() + "\"";
-                String zona = "\"" + equipo.getZona() + "\"";
-                String ok = String.format("{\n" + "\"equipo\": " + nombre + ",\n" + "\"zona\": " + zona + "\n" + "}");
-                return Response.status(Response.Status.OK)
-                        .entity(ok)
-                        .build();
+
+                    String nombre = "\"" + equipo.getNombre() + "\"";
+                    String zona = "\"" + equipo.getZona() + "\"";
+                    String ok = String.format("{\n" + "\"equipo\": " + nombre + ",\n" + "\"zona\": " + zona + "\n" + "}");
+                    return Response.status(Response.Status.OK)
+                            .entity(ok)
+                            .build();
+                }else {
+                    throw new Exception("No puede haber mas de 4 equipos por zona");
+                }
             }
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)

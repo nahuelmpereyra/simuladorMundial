@@ -49,8 +49,20 @@ TestService {
             return null;
         }
         });
+
+
     }
 
+    public Integer recuperarCantidadDeEquiposPorZona(String zona) {
+        return Runner.runInSession(() -> {
+            Session session = Runner.getCurrentSession();
+            String hql = "FROM Equipo WHERE zona = :laZona";
+            Query<Equipo> query = session.createQuery(hql, Equipo.class)
+                    .setParameter("laZona", zona);
 
+                return query.getResultList().size();
 
+            
+        });
+    }
 }
