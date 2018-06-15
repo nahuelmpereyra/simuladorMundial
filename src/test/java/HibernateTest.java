@@ -1,5 +1,3 @@
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +9,7 @@ public class HibernateTest {
     private Equipo equipo1;
     private Equipo equipo2;
     private Equipo equipo3;
-    private TestService testService;
+    private DaoServicios testService;
 
     @Before
     public void prepare(){
@@ -20,7 +18,7 @@ public class HibernateTest {
         SessionFactoryProvider.getInstance().setSessionFactoryTest();
 
 
-        this.testService = new TestService();
+        this.testService = new DaoServicios();
         Torneo torneo = Torneo.getTorneo();
         if(this.testService.recuperarEntidad(Torneo.class, 1) == null ){
             this.testService.crearEntidad(torneo);

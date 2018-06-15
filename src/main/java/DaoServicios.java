@@ -9,7 +9,7 @@ import java.io.Serializable;
  * principalmente en tests
  */
 public class
-TestService {
+DaoServicios {
 
     public void crearEntidad(Object object) {
         Runner.runInSession(() -> {

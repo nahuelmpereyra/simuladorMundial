@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 @Path("")
 public class Services {
     // The Java method will process HTTP GET requests
-    TestService testService = new TestService();
+    DaoServicios daoServicios = new DaoServicios();
 
 
     @GET
@@ -16,9 +16,9 @@ public class Services {
     @Produces("application/json")
     public Equipo getEquipos() {
         // Return some cliched textual content
-        Equipo equipo1 = this.testService.recuperarEntidad(Equipo.class, "Argentina");
-        Equipo equipo2 = this.testService.recuperarEntidad(Equipo.class, "Islandia");
-//        Equipo equipo3 = this.testService.recuperarEntidad(Equipo.class, "Croacia");
+        Equipo equipo1 = this.daoServicios.recuperarEntidad(Equipo.class, "Argentina");
+        Equipo equipo2 = this.daoServicios.recuperarEntidad(Equipo.class, "Islandia");
+//        Equipo equipo3 = this.daoServicios.recuperarEntidad(Equipo.class, "Croacia");
         return equipo1;
 
     }
@@ -27,7 +27,7 @@ public class Services {
     @Path("{pais}")
     @Produces("application/json")
     public Equipo getEquipobyId(@PathParam("pais") String pais) {
-        Equipo equipo1 = this.testService.recuperarEntidad(Equipo.class, pais);
+        Equipo equipo1 = this.daoServicios.recuperarEntidad(Equipo.class, pais);
         return equipo1;
     }
 
@@ -36,8 +36,8 @@ public class Services {
     @Consumes({"application/json"})
     @Produces(MediaType.APPLICATION_JSON)
     public Response createEquipo(Equipo equipo) {
-        if (testService.recuperarPorNombre(equipo.getNombre()) == null) {
-            this.testService.crearEntidad(equipo);
+        if (daoServicios.recuperarPorNombre(equipo.getNombre()) == null) {
+            this.daoServicios.crearEntidad(equipo);
 
             JsonObject okay = new JsonObject();
             okay.addProperty("nombre", equipo.getNombre());
