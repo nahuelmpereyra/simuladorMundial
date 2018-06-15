@@ -1,4 +1,3 @@
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -7,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SimuladosStepdefs {
 
     private Equipo equipo;
-    private TestService testService = new TestService();
+    private DaoServicios testService = new DaoServicios();
 
 
     @Given("^Un nuevo Equipo$")

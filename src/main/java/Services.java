@@ -1,20 +1,24 @@
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 
 @Path("")
 public class Services {
-    TestService testService = new TestService();
+
+    // The Java method will process HTTP GET requests
+    DaoServicios daoServicios = new DaoServicios();
 
 
     @GET
     @Path("/index")
     @Produces("application/json")
-    public Equipo getEquipos() {
-        Equipo equipo1 = this.testService.recuperarEntidad(Equipo.class, "Argentina");
-        Equipo equipo2 = this.testService.recuperarEntidad(Equipo.class, "Islandia");
-        return equipo1;
+
+    public List<Equipo> getEquipos() {
+
+        List<Equipo> equipos=this.daoServicios.recuperarEquipos();
+        return equipos;
 
     }
 
@@ -22,11 +26,11 @@ public class Services {
     @Path("{pais}")
     @Produces("application/json")
     public Equipo getEquipobyId(@PathParam("pais") String pais) {
-        Equipo equipo1 = this.testService.recuperarEntidad(Equipo.class, pais);
+        Equipo equipo1 = this.daoServicios.recuperarEntidad(Equipo.class, pais);
         return equipo1;
     }
 
-    @POST
+@POST
     @Path("/agregarequipo")
     @Consumes({"application/json"})
     @Produces(MediaType.APPLICATION_JSON)

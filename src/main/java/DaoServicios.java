@@ -2,6 +2,8 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -9,7 +11,7 @@ import java.io.Serializable;
  * principalmente en tests
  */
 public class
-TestService {
+DaoServicios {
 
     public void crearEntidad(Object object) {
         Runner.runInSession(() -> {
@@ -51,6 +53,21 @@ TestService {
         });
     }
 
+
+
+    public List<Equipo> recuperarEquipos(){
+        return Runner.runInSession(() -> {
+            Session session = Runner.getCurrentSession();
+            String hql = "FROM Equipo";
+            Query<Equipo> query = session.createQuery(hql, Equipo.class);
+            if (!query.getResultList().isEmpty()){
+                return query.getResultList();
+            }
+            else {
+                return new ArrayList<>();
+            }
+        });
+    }
 
 
 }

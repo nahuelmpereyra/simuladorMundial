@@ -1,5 +1,3 @@
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +9,7 @@ public class HibernateTest {
     private Equipo equipo1;
     private Equipo equipo2;
     private Equipo equipo3;
-    private TestService testService;
+    private DaoServicios daoServicios;
 
     @Before
     public void prepare(){
@@ -20,10 +18,10 @@ public class HibernateTest {
         SessionFactoryProvider.getInstance().setSessionFactoryTest();
 
 
-        this.testService = new TestService();
+        this.daoServicios = new DaoServicios();
         Torneo torneo = Torneo.getTorneo();
-        if(this.testService.recuperarEntidad(Torneo.class, 1) == null ){
-            this.testService.crearEntidad(torneo);
+        if(this.daoServicios.recuperarEntidad(Torneo.class, 1) == null ){
+            this.daoServicios.crearEntidad(torneo);
         }
 
         this.equipo1 = new Equipo();
@@ -36,9 +34,9 @@ public class HibernateTest {
         equipo3.setZona("D");
         equipo3.setNombre("Croacia");
 
-        this.testService.crearEntidad(equipo1);
-        this.testService.crearEntidad(equipo2);
-        this.testService.crearEntidad(equipo3);
+        this.daoServicios.crearEntidad(equipo1);
+        this.daoServicios.crearEntidad(equipo2);
+        this.daoServicios.crearEntidad(equipo3);
         System.out.println("Terminando el Before");
     }
 
@@ -52,7 +50,7 @@ public class HibernateTest {
     public void test_recuperarEquipo() {
         Runner.runInSession(() -> {
 
-            Equipo equipo = this.testService.recuperarEntidad(Equipo.class, "Islandia");
+            Equipo equipo = this.daoServicios.recuperarEntidad(Equipo.class, "Islandia");
             assertEquals("Islandia", equipo.getNombre());
             assertEquals("D", equipo.getZona());
             System.out.println("Terminando test_recuperarEquipo");
@@ -64,7 +62,7 @@ public class HibernateTest {
     @Test
     public void  test_recuperarEquipoPorNombre() {
         Runner.runInSession(() -> {
-            Equipo equipo = this.testService.recuperarPorNombre("Islandia");
+            Equipo equipo = this.daoServicios.recuperarPorNombre("Islandia");
             assertEquals("Islandia", equipo.getNombre());
             assertEquals("D", equipo.getZona());
             System.out.println("Terminando test_recuperarEquipoPorNombre");
@@ -75,7 +73,7 @@ public class HibernateTest {
     @Test
     public void test_RecuperarEquipoInexistente() {
         Runner.runInSession(() -> {
-            Equipo equipo = this.testService.recuperarPorNombre("Chipre");
+            Equipo equipo = this.daoServicios.recuperarPorNombre("Chipre");
             assertEquals(null, equipo);
             System.out.println("Terminando test_recuperarEquipoInexistente");
             return null;
