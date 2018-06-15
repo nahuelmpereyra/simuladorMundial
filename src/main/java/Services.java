@@ -3,6 +3,7 @@ import gherkin.deps.com.google.gson.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 
 @Path("")
@@ -14,12 +15,10 @@ public class Services {
     @GET
     @Path("/index")
     @Produces("application/json")
-    public Equipo getEquipos() {
-        // Return some cliched textual content
-        Equipo equipo1 = this.daoServicios.recuperarEntidad(Equipo.class, "Argentina");
-        Equipo equipo2 = this.daoServicios.recuperarEntidad(Equipo.class, "Islandia");
-//        Equipo equipo3 = this.daoServicios.recuperarEntidad(Equipo.class, "Croacia");
-        return equipo1;
+    public List<Equipo> getEquipos() {
+
+        List<Equipo> equipos=this.daoServicios.recuperarEquipos();
+        return equipos;
 
     }
 
