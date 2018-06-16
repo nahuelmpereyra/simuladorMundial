@@ -3,7 +3,7 @@ class CargarEquipoController {
   constructor($state, cargarEquipoService, growl) {
     this.state = $state
     this.cargarEquipoService = cargarEquipoService
-    this.equipoACargar = null
+    this.equipoACargar = new Equipo()
     this.zonasValidas = ["A", "B", "C", "D", "E", "F", "G", "H"]
     this.growl = growl
     this.errorHandler = (response) => {
