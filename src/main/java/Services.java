@@ -1,6 +1,7 @@
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 
 @Path("")
@@ -10,12 +11,9 @@ public class Services {
 
     @GET
     @Path("/index")
-    @Produces("application/json")
-    public Equipo getEquipos() {
-        Equipo equipo1 = this.testService.recuperarEntidad(Equipo.class, "Argentina");
-        Equipo equipo2 = this.testService.recuperarEntidad(Equipo.class, "Islandia");
-        return equipo1;
-
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Equipo> getEquipos() {
+        return this.testService.recuperarEquipos();
     }
 
     @GET

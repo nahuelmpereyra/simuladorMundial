@@ -70,4 +70,18 @@ TestService {
         return this.recuperarEquiposPorZona(zona).stream().anyMatch(equipo -> equipo.getEsCabezaDeSerie());
     }
 
+
+    public List<Equipo> recuperarEquipos() {
+        return Runner.runInSession(() -> {
+            Session session = Runner.getCurrentSession();
+            String hql = "FROM Equipo";
+            Query<Equipo> query = session.createQuery(hql, Equipo.class);
+            if (!query.getResultList().isEmpty()) {
+                return query.getResultList();
+            } else {
+                return new ArrayList<>();
+            }
+        });
+    }
+
 }
