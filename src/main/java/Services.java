@@ -38,7 +38,7 @@ public class Services {
             if (equipoRecuperado != null) {
                 throw new Exception("Equipo ya existente");
             } else {
-                if (testService.recuperarCantidadDeEquiposPorZona(equipo.getZona()) < 4) {
+                if (testService.recuperarEquiposPorZona(equipo.getZona()).size() < 4) {
                     this.testService.crearEntidad(equipo);
 
 

@@ -8,6 +8,8 @@ public class Equipo {
     @Id
     private String nombre;
 
+    private Boolean esCabezaDeSerie = false;
+
     public String getNombre() {
         return this.nombre;
     }
@@ -23,4 +25,8 @@ public class Equipo {
     public void setZona(String zona) {
         this.zona = zona;
     }
+
+    public Boolean getEsCabezaDeSerie() { return esCabezaDeSerie; }
+
+    public void setEsCabezaDeSerie() {this.esCabezaDeSerie = true;}
 }

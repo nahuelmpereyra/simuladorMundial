@@ -2,6 +2,8 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -36,33 +38,33 @@ TestService {
         });
     }
 
-    public Equipo recuperarPorNombre(String nombre){
+    public Equipo recuperarPorNombre(String nombre) {
         return Runner.runInSession(() -> {
-        Session session = Runner.getCurrentSession();
-        String hql = "FROM Equipo WHERE nombre = :elNombre";
-        Query<Equipo> query = session.createQuery(hql, Equipo.class)
-                .setParameter("elNombre", nombre);
-        if (!query.getResultList().isEmpty()){
-            return query.getResultList().get(0);
-        }
-        else {
-            return null;
-        }
+            Session session = Runner.getCurrentSession();
+            String hql = "FROM Equipo WHERE nombre = :elNombre";
+            Query<Equipo> query = session.createQuery(hql, Equipo.class)
+                    .setParameter("elNombre", nombre);
+            if (!query.getResultList().isEmpty()) {
+                return query.getResultList().get(0);
+            } else {
+                return null;
+            }
         });
 
 
     }
 
-    public Integer recuperarCantidadDeEquiposPorZona(String zona) {
+    public List<Equipo> recuperarEquiposPorZona(String zona) {
         return Runner.runInSession(() -> {
             Session session = Runner.getCurrentSession();
             String hql = "FROM Equipo WHERE zona = :laZona";
             Query<Equipo> query = session.createQuery(hql, Equipo.class)
                     .setParameter("laZona", zona);
 
-                return query.getResultList().size();
+            return query.getResultList();
 
-            
         });
     }
+
+
 }
