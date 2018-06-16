@@ -66,5 +66,8 @@ TestService {
         });
     }
 
+    public Boolean hayCabezaDeSerieEnZona(String zona) {
+        return this.recuperarEquiposPorZona(zona).stream().anyMatch(equipo -> equipo.getEsCabezaDeSerie());
+    }
 
 }

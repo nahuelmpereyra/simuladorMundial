@@ -28,5 +28,5 @@ public class Equipo {
 
     public Boolean getEsCabezaDeSerie() { return esCabezaDeSerie; }
 
-    public void setEsCabezaDeSerie() {this.esCabezaDeSerie = true;}
+    public void setEsCabezaDeSerie(Boolean bool) {this.esCabezaDeSerie = bool;}
 }

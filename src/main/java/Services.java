@@ -38,18 +38,24 @@ public class Services {
             if (equipoRecuperado != null) {
                 throw new Exception("Equipo ya existente");
             } else {
-                if (testService.recuperarEquiposPorZona(equipo.getZona()).size() < 4) {
-                    this.testService.crearEntidad(equipo);
+                if(equipo.getEsCabezaDeSerie() && this.testService.hayCabezaDeSerieEnZona(equipo.getZona())){
+
+                    throw new Exception("Ya existe un cabeza de serie en el grupo " + equipo.getZona());
+                }
+                else {
+                    if (testService.recuperarEquiposPorZona(equipo.getZona()).size() < 4) {
+                        this.testService.crearEntidad(equipo);
 
 
-                    String nombre = "\"" + equipo.getNombre() + "\"";
-                    String zona = "\"" + equipo.getZona() + "\"";
-                    String ok = String.format("{\n" + "\"equipo\": " + nombre + ",\n" + "\"zona\": " + zona + "\n" + "}");
-                    return Response.status(Response.Status.OK)
-                            .entity(ok)
-                            .build();
-                }else {
-                    throw new Exception("No puede haber mas de 4 equipos por zona");
+                        String nombre = "\"" + equipo.getNombre() + "\"";
+                        String zona = "\"" + equipo.getZona() + "\"";
+                        String ok = String.format("{\n" + "\"equipo\": " + nombre + ",\n" + "\"zona\": " + zona + "\n" + "}");
+                        return Response.status(Response.Status.OK)
+                                .entity(ok)
+                                .build();
+                    } else {
+                        throw new Exception("No puede haber mas de 4 equipos por zona");
+                    }
                 }
             }
         } catch (Exception e) {
@@ -59,11 +65,6 @@ public class Services {
         }
 
     }
-
-//    private boolean esZonaValida(String zona) {
-//        return this.zonasValidas.contains(zona);
-//    }
-
 
     private String getErrorJson(String message) {
         String msg = "\"" + message + "\"";
