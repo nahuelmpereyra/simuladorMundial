@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.assertEquals;
 
 public class HibernateTest {
@@ -12,9 +14,10 @@ public class HibernateTest {
     private Equipo equipo2;
     private Equipo equipo3;
     private TestService testService;
+    private Partido partido;
 
     @Before
-    public void prepare(){
+    public void prepare() {
         System.out.println("Empezando el Before");
 
         SessionFactoryProvider.getInstance().setSessionFactoryTest();
@@ -22,7 +25,7 @@ public class HibernateTest {
 
         this.testService = new TestService();
         Torneo torneo = Torneo.getTorneo();
-        if(this.testService.recuperarEntidad(Torneo.class, 1) == null ){
+        if (this.testService.recuperarEntidad(Torneo.class, 1) == null) {
             this.testService.crearEntidad(torneo);
         }
 
@@ -36,9 +39,11 @@ public class HibernateTest {
         equipo3.setZona("D");
         equipo3.setNombre("Croacia");
 
+        this.partido = new Partido(new Date(), equipo1, equipo2, "Estadio");
         this.testService.crearEntidad(equipo1);
         this.testService.crearEntidad(equipo2);
         this.testService.crearEntidad(equipo3);
+        this.testService.crearEntidad(partido);
         System.out.println("Terminando el Before");
     }
 
@@ -62,7 +67,7 @@ public class HibernateTest {
     }
 
     @Test
-    public void  test_recuperarEquipoPorNombre() {
+    public void test_recuperarEquipoPorNombre() {
         Runner.runInSession(() -> {
             Equipo equipo = this.testService.recuperarPorNombre("Islandia");
             assertEquals("Islandia", equipo.getNombre());
@@ -78,6 +83,16 @@ public class HibernateTest {
             Equipo equipo = this.testService.recuperarPorNombre("Chipre");
             assertEquals(null, equipo);
             System.out.println("Terminando test_recuperarEquipoInexistente");
+            return null;
+        });
+    }
+
+    @Test
+    public void test_VerificarPartidoCargado() {
+        Runner.runInSession(() -> {
+            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            assertEquals("Argentina", partidoRecuperado.getEquipo1().getNombre());
+            assertEquals("Islandia", partidoRecuperado.getEquipo2().getNombre());
             return null;
         });
     }

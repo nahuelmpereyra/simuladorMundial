@@ -28,6 +28,6 @@
 
         <mapping class="Torneo" />
         <mapping class="Equipo" />
-
+        <mapping class="Partido" />
     </session-factory>
 </hibernate-configuration>
