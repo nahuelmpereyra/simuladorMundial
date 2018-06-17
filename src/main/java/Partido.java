@@ -8,11 +8,13 @@ public class Partido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int id;
+
     private Date fecha;
     @OneToOne
     private Equipo equipo1;
     @OneToOne
     private Equipo equipo2;
+
     private String estadio;
 
 
@@ -27,18 +29,19 @@ public class Partido {
     }
 
     public Date getFecha() {
-        return fecha;
+        return this.fecha;
     }
 
     public Equipo getEquipo1() {
-        return equipo1;
+        return this.equipo1;
     }
 
     public Equipo getEquipo2() {
-        return equipo2;
+        return this.equipo2;
     }
 
     public String getEstadio() {
-        return estadio;
+        return this.estadio;
     }
+
 }
