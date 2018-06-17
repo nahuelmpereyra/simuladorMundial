@@ -1,7 +1,4 @@
-Feature: Gradle-Cucumber integration
-
-  Scenario: Just a failing scenario
-    When I run a failing step
+Feature: Cucumber integration
 
 
   Scenario: Nuevo Equipo agregado
