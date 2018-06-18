@@ -29,5 +29,7 @@
         <mapping class="Torneo" />
         <mapping class="Equipo" />
         <mapping class="Partido" />
+        <mapping class="Resultado" />
+
     </session-factory>
 </hibernate-configuration>

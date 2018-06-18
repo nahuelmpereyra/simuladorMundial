@@ -20,3 +20,12 @@ Feature: Cucumber integration
     When Equipo se agrega
     When Partido se agrega
     Then El Partido se carga en la base de partidos
+
+  Scenario: Setear resultados del Partido
+    Given Un nuevo Equipo
+    Given Otro nuevo Equipo
+    Given Un nuevo Partido
+    When Equipo se agrega
+    When Partido se agrega
+    When Seteo resultado del partido
+    Then El Partido tiene un resultado
