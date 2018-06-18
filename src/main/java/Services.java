@@ -10,7 +10,7 @@ public class Services {
 
 
     @GET
-    @Path("/index")
+    @Path("/equipos")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Equipo> getEquipos() {
         return this.testService.recuperarEquipos();
