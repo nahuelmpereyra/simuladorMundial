@@ -1,32 +1,47 @@
 <div data-ng-controller="CargarResultadosController as ctrl">
     <ul class="nav nav-pills nav-stacked">
         <li data-ng-repeat="grupo in ctrl.grupos">
-            <div>
+            <div class="col-sm-6">
                 <br>
                 <b>Grupo {{grupo}}</b>
                 <br>
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Posición</th>
-                            <th>Equipo</th>
-                            <th>Grupo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-ng-repeat="equipo in ctrl.getGrupo(grupo)">
+                <div class="col-sm-8">
 
-                            <th>1</th>
-                            <td>{{equipo.nombre}}</td>
-                            <td>{{equipo.zona}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <table class="table table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th>Posición</th>
+                                <th>Equipo</th>
+                                <th>Grupo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="equipo in ctrl.getGrupo(grupo)"  ng-class="{true:'cabezaDeSerie'}[equipo.esCabezaDeSerie]">
+                                <th>1</th>
+                                <td>
+                                    {{equipo.nombre}}
+                                </td>
+                                <td>
+                                    {{equipo.zona}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
             </div>
         </li>
     </ul>
 
-    
+
 
 
 
