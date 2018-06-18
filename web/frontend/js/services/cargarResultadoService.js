@@ -7,6 +7,12 @@ const cargarResultadoService = ($http, $state) => {
           method: "GET",
           url: baseurl + "equipos"
         })
+      },
+      listarPorGrupo: (grupo) => {
+        return $http({
+          method: "GET",
+          url: baseurl + "equipos/" + grupo
+        })
       }
     }
   
