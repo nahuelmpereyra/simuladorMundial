@@ -17,6 +17,13 @@ public class Services {
     }
 
     @GET
+    @Path("/equipos/{zona}")
+    @Produces("application/json")
+    public List<Equipo> getEquiposByZona(@PathParam("zona") String zona) {
+        return this.testService.recuperarEquiposPorZona(zona);
+    }
+
+    @GET
     @Path("{pais}")
     @Produces("application/json")
     public Equipo getEquipobyId(@PathParam("pais") String pais) {
