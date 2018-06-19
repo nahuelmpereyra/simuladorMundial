@@ -100,11 +100,11 @@ public class HibernateTest {
     public void test_VerificarResultadoPartido() {
         Runner.runInSession(() -> {
             Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
-            assertTrue(partidoRecuperado.resultado(0,0));
-            partidoRecuperado.setResultado(2,1);
+            assertTrue(partidoRecuperado.resultado(0, 0));
+            partidoRecuperado.setResultado(2, 1);
             this.testService.actualizar(partidoRecuperado);
-            partidoRecuperado=this.testService.recuperarEntidad(Partido.class, this.partido.id);
-            assertTrue(partidoRecuperado.resultado(2,1));
+            partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            assertTrue(partidoRecuperado.resultado(2, 1));
             return null;
         });
     }
@@ -113,14 +113,17 @@ public class HibernateTest {
     public void test_VerificarPuntosPartidoConGanador() {
         Runner.runInSession(() -> {
             Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
-            partidoRecuperado.setResultado(2,1);
+            partidoRecuperado.setResultado(2, 1);
             partidoRecuperado.sumarPuntos();
 
             this.testService.actualizar(partidoRecuperado);
-           Equipo equipoLocalRecuperado= this.testService.recuperarPorNombre("Argentina");
-           Equipo equipoVisitanteRecuperado= this.testService.recuperarPorNombre("Islandia");
-            assertEquals(equipoLocalRecuperado.getPuntos(),3);
-            assertEquals(equipoVisitanteRecuperado.getPuntos(),0);
+            Equipo equipoLocalRecuperado = this.testService.recuperarPorNombre("Argentina");
+            Equipo equipoVisitanteRecuperado = this.testService.recuperarPorNombre("Islandia");
+            assertEquals(equipoLocalRecuperado.getGolesAfavor(), 2);
+            assertEquals(equipoLocalRecuperado.getGolesEnContra(), 1);
+            assertEquals(equipoLocalRecuperado.getDiferencia(), 1);
+            assertEquals(equipoLocalRecuperado.getPuntos(), 3);
+            assertEquals(equipoVisitanteRecuperado.getPuntos(), 0);
             return null;
         });
     }
@@ -129,14 +132,17 @@ public class HibernateTest {
     public void test_VerificarPuntosPartidoEmpatado() {
         Runner.runInSession(() -> {
             Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
-            partidoRecuperado.setResultado(1,1);
+            partidoRecuperado.setResultado(1, 1);
             partidoRecuperado.sumarPuntos();
 
             this.testService.actualizar(partidoRecuperado);
-            Equipo equipoLocalRecuperado= this.testService.recuperarPorNombre("Argentina");
-            Equipo equipoVisitanteRecuperado= this.testService.recuperarPorNombre("Islandia");
-            assertEquals(equipoLocalRecuperado.getPuntos(),1);
-            assertEquals(equipoVisitanteRecuperado.getPuntos(),1);
+            Equipo equipoLocalRecuperado = this.testService.recuperarPorNombre("Argentina");
+            Equipo equipoVisitanteRecuperado = this.testService.recuperarPorNombre("Islandia");
+            assertEquals(equipoLocalRecuperado.getPuntos(), 1);
+            assertEquals(equipoLocalRecuperado.getGolesAfavor(), 1);
+            assertEquals(equipoLocalRecuperado.getGolesEnContra(), 1);
+            assertEquals(equipoLocalRecuperado.getDiferencia(), 0);
+            assertEquals(equipoVisitanteRecuperado.getPuntos(), 1);
             return null;
         });
     }

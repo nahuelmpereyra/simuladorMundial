@@ -29,13 +29,13 @@ public class SimuladosStepdefs {
 
 
     }
+
     @Then("^El equipo se carga en la base de equipos$")
     public void el_equipo_se_carga_en_la_base_de_equipos() throws Throwable {
-        String nombreEquipo  = this.testService.recuperarEntidad(Equipo.class, equipo1.getNombre()).getNombre();
+        String nombreEquipo = this.testService.recuperarEntidad(Equipo.class, equipo1.getNombre()).getNombre();
 
         assertThat(nombreEquipo).isEqualTo("Arabia Saudita");
     }
-
 
 
     @When("^Seteo el Equipo como cabeza de serie$")
@@ -45,7 +45,7 @@ public class SimuladosStepdefs {
 
     @Then("^El Equipo figura como cabeza de serie en la base de equipos$")
     public void el_Equipo_figura_como_cabeza_de_serie_en_la_base_de_equipos() throws Throwable {
-        Equipo equipoRecuperado  = this.testService.recuperarEntidad(Equipo.class, equipo1.getNombre());
+        Equipo equipoRecuperado = this.testService.recuperarEntidad(Equipo.class, equipo1.getNombre());
         assertThat(equipoRecuperado.getEsCabezaDeSerie());
         assertThat(this.testService.hayCabezaDeSerieEnZona(equipoRecuperado.getZona()));
 
@@ -61,7 +61,7 @@ public class SimuladosStepdefs {
 
     @Given("^Un nuevo Partido$")
     public void un_nuevo_Partido() throws Throwable {
-        partido = new Partido(new Date(),equipo1,equipo2,"Moscu");
+        partido = new Partido(new Date(), equipo1, equipo2, "Moscu");
 
     }
 
@@ -87,10 +87,9 @@ public class SimuladosStepdefs {
     }
 
 
-
     @When("^Seteo resultado del partido$")
     public void seteo_resultado_del_partido() throws Throwable {
-        partido.setResultado(2,1);
+        partido.setResultado(2, 1);
     }
 
     @Then("^El Partido tiene un resultado$")
@@ -98,7 +97,6 @@ public class SimuladosStepdefs {
         Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
         assertThat(partidoRecuperado.resultado(2, 1));
     }
-
 
 
 }

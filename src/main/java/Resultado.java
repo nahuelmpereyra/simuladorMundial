@@ -6,17 +6,17 @@ import javax.persistence.Id;
 @Entity
 public class Resultado {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        public int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public int id;
 
-        int golesLocal;
-        int golesVisitantes;
+    int golesLocal;
+    int golesVisitantes;
 
-        public void setResultados(int local,int visitante){
-            this.golesLocal= local;
-            this.golesVisitantes= visitante;
-        }
+    public void setResultados(int local, int visitante) {
+        this.golesLocal = local;
+        this.golesVisitantes = visitante;
+    }
 
 
 }

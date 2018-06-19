@@ -10,7 +10,10 @@ public class Equipo {
 
     private Boolean esCabezaDeSerie = false;
 
-    private Integer puntos=0;
+    private Integer puntos = 0;
+    private Integer golesAfavor = 0;
+    private Integer golesEnContra = 0;
+    private Integer diferencia = 0;
 
     public String getNombre() {
         return this.nombre;
@@ -28,9 +31,13 @@ public class Equipo {
         this.zona = zona;
     }
 
-    public Boolean getEsCabezaDeSerie() { return esCabezaDeSerie; }
+    public Boolean getEsCabezaDeSerie() {
+        return esCabezaDeSerie;
+    }
 
-    public void setEsCabezaDeSerie(Boolean bool) {this.esCabezaDeSerie = bool;}
+    public void setEsCabezaDeSerie(Boolean bool) {
+        this.esCabezaDeSerie = bool;
+    }
 
     public void sumarPuntos(int puntos) {
         this.puntos += puntos;
@@ -38,5 +45,27 @@ public class Equipo {
 
     public int getPuntos() {
         return puntos;
+    }
+
+    public void sumarGoles(int golesLocal, int golesVisitantes) {
+        golesAfavor += golesLocal;
+        golesEnContra += golesVisitantes;
+        actualizarDiferencia();
+    }
+
+    public void actualizarDiferencia() {
+        diferencia = golesAfavor - golesEnContra;
+    }
+
+    public int getDiferencia() {
+        return diferencia;
+    }
+
+    public int getGolesAfavor() {
+        return golesAfavor;
+    }
+
+    public int getGolesEnContra() {
+        return golesEnContra;
     }
 }

@@ -30,7 +30,7 @@ public class Partido {
         this.local = equipo1;
         this.visitante = equipo2;
         this.estadio = estadio;
-        this.resultado= new Resultado();
+        this.resultado = new Resultado();
 
     }
 
@@ -55,23 +55,27 @@ public class Partido {
 
     public void setResultado(int golesLocal, int golesVisitantes) {
 
-        this.resultado.setResultados(golesLocal,golesVisitantes);
+        this.resultado.setResultados(golesLocal, golesVisitantes);
+        local.sumarGoles(golesLocal, golesVisitantes);
+        visitante.sumarGoles(golesVisitantes, golesLocal);
 
     }
 
-    public boolean resultado(int golesLocal,int golesVisitantes) {
+    public boolean resultado(int golesLocal, int golesVisitantes) {
 
-        return (resultado.golesLocal== golesLocal && resultado.golesVisitantes==golesVisitantes);
+        return (resultado.golesLocal == golesLocal && resultado.golesVisitantes == golesVisitantes);
     }
-    public void sumarPuntos(){
-        if (esGanadorLocal()){
-            local.sumarPuntos(3); }
-            else {
-                if (esEmpate()){
+
+    public void sumarPuntos() {
+        if (esGanadorLocal()) {
+            local.sumarPuntos(3);
+        } else {
+            if (esEmpate()) {
                 local.sumarPuntos(1);
                 visitante.sumarPuntos(1);
-        }
-        else { visitante.sumarPuntos(3); }
+            } else {
+                visitante.sumarPuntos(3);
+            }
         }
 
 
@@ -82,6 +86,6 @@ public class Partido {
     }
 
     private boolean esGanadorLocal() {
-        return resultado.golesLocal>resultado.golesVisitantes;
+        return resultado.golesLocal > resultado.golesVisitantes;
     }
 }
