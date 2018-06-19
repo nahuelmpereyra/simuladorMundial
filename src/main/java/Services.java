@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -7,6 +9,7 @@ import java.util.List;
 @Path("")
 public class Services {
     TestService testService = new TestService();
+    Gson gson = new Gson();
 
 
     @GET
@@ -50,10 +53,7 @@ public class Services {
                     if (testService.recuperarEquiposPorZona(equipo.getZona()).size() < 4) {
                         this.testService.crearEntidad(equipo);
 
-
-                        String nombre = "\"" + equipo.getNombre() + "\"";
-                        String zona = "\"" + equipo.getZona() + "\"";
-                        String ok = String.format("{\n" + "\"equipo\": " + nombre + ",\n" + "\"zona\": " + zona + "\n" + "}");
+                        String ok = gson.toJson(equipo);
                         return Response.status(Response.Status.OK)
                                 .entity(ok)
                                 .build();
