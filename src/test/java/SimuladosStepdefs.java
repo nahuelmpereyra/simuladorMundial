@@ -5,7 +5,6 @@ import cucumber.api.java.en.When;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 public class SimuladosStepdefs {
 
@@ -83,8 +82,8 @@ public class SimuladosStepdefs {
         Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
         //System.out.println("Partido recuperado: " + partidoRecuperado);
         //System.out.println("Partido.estadio: " + partido.getEstadio());
-        assertThat(partidoRecuperado.getEquipo1().getNombre()).isEqualTo("Arabia Saudita");
-        assertThat(partidoRecuperado.getEquipo2().getNombre()).isEqualTo("Rusia");
+        assertThat(partidoRecuperado.getLocal().getNombre()).isEqualTo("Arabia Saudita");
+        assertThat(partidoRecuperado.getVisitante().getNombre()).isEqualTo("Rusia");
     }
 
 

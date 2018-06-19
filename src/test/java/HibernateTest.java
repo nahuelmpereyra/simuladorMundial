@@ -1,5 +1,3 @@
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -92,8 +90,8 @@ public class HibernateTest {
     public void test_VerificarPartidoCargado() {
         Runner.runInSession(() -> {
             Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
-            assertEquals("Argentina", partidoRecuperado.getEquipo1().getNombre());
-            assertEquals("Islandia", partidoRecuperado.getEquipo2().getNombre());
+            assertEquals("Argentina", partidoRecuperado.getLocal().getNombre());
+            assertEquals("Islandia", partidoRecuperado.getVisitante().getNombre());
             return null;
         });
     }
@@ -111,4 +109,35 @@ public class HibernateTest {
         });
     }
 
+    @Test
+    public void test_VerificarPuntosPartidoConGanador() {
+        Runner.runInSession(() -> {
+            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            partidoRecuperado.setResultado(2,1);
+            partidoRecuperado.sumarPuntos();
+
+            this.testService.actualizar(partidoRecuperado);
+           Equipo equipoLocalRecuperado= this.testService.recuperarPorNombre("Argentina");
+           Equipo equipoVisitanteRecuperado= this.testService.recuperarPorNombre("Islandia");
+            assertEquals(equipoLocalRecuperado.getPuntos(),3);
+            assertEquals(equipoVisitanteRecuperado.getPuntos(),0);
+            return null;
+        });
+    }
+
+    @Test
+    public void test_VerificarPuntosPartidoEmpatado() {
+        Runner.runInSession(() -> {
+            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            partidoRecuperado.setResultado(1,1);
+            partidoRecuperado.sumarPuntos();
+
+            this.testService.actualizar(partidoRecuperado);
+            Equipo equipoLocalRecuperado= this.testService.recuperarPorNombre("Argentina");
+            Equipo equipoVisitanteRecuperado= this.testService.recuperarPorNombre("Islandia");
+            assertEquals(equipoLocalRecuperado.getPuntos(),1);
+            assertEquals(equipoVisitanteRecuperado.getPuntos(),1);
+            return null;
+        });
+    }
 }

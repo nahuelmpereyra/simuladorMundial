@@ -10,6 +10,8 @@ public class Equipo {
 
     private Boolean esCabezaDeSerie = false;
 
+    private Integer puntos=0;
+
     public String getNombre() {
         return this.nombre;
     }
@@ -29,4 +31,12 @@ public class Equipo {
     public Boolean getEsCabezaDeSerie() { return esCabezaDeSerie; }
 
     public void setEsCabezaDeSerie(Boolean bool) {this.esCabezaDeSerie = bool;}
+
+    public void sumarPuntos(int puntos) {
+        this.puntos += puntos;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
 }
