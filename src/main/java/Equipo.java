@@ -11,7 +11,7 @@ public class Equipo {
     private Boolean esCabezaDeSerie = false;
 
     private Integer puntos = 0;
-    private Integer golesAfavor = 0;
+    private Integer golesAFavor = 0;
     private Integer golesEnContra = 0;
     private Integer diferencia = 0;
 
@@ -48,21 +48,21 @@ public class Equipo {
     }
 
     public void sumarGoles(int golesLocal, int golesVisitantes) {
-        golesAfavor += golesLocal;
+        golesAFavor += golesLocal;
         golesEnContra += golesVisitantes;
         actualizarDiferencia();
     }
 
     public void actualizarDiferencia() {
-        diferencia = golesAfavor - golesEnContra;
+        diferencia = golesAFavor - golesEnContra;
     }
 
     public int getDiferencia() {
         return diferencia;
     }
 
-    public int getGolesAfavor() {
-        return golesAfavor;
+    public int getGolesAFavor() {
+        return golesAFavor;
     }
 
     public int getGolesEnContra() {

@@ -119,7 +119,7 @@ public class HibernateTest {
             this.testService.actualizar(partidoRecuperado);
             Equipo equipoLocalRecuperado = this.testService.recuperarPorNombre("Argentina");
             Equipo equipoVisitanteRecuperado = this.testService.recuperarPorNombre("Islandia");
-            assertEquals(equipoLocalRecuperado.getGolesAfavor(), 2);
+            assertEquals(equipoLocalRecuperado.getGolesAFavor(), 2);
             assertEquals(equipoLocalRecuperado.getGolesEnContra(), 1);
             assertEquals(equipoLocalRecuperado.getDiferencia(), 1);
             assertEquals(equipoLocalRecuperado.getPuntos(), 3);
@@ -139,7 +139,7 @@ public class HibernateTest {
             Equipo equipoLocalRecuperado = this.testService.recuperarPorNombre("Argentina");
             Equipo equipoVisitanteRecuperado = this.testService.recuperarPorNombre("Islandia");
             assertEquals(equipoLocalRecuperado.getPuntos(), 1);
-            assertEquals(equipoLocalRecuperado.getGolesAfavor(), 1);
+            assertEquals(equipoLocalRecuperado.getGolesAFavor(), 1);
             assertEquals(equipoLocalRecuperado.getGolesEnContra(), 1);
             assertEquals(equipoLocalRecuperado.getDiferencia(), 0);
             assertEquals(equipoVisitanteRecuperado.getPuntos(), 1);
