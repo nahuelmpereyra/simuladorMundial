@@ -43,11 +43,10 @@ public class Services {
             if (equipoRecuperado != null) {
                 throw new Exception("Equipo ya existente");
             } else {
-                if(equipo.getEsCabezaDeSerie() && this.testService.hayCabezaDeSerieEnZona(equipo.getZona())){
+                if (equipo.getEsCabezaDeSerie() && this.testService.hayCabezaDeSerieEnZona(equipo.getZona())) {
 
                     throw new Exception("Ya existe un cabeza de serie en el grupo " + equipo.getZona());
-                }
-                else {
+                } else {
                     if (testService.recuperarEquiposPorZona(equipo.getZona()).size() < 4) {
                         this.testService.crearEntidad(equipo);
 

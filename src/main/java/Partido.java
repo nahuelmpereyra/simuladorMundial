@@ -2,9 +2,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity
@@ -16,9 +14,9 @@ public class Partido {
 
     private Date fecha;
     @OneToOne
-    private Equipo equipo1;
+    private Equipo local;
     @OneToOne
-    private Equipo equipo2;
+    private Equipo visitante;
 
     private String estadio;
 
@@ -29,10 +27,10 @@ public class Partido {
 
     public Partido(Date fecha, Equipo equipo1, Equipo equipo2, String estadio) {
         this.fecha = fecha;
-        this.equipo1 = equipo1;
-        this.equipo2 = equipo2;
+        this.local = equipo1;
+        this.visitante = equipo2;
         this.estadio = estadio;
-        this.resultado= new Resultado();
+        this.resultado = new Resultado();
 
     }
 
@@ -43,12 +41,12 @@ public class Partido {
         return this.fecha;
     }
 
-    public Equipo getEquipo1() {
-        return this.equipo1;
+    public Equipo getLocal() {
+        return this.local;
     }
 
-    public Equipo getEquipo2() {
-        return this.equipo2;
+    public Equipo getVisitante() {
+        return this.visitante;
     }
 
     public String getEstadio() {
@@ -57,11 +55,37 @@ public class Partido {
 
     public void setResultado(int golesLocal, int golesVisitantes) {
 
-        this.resultado.setResultados(golesLocal,golesVisitantes);
+        this.resultado.setResultados(golesLocal, golesVisitantes);
+        local.sumarGoles(golesLocal, golesVisitantes);
+        visitante.sumarGoles(golesVisitantes, golesLocal);
+
     }
 
-    public boolean resultado(int golesLocal,int golesVisitantes) {
+    public boolean resultado(int golesLocal, int golesVisitantes) {
 
-        return this.resultado.resultado(golesLocal,golesVisitantes);
+        return (resultado.golesLocal == golesLocal && resultado.golesVisitantes == golesVisitantes);
+    }
+
+    public void sumarPuntos() {
+        if (esGanadorLocal()) {
+            local.sumarPuntos(3);
+        } else {
+            if (esEmpate()) {
+                local.sumarPuntos(1);
+                visitante.sumarPuntos(1);
+            } else {
+                visitante.sumarPuntos(3);
+            }
+        }
+
+
+    }
+
+    private boolean esEmpate() {
+        return resultado.golesVisitantes == resultado.golesLocal;
+    }
+
+    private boolean esGanadorLocal() {
+        return resultado.golesLocal > resultado.golesVisitantes;
     }
 }

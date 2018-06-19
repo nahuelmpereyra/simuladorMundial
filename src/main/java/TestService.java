@@ -22,6 +22,7 @@ TestService {
 
     }
 
+
     public <T> T recuperarEntidad(Class<T> tipo, Serializable key) {
         return Runner.runInSession(() -> {
             Session session = Runner.getCurrentSession();
@@ -84,4 +85,11 @@ TestService {
         });
     }
 
+    public void actualizar(Object object) {
+        Runner.runInSession(() -> {
+            Session session = Runner.getCurrentSession();
+            session.update(object);
+            return null;
+        });
+    }
 }

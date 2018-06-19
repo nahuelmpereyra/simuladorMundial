@@ -15,8 +15,8 @@ public class Torneo {
     private List<Equipo> equipos = new ArrayList<>();
     private static Torneo miTorneo;
 
-    public static Torneo getTorneo(){
-        if (miTorneo == null){
+    public static Torneo getTorneo() {
+        if (miTorneo == null) {
             miTorneo = new Torneo();
         }
         return miTorneo;
