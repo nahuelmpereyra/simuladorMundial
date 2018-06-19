@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class HibernateTest {
 
@@ -96,4 +97,18 @@ public class HibernateTest {
             return null;
         });
     }
+
+    @Test
+    public void test_VerificarResultadoPartido() {
+        Runner.runInSession(() -> {
+            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            assertTrue(partidoRecuperado.resultado(0,0));
+            partidoRecuperado.setResultado(2,1);
+            this.testService.actualizar(partidoRecuperado);
+            partidoRecuperado=this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            assertTrue(partidoRecuperado.resultado(2,1));
+            return null;
+        });
+    }
+
 }

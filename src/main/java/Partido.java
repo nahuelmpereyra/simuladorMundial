@@ -58,10 +58,11 @@ public class Partido {
     public void setResultado(int golesLocal, int golesVisitantes) {
 
         this.resultado.setResultados(golesLocal,golesVisitantes);
+
     }
 
     public boolean resultado(int golesLocal,int golesVisitantes) {
 
-        return this.resultado.resultado(golesLocal,golesVisitantes);
+        return (resultado.golesLocal== golesLocal && resultado.golesVisitantes==golesVisitantes);
     }
 }

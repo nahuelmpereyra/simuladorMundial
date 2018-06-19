@@ -17,7 +17,6 @@ public class Resultado {
             this.golesLocal= local;
             this.golesVisitantes= visitante;
         }
-        public boolean resultado(int local, int visitante){
-            return golesLocal== local && golesVisitantes==visitante;
-        }
+
+
 }
