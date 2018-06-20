@@ -29,7 +29,7 @@ class CargarEquipoController {
     this.validarZona(this.equipoACargar.zona)
     this.cargarEquipoService.cargarEquipo(this.equipoACargar)
       .then((response) => {
-        this.notificarMensaje("Registraste a " + response.data.equipo + " exitosamente")
+        this.notificarMensaje("Registraste a " + response.data.nombre + " exitosamente")
         //this.state.go("equipos")
       }, this.errorHandler)
   }

@@ -70,6 +70,35 @@ public class Services {
 
     }
 
+    @POST
+    @Path("/agregarpartido")
+    @Consumes({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createPartido(Partido partido) {
+
+        Equipo equipoLocal = testService.recuperarPorNombre(partido.getLocal().getNombre());
+        Equipo equipoVisitante = testService.recuperarPorNombre(partido.getVisitante().getNombre());
+
+
+        try {
+            if (equipoLocal == null || equipoVisitante == null) {
+                throw new Exception("Al menos uno de los equipos no existe");
+            } else {
+                this.testService.crearEntidad(partido);
+                String ok = gson.toJson(partido);
+                return Response.status(Response.Status.OK)
+                        .entity(ok)
+                        .build();
+            }
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(getErrorJson(e.getMessage()))
+                    .build();
+        }
+
+    }
+
     private String getErrorJson(String message) {
         String msg = "\"" + message + "\"";
         return String.format("{\n" + "\"error\": " + msg + "\n" + "}");
