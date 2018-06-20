@@ -1,8 +1,7 @@
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -38,7 +37,11 @@ public class HibernateTest {
         equipo3.setZona("D");
         equipo3.setNombre("Croacia");
 
-        this.partido = new Partido(new Date(), equipo1, equipo2, "Estadio");
+        this.partido = new Partido();
+        this.partido.setFecha(LocalDateTime.now());
+        this.partido.setLocal(equipo1);
+        this.partido.setVisitante(equipo2);
+        this.partido.setEstadio("Estadio");
         this.testService.crearEntidad(equipo1);
         this.testService.crearEntidad(equipo2);
         this.testService.crearEntidad(equipo3);
@@ -46,7 +49,7 @@ public class HibernateTest {
         System.out.println("Terminando el Before");
     }
 
-    @After
+    //@After
     public void cleanup() {
         SessionFactoryProvider.destroy();
         System.out.println("Terminando el After");
@@ -89,7 +92,7 @@ public class HibernateTest {
     @Test
     public void test_VerificarPartidoCargado() {
         Runner.runInSession(() -> {
-            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
             assertEquals("Argentina", partidoRecuperado.getLocal().getNombre());
             assertEquals("Islandia", partidoRecuperado.getVisitante().getNombre());
             return null;
@@ -99,11 +102,11 @@ public class HibernateTest {
     @Test
     public void test_VerificarResultadoPartido() {
         Runner.runInSession(() -> {
-            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
             assertTrue(partidoRecuperado.resultado(0, 0));
             partidoRecuperado.setResultado(2, 1);
             this.testService.actualizar(partidoRecuperado);
-            partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
             assertTrue(partidoRecuperado.resultado(2, 1));
             return null;
         });
@@ -112,14 +115,14 @@ public class HibernateTest {
     @Test
     public void test_VerificarPuntosPartidoConGanador() {
         Runner.runInSession(() -> {
-            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
             partidoRecuperado.setResultado(2, 1);
             partidoRecuperado.sumarPuntos();
 
             this.testService.actualizar(partidoRecuperado);
             Equipo equipoLocalRecuperado = this.testService.recuperarPorNombre("Argentina");
             Equipo equipoVisitanteRecuperado = this.testService.recuperarPorNombre("Islandia");
-            assertEquals(equipoLocalRecuperado.getGolesAfavor(), 2);
+            assertEquals(equipoLocalRecuperado.getGolesAFavor(), 2);
             assertEquals(equipoLocalRecuperado.getGolesEnContra(), 1);
             assertEquals(equipoLocalRecuperado.getDiferencia(), 1);
             assertEquals(equipoLocalRecuperado.getPuntos(), 3);
@@ -131,7 +134,7 @@ public class HibernateTest {
     @Test
     public void test_VerificarPuntosPartidoEmpatado() {
         Runner.runInSession(() -> {
-            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
             partidoRecuperado.setResultado(1, 1);
             partidoRecuperado.sumarPuntos();
 
@@ -139,7 +142,7 @@ public class HibernateTest {
             Equipo equipoLocalRecuperado = this.testService.recuperarPorNombre("Argentina");
             Equipo equipoVisitanteRecuperado = this.testService.recuperarPorNombre("Islandia");
             assertEquals(equipoLocalRecuperado.getPuntos(), 1);
-            assertEquals(equipoLocalRecuperado.getGolesAfavor(), 1);
+            assertEquals(equipoLocalRecuperado.getGolesAFavor(), 1);
             assertEquals(equipoLocalRecuperado.getGolesEnContra(), 1);
             assertEquals(equipoLocalRecuperado.getDiferencia(), 0);
             assertEquals(equipoVisitanteRecuperado.getPuntos(), 1);

@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -7,6 +9,7 @@ import java.util.List;
 @Path("")
 public class Services {
     TestService testService = new TestService();
+    Gson gson = new Gson();
 
 
     @GET
@@ -50,10 +53,7 @@ public class Services {
                     if (testService.recuperarEquiposPorZona(equipo.getZona()).size() < 4) {
                         this.testService.crearEntidad(equipo);
 
-
-                        String nombre = "\"" + equipo.getNombre() + "\"";
-                        String zona = "\"" + equipo.getZona() + "\"";
-                        String ok = String.format("{\n" + "\"equipo\": " + nombre + ",\n" + "\"zona\": " + zona + "\n" + "}");
+                        String ok = gson.toJson(equipo);
                         return Response.status(Response.Status.OK)
                                 .entity(ok)
                                 .build();
@@ -62,6 +62,35 @@ public class Services {
                     }
                 }
             }
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(getErrorJson(e.getMessage()))
+                    .build();
+        }
+
+    }
+
+    @POST
+    @Path("/agregarpartido")
+    @Consumes({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createPartido(Partido partido) {
+
+        Equipo equipoLocal = testService.recuperarPorNombre(partido.getLocal().getNombre());
+        Equipo equipoVisitante = testService.recuperarPorNombre(partido.getVisitante().getNombre());
+
+
+        try {
+            if (equipoLocal == null || equipoVisitante == null) {
+                throw new Exception("Al menos uno de los equipos no existe");
+            } else {
+                this.testService.crearEntidad(partido);
+                String ok = gson.toJson(partido);
+                return Response.status(Response.Status.OK)
+                        .entity(ok)
+                        .build();
+            }
+
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(getErrorJson(e.getMessage()))

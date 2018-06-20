@@ -6,7 +6,7 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/simulacionmundial?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/simulacionmundial?useLegacyDatetimeCode=false</property>
 
 
         <property name="connection.username">travis</property>

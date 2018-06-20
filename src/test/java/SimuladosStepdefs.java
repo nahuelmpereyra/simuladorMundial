@@ -2,7 +2,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -61,8 +61,12 @@ public class SimuladosStepdefs {
 
     @Given("^Un nuevo Partido$")
     public void un_nuevo_Partido() throws Throwable {
-        partido = new Partido(new Date(), equipo1, equipo2, "Moscu");
-
+        this.partido = new Partido();
+//        this.partido.setFecha(new Date());
+        this.partido.setFecha(LocalDateTime.now());
+        this.partido.setLocal(equipo1);
+        this.partido.setVisitante(equipo2);
+        this.partido.setEstadio("Moscu");
     }
 
     //@When("^Otro nuevo equipo se agrega$")
@@ -79,7 +83,7 @@ public class SimuladosStepdefs {
 
     @Then("^El Partido se carga en la base de partidos$")
     public void el_Partido_se_carga_en_la_base_de_partidos() throws Throwable {
-        Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+        Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
         //System.out.println("Partido recuperado: " + partidoRecuperado);
         //System.out.println("Partido.estadio: " + partido.getEstadio());
         assertThat(partidoRecuperado.getLocal().getNombre()).isEqualTo("Arabia Saudita");
@@ -94,7 +98,7 @@ public class SimuladosStepdefs {
 
     @Then("^El Partido tiene un resultado$")
     public void el_Partido_tiene_un_resultado() throws Throwable {
-        Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.id);
+        Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
         assertThat(partidoRecuperado.resultado(2, 1));
     }
 

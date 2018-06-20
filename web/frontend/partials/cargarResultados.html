@@ -10,19 +10,47 @@
                     <table class="table table-condensed table-hover">
                         <thead>
                             <tr>
-                                <th>Posición</th>
+                                <th>Pos</th>
                                 <th>Equipo</th>
-                                <th>Grupo</th>
+                                <th class="success">Pts</th>
+                                <th>PJ</th>
+                                <th>PG</th>
+                                <th>PE</th>
+                                <th>PP</th>
+                                <th>GF</th>
+                                <th>GC</th>
+                                <th>Dif</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-ng-repeat="equipo in ctrl.getGrupo(grupo)"  ng-class="{true:'cabezaDeSerie'}[equipo.esCabezaDeSerie]">
+                            <tr data-ng-repeat="equipo in ctrl.getGrupo(grupo)" ng-class="{true:'bold'}[equipo.esCabezaDeSerie]">
                                 <th>1</th>
                                 <td>
                                     {{equipo.nombre}}
                                 </td>
+                                <td class="success bold">
+                                    {{equipo.puntos}}
+                                </td>
                                 <td>
-                                    {{equipo.zona}}
+                                    <!-- {{equipo.partidosJugados}} -->
+                                </td>
+                                <td>
+                                    <!-- {{equipo.partidosGanados}} -->
+                                </td>
+                                <td>
+                                    <!-- {{equipo.partidosEmpatados}} -->
+                                </td>
+                                <td>
+                                    <!-- {{equipo.partidosPerdidos}} -->
+                                </td>
+                                <td>
+                                    {{equipo.golesAFavor}}
+                                </td>
+                                <td>
+                                    {{equipo.golesEnContra}}
+                                </td>
+                                <td>
+                                    {{equipo.diferencia}}
                                 </td>
                             </tr>
                         </tbody>

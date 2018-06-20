@@ -1,18 +1,20 @@
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
-import java.util.Date;
-
+import java.time.LocalDateTime;
 
 @Entity
 public class Partido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int id;
+    private int id;
 
-    private Date fecha;
+
+    @JsonbDateFormat("yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime fecha;
     @OneToOne
     private Equipo local;
     @OneToOne
@@ -22,23 +24,35 @@ public class Partido {
 
     @OneToOne
     @Cascade(CascadeType.ALL)
-    private Resultado resultado;
+    private Resultado resultado = new Resultado();
 
 
-    public Partido(Date fecha, Equipo equipo1, Equipo equipo2, String estadio) {
-        this.fecha = fecha;
-        this.local = equipo1;
-        this.visitante = equipo2;
-        this.estadio = estadio;
-        this.resultado = new Resultado();
-
-    }
-
-    public Partido() {
-    }
-
-    public Date getFecha() {
+    public LocalDateTime getFecha() {
         return this.fecha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setLocal(Equipo local) {
+        this.local = local;
+    }
+
+    public void setVisitante(Equipo visitante) {
+        this.visitante = visitante;
+    }
+
+    public void setEstadio(String estadio) {
+        this.estadio = estadio;
+    }
+
+    public Resultado getResultado() {
+        return resultado;
     }
 
     public Equipo getLocal() {
