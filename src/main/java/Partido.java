@@ -24,7 +24,7 @@ public class Partido {
 
     @OneToOne
     @Cascade(CascadeType.ALL)
-    private Resultado resultado;
+    private Resultado resultado = new Resultado();
 
 
     public LocalDateTime getFecha() {
@@ -53,10 +53,6 @@ public class Partido {
 
     public Resultado getResultado() {
         return resultado;
-    }
-
-    public void setResultado(Resultado resultado) {
-        this.resultado = resultado;
     }
 
     public Equipo getLocal() {
