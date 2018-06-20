@@ -39,15 +39,15 @@ public class Equipo {
         this.esCabezaDeSerie = bool;
     }
 
-    public void sumarPuntos(int puntos) {
+    public void sumarPuntos(Integer puntos) {
         this.puntos += puntos;
     }
 
-    public int getPuntos() {
+    public Integer getPuntos() {
         return puntos;
     }
 
-    public void sumarGoles(int golesLocal, int golesVisitantes) {
+    public void sumarGoles(Integer golesLocal, Integer golesVisitantes) {
         golesAFavor += golesLocal;
         golesEnContra += golesVisitantes;
         actualizarDiferencia();
@@ -57,15 +57,15 @@ public class Equipo {
         diferencia = golesAFavor - golesEnContra;
     }
 
-    public int getDiferencia() {
+    public Integer getDiferencia() {
         return diferencia;
     }
 
-    public int getGolesAFavor() {
+    public Integer getGolesAFavor() {
         return golesAFavor;
     }
 
-    public int getGolesEnContra() {
+    public Integer getGolesEnContra() {
         return golesEnContra;
     }
 }

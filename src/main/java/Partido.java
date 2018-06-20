@@ -10,7 +10,7 @@ public class Partido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
 
     @JsonbDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -31,7 +31,7 @@ public class Partido {
         return this.fecha;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -67,18 +67,16 @@ public class Partido {
         return this.estadio;
     }
 
-    public void setResultado(int golesLocal, int golesVisitantes) {
+    public void setResultado(Integer golesLocal, Integer golesVisitantes) {
 
-        this.resultado.setResultados(golesLocal, golesVisitantes);
-        local.sumarGoles(golesLocal, golesVisitantes);
-        visitante.sumarGoles(golesVisitantes, golesLocal);
+        this.resultado.setGolesLocal(golesLocal);
+        this.resultado.setGolesVisitantes(golesVisitantes);
+        local.sumarGoles(this.resultado.getGolesLocal(), this.resultado.getGolesVisitantes());
+        visitante.sumarGoles(this.resultado.getGolesVisitantes(), this.resultado.getGolesLocal());
+        this.sumarPuntos();
 
     }
 
-    public boolean resultado(int golesLocal, int golesVisitantes) {
-
-        return (resultado.golesLocal == golesLocal && resultado.golesVisitantes == golesVisitantes);
-    }
 
     public void sumarPuntos() {
         if (esGanadorLocal()) {
@@ -96,10 +94,10 @@ public class Partido {
     }
 
     private boolean esEmpate() {
-        return resultado.golesVisitantes == resultado.golesLocal;
+        return resultado.getGolesVisitantes() == resultado.getGolesLocal();
     }
 
     private boolean esGanadorLocal() {
-        return resultado.golesLocal > resultado.golesVisitantes;
+        return resultado.getGolesLocal() > resultado.getGolesVisitantes();
     }
 }
