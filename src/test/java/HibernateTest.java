@@ -1,10 +1,11 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class HibernateTest {
 
@@ -103,11 +104,13 @@ public class HibernateTest {
     public void test_VerificarResultadoPartido() {
         Runner.runInSession(() -> {
             Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
-            assertTrue(partidoRecuperado.resultado(0, 0));
+            assertThat(partidoRecuperado.getResultado().getGolesLocal()).isEqualTo(0);
+            assertThat(partidoRecuperado.getResultado().getGolesVisitantes()).isEqualTo(0);
             partidoRecuperado.setResultado(2, 1);
             this.testService.actualizar(partidoRecuperado);
             partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
-            assertTrue(partidoRecuperado.resultado(2, 1));
+            assertThat(partidoRecuperado.getResultado().getGolesLocal()).isEqualTo(2);
+            assertThat(partidoRecuperado.getResultado().getGolesVisitantes()).isEqualTo(1);
             return null;
         });
     }
@@ -117,7 +120,7 @@ public class HibernateTest {
         Runner.runInSession(() -> {
             Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
             partidoRecuperado.setResultado(2, 1);
-            partidoRecuperado.sumarPuntos();
+            //partidoRecuperado.sumarPuntos();
 
             this.testService.actualizar(partidoRecuperado);
             Equipo equipoLocalRecuperado = this.testService.recuperarPorNombre("Argentina");
@@ -136,7 +139,7 @@ public class HibernateTest {
         Runner.runInSession(() -> {
             Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
             partidoRecuperado.setResultado(1, 1);
-            partidoRecuperado.sumarPuntos();
+            //partidoRecuperado.sumarPuntos();
 
             this.testService.actualizar(partidoRecuperado);
             Equipo equipoLocalRecuperado = this.testService.recuperarPorNombre("Argentina");

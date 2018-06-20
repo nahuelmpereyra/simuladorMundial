@@ -99,6 +99,38 @@ public class Services {
 
     }
 
+
+    @POST
+    @Path("/partidos/{idPartido}")
+    @Consumes({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response cargarResultado(@PathParam("idPartido") int id, Resultado resultado) {
+
+        Partido partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
+
+        try {
+            if (partidoRecuperado == null) {
+                throw new Exception("El partido no existe");
+            } else {
+                partidoRecuperado.setResultado(resultado.getGolesLocal(), resultado.getGolesVisitantes());
+                this.testService.actualizar(partidoRecuperado);
+                this.testService.actualizar(partidoRecuperado.getLocal());
+                this.testService.actualizar(partidoRecuperado.getVisitante());
+                partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
+                String ok = gson.toJson(partidoRecuperado);
+                return Response.status(Response.Status.OK)
+                        .entity(ok)
+                        .build();
+            }
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(getErrorJson(e.getMessage()))
+                    .build();
+        }
+
+    }
+
     private String getErrorJson(String message) {
         String msg = "\"" + message + "\"";
         return String.format("{\n" + "\"error\": " + msg + "\n" + "}");

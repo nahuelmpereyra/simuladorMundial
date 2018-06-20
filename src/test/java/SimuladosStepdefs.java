@@ -62,7 +62,6 @@ public class SimuladosStepdefs {
     @Given("^Un nuevo Partido$")
     public void un_nuevo_Partido() throws Throwable {
         this.partido = new Partido();
-//        this.partido.setFecha(new Date());
         this.partido.setFecha(LocalDateTime.now());
         this.partido.setLocal(equipo1);
         this.partido.setVisitante(equipo2);
@@ -94,12 +93,14 @@ public class SimuladosStepdefs {
     @When("^Seteo resultado del partido$")
     public void seteo_resultado_del_partido() throws Throwable {
         partido.setResultado(2, 1);
+        this.testService.actualizar(partido);
     }
 
     @Then("^El Partido tiene un resultado$")
     public void el_Partido_tiene_un_resultado() throws Throwable {
         Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
-        assertThat(partidoRecuperado.resultado(2, 1));
+        assertThat(partidoRecuperado.getResultado().getGolesLocal()).isEqualTo(2);
+        assertThat(partidoRecuperado.getResultado().getGolesVisitantes()).isEqualTo(1);
     }
 
 

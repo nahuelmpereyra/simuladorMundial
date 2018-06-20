@@ -10,13 +10,25 @@ public class Resultado {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int id;
 
-    int golesLocal;
-    int golesVisitantes;
-
-    public void setResultados(int local, int visitante) {
-        this.golesLocal = local;
-        this.golesVisitantes = visitante;
+    public void setGolesLocal(int golesLocal) {
+        this.golesLocal = golesLocal;
     }
 
+    public void setGolesVisitantes(int golesVisitantes) {
+        this.golesVisitantes = golesVisitantes;
+    }
+
+    private int golesLocal;
+    private int golesVisitantes;
+
+
+    public int getGolesLocal() {
+        return golesLocal;
+    }
+
+    public int getGolesVisitantes() {
+        return golesVisitantes;
+    }
+    
 
 }
