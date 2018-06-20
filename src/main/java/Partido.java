@@ -10,7 +10,7 @@ public class Partido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
 
     @JsonbDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -31,7 +31,7 @@ public class Partido {
         return this.fecha;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -67,7 +67,7 @@ public class Partido {
         return this.estadio;
     }
 
-    public void setResultado(int golesLocal, int golesVisitantes) {
+    public void setResultado(Integer golesLocal, Integer golesVisitantes) {
 
         this.resultado.setGolesLocal(golesLocal);
         this.resultado.setGolesVisitantes(golesVisitantes);
