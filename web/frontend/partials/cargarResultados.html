@@ -1,4 +1,5 @@
 <div data-ng-controller="CargarResultadosController as ctrl">
+
     <ul class="nav nav-pills nav-stacked">
         <li data-ng-repeat="grupo in ctrl.grupos">
             <div class="col-sm-6">
@@ -23,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-ng-repeat="equipo in ctrl.getGrupo(grupo)" ng-class="{true:'bold'}[equipo.esCabezaDeSerie]">
+                            <tr data-ng-repeat="equipo in ctrl.equipos" ng-show="ctrl.esDelGrupo(equipo, grupo)" ng-class="{true:'bold'}[equipo.esCabezaDeSerie]">
                                 <th>1</th>
                                 <td>
                                     {{equipo.nombre}}
@@ -59,6 +60,9 @@
                 <br>
                 <br>
                 <br>
+
+
+
                 <br>
                 <br>
                 <br>
