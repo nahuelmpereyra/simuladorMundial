@@ -85,6 +85,19 @@ TestService {
         });
     }
 
+    public List<Partido> recuperarPartidos() {
+        return Runner.runInSession(() -> {
+            Session session = Runner.getCurrentSession();
+            String hql = "FROM Partido";
+            Query<Partido> query = session.createQuery(hql, Partido.class);
+            if (!query.getResultList().isEmpty()) {
+                return query.getResultList();
+            } else {
+                return new ArrayList<>();
+            }
+        });
+    }
+
     public void actualizar(Object object) {
         Runner.runInSession(() -> {
             Session session = Runner.getCurrentSession();

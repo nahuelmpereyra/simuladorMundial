@@ -20,6 +20,13 @@ public class Services {
     }
 
     @GET
+    @Path("/partidos")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Partido> getPartidos() {
+        return this.testService.recuperarPartidos();
+    }
+
+    @GET
     @Path("/equipos/{zona}")
     @Produces("application/json")
     public List<Equipo> getEquiposByZona(@PathParam("zona") String zona) {
@@ -112,21 +119,23 @@ public class Services {
             if (partidoRecuperado == null) {
                 throw new Exception("El partido no existe");
             } else {
-                if (resultado.getGolesLocal() == null || resultado.getGolesVisitantes() == null) {
-                    throw new Exception("Debe completar resultado");
-                } else {
-                    partidoRecuperado.setResultado(resultado.getGolesLocal(), resultado.getGolesVisitantes());
-                    this.testService.actualizar(partidoRecuperado);
-                    this.testService.actualizar(partidoRecuperado.getLocal());
-                    this.testService.actualizar(partidoRecuperado.getVisitante());
-                    partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
-                    String ok = gson.toJson(partidoRecuperado);
-                    return Response.status(Response.Status.OK)
-                            .entity(ok)
-                            .build();
-                }
+//                if (resultado.getGolesLocal() == null || resultado.getGolesVisitantes() == null) {
+//                    throw new Exception("Debe completar resultado");
+//                }
+//                else {
+                partidoRecuperado.setResultado(resultado.getGolesLocal(), resultado.getGolesVisitantes());
+                this.testService.actualizar(partidoRecuperado);
+                this.testService.actualizar(partidoRecuperado.getLocal());
+                this.testService.actualizar(partidoRecuperado.getVisitante());
+                partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
+                String ok = gson.toJson(partidoRecuperado);
+                return Response.status(Response.Status.OK)
+                        .entity(ok)
+                        .build();
             }
-        } catch (Exception e) {
+        }
+//        }
+        catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(getErrorJson(e.getMessage()))
                     .build();
