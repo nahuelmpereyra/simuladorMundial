@@ -5,6 +5,7 @@ class CargarResultadosController {
     this.cargarResultadoService = cargarResultadoService
     this.growl = growl
     this.todosLosEquipos()
+    this.todosLosPartidos()
   }
 
   /*
@@ -17,15 +18,33 @@ class CargarResultadosController {
   }
 */
   todosLosEquipos() {
-    this.cargarResultadoService.listarTodos()
+    this.cargarResultadoService.listarEquipos()
       .then((response) => {
         this.equipos = response.data
       }, this.errorHandler)
   }
 
-  esDelGrupo(equipo, grupo) {
+  todosLosPartidos() {
+    this.cargarResultadoService.listarPartidos()
+      .then((response) => {
+        this.partidos = response.data
+      }, this.errorHandler)
+  }
+
+  esEquipoDeGrupo(equipo, grupo) {
     return equipo.zona == grupo
   }
+
+  actualizarResultado(partido) {
+    if (partido.resultado.golesLocal != undefined && partido.resultado.golesVisitantes != undefined) {
+      this.cargarResultadoService.actualizarResultado(partido)
+        .then((response) => {
+          this.todosLosEquipos()
+        }, this.errorHandler)
+    }
+  }
+
+
 
 
 }

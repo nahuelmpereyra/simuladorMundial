@@ -2,12 +2,11 @@
 
     <ul class="nav nav-pills nav-stacked">
         <li data-ng-repeat="grupo in ctrl.grupos">
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <br>
                 <b>Grupo {{grupo}}</b>
                 <br>
-                <div class="col-sm-8">
-
+                <div>
                     <table class="table table-condensed table-hover">
                         <thead>
                             <tr>
@@ -24,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-ng-repeat="equipo in ctrl.equipos" ng-show="ctrl.esDelGrupo(equipo, grupo)" ng-class="{true:'bold'}[equipo.esCabezaDeSerie]">
+                            <tr data-ng-repeat="equipo in ctrl.equipos" ng-show="ctrl.esEquipoDeGrupo(equipo, grupo)" ng-class="{true:'bold'}[equipo.esCabezaDeSerie]">
                                 <th>1</th>
                                 <td>
                                     {{equipo.nombre}}
@@ -56,13 +55,33 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <ul data-ng-repeat="partido in ctrl.partidos" ng-show="ctrl.esEquipoDeGrupo(partido.local, grupo)" style="list-style-type:none">
+                        <li>
+                            <div>
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <span class="col-md-2 control-label">{{partido.local.nombre}}</span>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="col-md-3">
+                                                    <input ng-change="ctrl.actualizarResultado(partido)" ng-model="partido.resultado.golesLocal" type="text" id="golesLocal" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input ng-change="ctrl.actualizarResultado(partido)" ng-model="partido.resultado.golesVisitantes" type="text" id="golesVisitante" class="form-control" required>
+                                                </div>
+                                                <span class="col-md-3 control-label">{{partido.visitante.nombre}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+
+
                 </div>
                 <br>
-                <br>
-                <br>
-
-
-
                 <br>
                 <br>
                 <br>
@@ -70,8 +89,11 @@
                 <br>
                 <br>
             </div>
-        </li>
-    </ul>
+
+</div>
+
+</li>
+</ul>
 
 
 
@@ -79,11 +101,11 @@
 
 
 
-    <!-- Sólo para pruebas -->
-    <br>
-    <br>
-    <br>
-    <a ui-sref="cargarEquipo">Ir a Cargar Equipos</a>
+<!-- Sólo para pruebas -->
+<br>
+<br>
+<br>
+<a ui-sref="cargarEquipo">Ir a Cargar Equipos</a>
 
 
 
