@@ -76,6 +76,70 @@ public class Services {
         }
 
     }
+    @POST
+    @Path("/eliminarequipo")
+    @Consumes({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response eliminarEquipo(Equipo equipo) {
+
+        Equipo equipoRecuperado = testService.recuperarPorNombre(equipo.getNombre());
+
+        try {
+            if (equipoRecuperado == null) {
+                throw new Exception("Equipo no existente");
+            } else {
+
+                        this.testService.eliminarEntidad(equipo);
+
+                        String ok = gson.toJson(equipo);
+                        return Response.status(Response.Status.OK)
+                                .entity(ok)
+                                .build();
+                    }
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(getErrorJson(e.getMessage()))
+                    .build();
+        }
+
+    }
+
+    @POST
+    @Path("/modificarEquipo")
+    @Consumes({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response editarEquipo(Equipo equipo) {
+
+        Equipo equipoRecuperado = testService.recuperarPorNombre(equipo.getNombre());
+
+        try {
+            if (equipoRecuperado != null) {
+                throw new Exception("Equipo ya existente");
+            } else {
+                if (equipo.getEsCabezaDeSerie() && this.testService.hayCabezaDeSerieEnZona(equipo.getZona())) {
+
+                    throw new Exception("Ya existe un cabeza de serie en el grupo " + equipo.getZona());
+                } else {
+                    if (testService.recuperarEquiposPorZona(equipo.getZona()).size() < 4) {
+                        this.testService.actualizar(equipo);
+
+                        String ok = gson.toJson(equipo);
+                        return Response.status(Response.Status.OK)
+                                .entity(ok)
+                                .build();
+                    } else {
+                        throw new Exception("No puede haber mas de 4 equipos por zona");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(getErrorJson(e.getMessage()))
+                    .build();
+        }
+
+    }
 
     @POST
     @Path("/agregarpartido")

@@ -153,4 +153,21 @@ public class HibernateTest {
             return null;
         });
     }
+
+    @Test
+    public void test_EditarUnEquipo()
+        {
+            Runner.runInSession(() -> {
+                Equipo equipo = this.testService.recuperarPorNombre("Argentina");
+                assertEquals("Argentina", equipo.getNombre());
+                assertEquals("D", equipo.getZona());
+                equipo.setNombre("Brasil");
+                testService.actualizar(equipo);
+                equipo = this.testService.recuperarPorNombre("Brasil");
+                assertEquals("Brasil", equipo.getNombre());
+                assertEquals("D", equipo.getZona());
+                System.out.println("Terminando test_recuperarEquipoPorNombre");
+                return null;
+            });
+        }
 }
