@@ -119,10 +119,7 @@ public class Services {
             if (partidoRecuperado == null) {
                 throw new Exception("El partido no existe");
             } else {
-//                if (resultado.getGolesLocal() == null || resultado.getGolesVisitantes() == null) {
-//                    throw new Exception("Debe completar resultado");
-//                }
-//                else {
+
                 partidoRecuperado.setResultado(resultado.getGolesLocal(), resultado.getGolesVisitantes());
                 this.testService.actualizar(partidoRecuperado);
                 this.testService.actualizar(partidoRecuperado.getLocal());
@@ -142,6 +139,69 @@ public class Services {
         }
 
     }
+
+
+    @POST
+    @Path("/eliminarequipo")
+    @Consumes({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response eliminarEquipo(Equipo equipo) {
+
+        Equipo equipoRecuperado = testService.recuperarPorNombre(equipo.getNombre());
+        try {
+            if (equipoRecuperado == null) {
+                throw new Exception("No existe el equipo");
+            } else {
+                this.testService.eliminarEntidad(equipo);
+
+                String ok = gson.toJson("Equipo eliminado");
+                return Response.status(Response.Status.OK)
+                        .entity(ok)
+                        .build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(getErrorJson(e.getMessage()))
+                    .build();
+        }
+
+    }
+
+
+    @PUT
+    @Path("/editarequipo")
+    @Consumes({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response editarEquipo(Equipo equipoAEditar) {
+
+        Equipo equipoRecuperado = testService.recuperarPorNombre(equipoAEditar.getNombre());
+        try {
+            if (equipoRecuperado == null) {
+                throw new Exception("No existe un equipo con el nombre " + equipoAEditar.getNombre());
+            } else {
+                if (equipoAEditar.getEsCabezaDeSerie() && this.testService.hayCabezaDeSerieEnZona(equipoAEditar.getZona()) && ! equipoRecuperado.getEsCabezaDeSerie()) {
+
+                    throw new Exception("Ya existe un cabeza de serie en el grupo " + equipoAEditar.getZona());
+                } else {
+                    if (testService.recuperarEquiposPorZona(equipoAEditar.getZona()).size() == 4 && (equipoRecuperado.getZona() != equipoAEditar.getZona())) {
+                        throw new Exception("La zona " +equipoAEditar.getZona() + " ya tiene 4 equipos" );
+                    }
+                }
+                this.testService.actualizar(equipoAEditar);
+
+                String ok = gson.toJson("Equipo editado");
+                return Response.status(Response.Status.OK)
+                        .entity(ok)
+                        .build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(getErrorJson(e.getMessage()))
+                    .build();
+        }
+
+    }
+
 
     private String getErrorJson(String message) {
         String msg = "\"" + message + "\"";
