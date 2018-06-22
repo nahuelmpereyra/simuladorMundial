@@ -50,6 +50,9 @@ public class Services {
         Equipo equipoRecuperado = testService.recuperarPorNombre(equipo.getNombre());
 
         try {
+            if (equipo.getNombre() == null || equipo.getZona() == null || equipo.getNombre() == "" || equipo.getZona() == "") {
+                throw new Exception("Faltan datos del equipo a agregar");
+            }
             if (equipoRecuperado != null) {
                 throw new Exception("Equipo ya existente");
             } else {
@@ -130,9 +133,7 @@ public class Services {
                         .entity(ok)
                         .build();
             }
-        }
-//        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(getErrorJson(e.getMessage()))
                     .build();
@@ -179,12 +180,12 @@ public class Services {
             if (equipoRecuperado == null) {
                 throw new Exception("No existe un equipo con el nombre " + equipoAEditar.getNombre());
             } else {
-                if (equipoAEditar.getEsCabezaDeSerie() && this.testService.hayCabezaDeSerieEnZona(equipoAEditar.getZona()) && ! equipoRecuperado.getEsCabezaDeSerie()) {
+                if (equipoAEditar.getEsCabezaDeSerie() && this.testService.hayCabezaDeSerieEnZona(equipoAEditar.getZona()) && !equipoRecuperado.getEsCabezaDeSerie()) {
 
                     throw new Exception("Ya existe un cabeza de serie en el grupo " + equipoAEditar.getZona());
                 } else {
                     if (testService.recuperarEquiposPorZona(equipoAEditar.getZona()).size() == 4 && (equipoRecuperado.getZona() != equipoAEditar.getZona())) {
-                        throw new Exception("La zona " +equipoAEditar.getZona() + " ya tiene 4 equipos" );
+                        throw new Exception("La zona " + equipoAEditar.getZona() + " ya tiene 4 equipos");
                     }
                 }
                 this.testService.actualizar(equipoAEditar);
