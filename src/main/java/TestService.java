@@ -75,7 +75,7 @@ TestService {
     public List<Equipo> recuperarEquipos() {
         return Runner.runInSession(() -> {
             Session session = Runner.getCurrentSession();
-            String hql = "FROM Equipo";
+            String hql = "FROM Equipo ORDER BY puntos DESC";
             Query<Equipo> query = session.createQuery(hql, Equipo.class);
             if (!query.getResultList().isEmpty()) {
                 return query.getResultList();
