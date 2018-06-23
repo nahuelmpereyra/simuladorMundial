@@ -55,7 +55,8 @@ class CargarEquipoController {
 
   // ELIMINAR
   eliminarEquipo(equipo) {
-    const mensaje = "¿Está seguro que desea eliminar a <b>'" + equipo.nombre + "'</b>?"
+    const mensaje = "¿Está seguro que desea eliminar a <b>'" + equipo.nombre + "'</b>?<br><br><b><u>Nota:</b></u> Se eliminarán todos los partidos en los cuales figure."
+
     bootbox.confirm({
       message: mensaje,
       buttons: {

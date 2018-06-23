@@ -14,6 +14,10 @@ public class Equipo {
     private Integer golesAFavor = 0;
     private Integer golesEnContra = 0;
     private Integer diferencia = 0;
+    private Integer partidosJugados = 0;
+    private Integer partidosGanados = 0;
+    private Integer partidosEmpatados = 0;
+    private Integer partidosPerdidos = 0;
 
     public String getNombre() {
         return this.nombre;
@@ -68,4 +72,28 @@ public class Equipo {
     public Integer getGolesEnContra() {
         return golesEnContra;
     }
+
+    public Integer getPartidosJugados() { return partidosJugados; }
+
+    public void setPartidosJugados(Integer partidosJugados) { this.partidosJugados = partidosJugados; }
+
+    public Integer getPartidosGanados() { return partidosGanados; }
+
+    public void setPartidosGanados(Integer partidosGanados) { this.partidosGanados = partidosGanados; }
+
+    public Integer getPartidosEmpatados() { return partidosEmpatados; }
+
+    public void setPartidosEmpatados(Integer partidosEmpatados) { this.partidosEmpatados = partidosEmpatados; }
+
+    public Integer getPartidosPerdidos() { return partidosPerdidos; }
+
+    public void setPartidosPerdidos(Integer partidosPerdidos) { this.partidosPerdidos = partidosPerdidos; }
+
+    public void sumarPartidosJugados() { this.partidosJugados++; }
+
+    public void sumarPartidosGanados() { this.partidosGanados++; }
+
+    public void sumarPartidosPerdidos() { this.partidosPerdidos++; }
+
+    public void sumarPartidosEmpatados() {this.partidosEmpatados++; }
 }

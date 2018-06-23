@@ -75,6 +75,8 @@ public class Partido {
         this.resultado.setGolesVisitantes(golesVisitantes);
         equipoLocal.sumarGoles(this.resultado.getGolesLocal(), this.resultado.getGolesVisitantes());
         equipoVisitante.sumarGoles(this.resultado.getGolesVisitantes(), this.resultado.getGolesLocal());
+        this.equipoLocal.sumarPartidosJugados();
+        this.equipoVisitante.sumarPartidosJugados();
         this.sumarPuntos();
 
     }
@@ -83,12 +85,18 @@ public class Partido {
     public void sumarPuntos() {
         if (esGanadorLocal()) {
             equipoLocal.sumarPuntos(3);
+            equipoLocal.sumarPartidosGanados();
+            equipoVisitante.sumarPartidosPerdidos();
         } else {
             if (esEmpate()) {
                 equipoLocal.sumarPuntos(1);
                 equipoVisitante.sumarPuntos(1);
+                equipoLocal.sumarPartidosEmpatados();
+                equipoVisitante.sumarPartidosEmpatados();
             } else {
                 equipoVisitante.sumarPuntos(3);
+                equipoVisitante.sumarPartidosGanados();
+                equipoLocal.sumarPartidosPerdidos();
             }
         }
 

@@ -87,7 +87,8 @@ public class TestService {
     public List<Equipo> recuperarEquipos() {
         return Runner.runInSession(() -> {
             Session session = Runner.getCurrentSession();
-            String hql = "FROM Equipo ORDER BY puntos DESC";
+            String hql = "FROM Equipo ORDER BY puntos DESC, diferencia DESC, golesAFavor DESC";
+            // En realidad, en caso de tener mismos puntos y diferencia, se decide por el resultado entre ambos equipos, y luego goles a favor.
             Query<Equipo> query = session.createQuery(hql, Equipo.class);
             return query.getResultList();
         });
