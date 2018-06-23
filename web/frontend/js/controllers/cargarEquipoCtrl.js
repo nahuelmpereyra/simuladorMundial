@@ -4,9 +4,8 @@ class CargarEquipoController {
     this.state = $state
     this.cargarEquipoService = cargarEquipoService
     this.cargarResultadoService = cargarResultadoService
-    this.equipoACargar = new Equipo()
-    this.equipoAEliminar = new Equipo()
-    this.equipoAEditar = null
+    this.equipoACargar = null
+    this.equipoParaModificar = null
     this.zonasValidas = ["A", "B", "C", "D", "E", "F", "G", "H"]
     this.growl = growl
     this.todosLosEquipos()
@@ -29,17 +28,22 @@ class CargarEquipoController {
     this.growl.error(mensaje)
   }
 
+  // CARGAR
   cargarEquipo() {
-    this.validarZona(this.equipoACargar.zona)
-    this.cargarEquipoService.cargarEquipo(this.equipoACargar)
-      .then((response) => {
-        this.notificarMensaje("Registraste a " + response.data.nombre + " exitosamente")
-        //this.state.go("equipos")
-      }, this.errorHandler)
+    if (this.equipoACargar != null) {
+      this.validarZona(this.equipoACargar.zona)
+      this.cargarEquipoService.cargarEquipo(this.equipoACargar)
+        .then((response) => {
+          this.notificarMensaje("Agregaste a " + response.data.nombre + " exitosamente")
+          this.todosLosEquipos()
+          this.equipoACargar = null
+        }, this.errorHandler)
+    }
   }
 
-  eliminarEquipo() {
-    const mensaje = "¿Está seguro que desea eliminar a <b>'" + this.equipoAEliminar.nombre + "'</b>?"
+  // ELIMINAR
+  eliminarEquipo(equipo) {
+    const mensaje = "¿Está seguro que desea eliminar a <b>'" + equipo.nombre + "'</b>?"
     bootbox.confirm({
       message: mensaje,
       buttons: {
@@ -54,27 +58,39 @@ class CargarEquipoController {
       },
       callback: (confirma) => {
         if (confirma) {
-          this.cargarEquipoService.eliminarEquipo(this.equipoAEliminar)
+          this.cargarEquipoService.eliminarEquipo(equipo)
             .then((response) => {
-              this.notificarMensaje("Eliminaste a " + this.equipoAEliminar.nombre + " exitosamente")
+              this.notificarMensaje("Eliminaste a " + equipo.nombre + " exitosamente")
+              this.todosLosEquipos()
             }, this.errorHandler)
         }
       }
     })
   }
 
-  editarEquipo(){
-    this.validarZona(this.equipoAEditar.zona)
-    this.cargarEquipoService.editarEquipo(this.equipoAEditar, this.equipoEditado)
-    .then((response) => {
-      this.notificarMensaje("Editaste a " + this.equipoAEditar.nombre + " exitosamente")
-    }, this.errorHandler)
+  // MODIFICAR
+  modificarEquipo(equipo) {
+    // Copiamos al equipo porque sino al cerrar el diálogo queda modificado en la lista
+    this.equipoParaModificar = Object.assign({}, equipo);
+    $("#modificarEquipoModal").modal({})
   }
+
+  aplicarModificacion() {
+    this.validarZona(this.equipoParaModificar.zona)
+    this.cargarEquipoService.editarEquipo(this.equipoParaModificar).then(() => {
+      this.notificarMensaje('Equipo modificado!')
+      this.todosLosEquipos()
+    }, this.errorHandler)
+
+    this.equipoParaModificar = null
+    $("#modificarEquipoModal").modal('toggle')
+  }
+
 
   upperCase(zona) {
     if (zona !== undefined) {
       this.equipoACargar.zona = zona.toLocaleUpperCase()
-      this.equipoAEditar.zona = zona.toLocaleUpperCase()
+      this.equipoParaModificar.zona = zona.toLocaleUpperCase()
     }
   }
 

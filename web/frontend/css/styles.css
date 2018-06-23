@@ -1,3 +1,13 @@
 .bold {
     font-weight: bold;
 }
+
+.equipos-btn-modificar {
+    color: white;
+    background-color: darkcyan;
+}
+
+.equipos-btn-eliminar {
+    color: white;
+    background-color: crimson;
+}
