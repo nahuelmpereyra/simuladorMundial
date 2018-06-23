@@ -67,6 +67,19 @@ TestService {
         });
     }
 
+    public List<Equipo> buscarEquipos(String nombre) {
+        return Runner.runInSession(() -> {
+            Session session = Runner.getCurrentSession();
+            String nombreFormateado = "%" + nombre +"%";
+            String hql = "FROM Equipo WHERE nombre LIKE :elNombre";
+            Query<Equipo> query = session.createQuery(hql, Equipo.class)
+                    .setParameter("elNombre", nombreFormateado);
+
+            return query.getResultList();
+
+        });
+    }
+
     public Boolean hayCabezaDeSerieEnZona(String zona) {
         return this.recuperarEquiposPorZona(zona).stream().anyMatch(equipo -> equipo.getEsCabezaDeSerie());
     }

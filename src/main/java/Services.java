@@ -203,6 +203,38 @@ public class Services {
 
     }
 
+    @DELETE
+    @Path("/eliminarpartido/{idPartido}")
+    @Consumes({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response eliminarPartido(@PathParam("idPartido") Integer idPartido) {
+
+        Partido partidoRecuperado = testService.recuperarEntidad(Partido.class, idPartido);
+
+        try {
+            if (partidoRecuperado == null) {
+                throw new Exception("No existe el partido");
+            } else {
+                this.testService.eliminarEntidad(partidoRecuperado);
+
+                String ok = gson.toJson("Partido entre " + partidoRecuperado.getLocal().getNombre() + " y " + partidoRecuperado.getVisitante().getNombre() + " eliminado con éxito");
+                return Response.status(Response.Status.OK)
+                        .entity(ok)
+                        .build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(getErrorJson(e.getMessage()))
+                    .build();
+        }
+    }
+
+    @GET
+    @Path("/equipos/nombre={nombre}")
+    @Produces("application/json")
+    public List<Equipo> buscarEquipos(@PathParam("nombre") String nombre) {
+        return this.testService.buscarEquipos(nombre);
+    }
 
     private String getErrorJson(String message) {
         String msg = "\"" + message + "\"";
