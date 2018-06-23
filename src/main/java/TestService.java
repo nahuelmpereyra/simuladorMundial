@@ -10,8 +10,7 @@ import java.util.List;
  * Servicio generico para guardar o recuperar objetos de forma genreica. Usado
  * principalmente en tests
  */
-public class
-TestService {
+public class TestService {
 
     public void crearEntidad(Object object) {
         Runner.runInSession(() -> {
@@ -70,7 +69,7 @@ TestService {
     public List<Equipo> buscarEquipos(String nombre) {
         return Runner.runInSession(() -> {
             Session session = Runner.getCurrentSession();
-            String nombreFormateado = "%" + nombre +"%";
+            String nombreFormateado = "%" + nombre + "%";
             String hql = "FROM Equipo WHERE nombre LIKE :elNombre";
             Query<Equipo> query = session.createQuery(hql, Equipo.class)
                     .setParameter("elNombre", nombreFormateado);
@@ -88,13 +87,10 @@ TestService {
     public List<Equipo> recuperarEquipos() {
         return Runner.runInSession(() -> {
             Session session = Runner.getCurrentSession();
-            String hql = "FROM Equipo ORDER BY puntos DESC";
+            String hql = "FROM Equipo ORDER BY puntos DESC, diferencia DESC, golesAFavor DESC";
+            // En realidad, en caso de tener mismos puntos y diferencia, se decide por el resultado entre ambos equipos, y luego goles a favor.
             Query<Equipo> query = session.createQuery(hql, Equipo.class);
-            if (!query.getResultList().isEmpty()) {
-                return query.getResultList();
-            } else {
-                return new ArrayList<>();
-            }
+            return query.getResultList();
         });
     }
 
@@ -103,11 +99,7 @@ TestService {
             Session session = Runner.getCurrentSession();
             String hql = "FROM Partido";
             Query<Partido> query = session.createQuery(hql, Partido.class);
-            if (!query.getResultList().isEmpty()) {
-                return query.getResultList();
-            } else {
-                return new ArrayList<>();
-            }
+            return query.getResultList();
         });
     }
 
@@ -115,6 +107,21 @@ TestService {
         Runner.runInSession(() -> {
             Session session = Runner.getCurrentSession();
             session.update(object);
+            return null;
+        });
+    }
+
+    public void eliminarPartidosDe(Equipo equipo) {
+        Runner.runInSession(() -> {
+            Session session = Runner.getCurrentSession();
+            String hql = "FROM Partido WHERE equipoLocal_nombre = :elNombre OR equipoVisitante_nombre = :elNombre";
+            Query<Partido> query = session.createQuery(hql, Partido.class)
+                    .setParameter("elNombre", equipo.getNombre());
+            List<Partido> partidos = query.list();
+            for (Partido partido : partidos) {
+                session.delete(partido);
+            }
+
             return null;
         });
     }
