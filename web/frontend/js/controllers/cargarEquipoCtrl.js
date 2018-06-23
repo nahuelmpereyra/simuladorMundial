@@ -6,6 +6,7 @@ class CargarEquipoController {
     this.cargarResultadoService = cargarResultadoService
     this.equipoACargar = null
     this.equipoParaModificar = null
+    this.busqueda = ""
     this.zonasValidas = ["A", "B", "C", "D", "E", "F", "G", "H"]
     this.growl = growl
     this.todosLosEquipos()
@@ -26,6 +27,17 @@ class CargarEquipoController {
 
   notificarError(mensaje) {
     this.growl.error(mensaje)
+  }
+
+  // BUSCAR
+  buscarEquipos() {
+    const promise = (this.busqueda == "") ?
+      this.listarTodos() :
+      this.cargarResultadoService.buscar(this.busqueda)
+
+    promise.then((response) => {
+      this.equipos = response.data
+    }, this.errorHandler)
   }
 
   // CARGAR

@@ -236,7 +236,6 @@ public class Services {
         return this.testService.buscarEquipos(nombre);
     }
 
-
     private String getErrorJson(String message) {
         String msg = "\"" + message + "\"";
         return String.format("{\n" + "\"error\": " + msg + "\n" + "}");

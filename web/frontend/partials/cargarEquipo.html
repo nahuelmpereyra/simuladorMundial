@@ -19,6 +19,18 @@
 
         <div class="col-lg-8">
 
+            <!-- Busqueda -->
+            <div class="equipos-busqueda">
+                <form role="form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" data-ng-model="cargarEquipoCtrl.busqueda" class="form-control" placeholder="Ingresá país a buscar">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default" data-ng-click="cargarEquipoCtrl.buscarEquipos()">Buscar</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+
             <!-- Equipos -->
             <div class="table-responsive">
                 <table class="table table-striped table-hover table-condensed">
@@ -88,7 +100,7 @@
                     <h4 class="modal-title">Modificar Equipo</h4>
                 </div>
                 <div class="modal-body">
-                    <h3>"{{cargarEquipoCtrl.equipoParaModificar.nombre}}"</h3>
+                    <h3>{{cargarEquipoCtrl.equipoParaModificar.nombre}}</h3>
                     <form name="modificarEquipoForm" role="form">
                         <fieldset>
                             <div class="form-group">
