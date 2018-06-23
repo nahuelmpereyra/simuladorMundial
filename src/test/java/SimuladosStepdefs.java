@@ -63,8 +63,8 @@ public class SimuladosStepdefs {
     public void un_nuevo_Partido() throws Throwable {
         this.partido = new Partido();
         this.partido.setFecha(LocalDateTime.now());
-        this.partido.setLocal(equipo1);
-        this.partido.setVisitante(equipo2);
+        this.partido.setEquipoLocal(equipo1);
+        this.partido.setEquipoVisitante(equipo2);
         this.partido.setEstadio("Moscu");
     }
 
@@ -85,8 +85,8 @@ public class SimuladosStepdefs {
         Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
         //System.out.println("Partido recuperado: " + partidoRecuperado);
         //System.out.println("Partido.estadio: " + partido.getEstadio());
-        assertThat(partidoRecuperado.getLocal().getNombre()).isEqualTo("Arabia Saudita");
-        assertThat(partidoRecuperado.getVisitante().getNombre()).isEqualTo("Rusia");
+        assertThat(partidoRecuperado.getEquipoLocal().getNombre()).isEqualTo("Arabia Saudita");
+        assertThat(partidoRecuperado.getEquipoVisitante().getNombre()).isEqualTo("Rusia");
     }
 
 

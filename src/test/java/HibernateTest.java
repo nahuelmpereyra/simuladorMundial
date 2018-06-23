@@ -40,8 +40,8 @@ public class HibernateTest {
 
         this.partido = new Partido();
         this.partido.setFecha(LocalDateTime.now());
-        this.partido.setLocal(equipo1);
-        this.partido.setVisitante(equipo2);
+        this.partido.setEquipoLocal(equipo1);
+        this.partido.setEquipoVisitante(equipo2);
         this.partido.setEstadio("Estadio");
         this.testService.crearEntidad(equipo1);
         this.testService.crearEntidad(equipo2);
@@ -64,6 +64,7 @@ public class HibernateTest {
             assertEquals("Islandia", equipo.getNombre());
             assertEquals("D", equipo.getZona());
             System.out.println("Terminando test_recuperarEquipo");
+
             return null;
         });
 
@@ -94,8 +95,8 @@ public class HibernateTest {
     public void test_VerificarPartidoCargado() {
         Runner.runInSession(() -> {
             Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
-            assertEquals("Argentina", partidoRecuperado.getLocal().getNombre());
-            assertEquals("Islandia", partidoRecuperado.getVisitante().getNombre());
+            assertEquals("Argentina", partidoRecuperado.getEquipoLocal().getNombre());
+            assertEquals("Islandia", partidoRecuperado.getEquipoVisitante().getNombre());
             return null;
         });
     }

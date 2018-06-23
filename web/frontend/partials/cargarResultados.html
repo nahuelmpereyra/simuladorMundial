@@ -56,12 +56,12 @@
                         </tbody>
                     </table>
 
-                    <ul data-ng-repeat="partido in ctrl.partidos" ng-show="ctrl.esEquipoDeGrupo(partido.local, grupo)" style="list-style-type:none">
+                    <ul data-ng-repeat="partido in ctrl.partidos" ng-show="ctrl.esEquipoDeGrupo(partido.equipoLocal, grupo)" style="list-style-type:none">
                         <li>
                             <div>
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
-                                        <span class="col-md-2 control-label">{{partido.local.nombre}}</span>
+                                        <span class="col-md-2 control-label">{{partido.equipoLocal.nombre}}</span>
                                         <div class="col-md-6">
                                             <div class="form-group row">
                                                 <div class="col-md-3">
@@ -72,7 +72,7 @@
                                                     <input ng-change="ctrl.actualizarResultado(partido)" ng-model="partido.resultado.golesVisitantes" type="text" id="golesVisitante"
                                                         class="form-control" required>
                                                 </div>
-                                                <span class="col-md-3 control-label">{{partido.visitante.nombre}}</span>
+                                                <span class="col-md-3 control-label">{{partido.equipoVisitante.nombre}}</span>
                                             </div>
                                         </div>
                                     </div>

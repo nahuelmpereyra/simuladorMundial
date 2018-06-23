@@ -34,11 +34,10 @@ public class Services {
     }
 
     @GET
-    @Path("{pais}")
+    @Path("/equipos/nombre={nombre}")
     @Produces("application/json")
-    public Equipo getEquipobyId(@PathParam("pais") String pais) {
-        Equipo equipo1 = this.testService.recuperarEntidad(Equipo.class, pais);
-        return equipo1;
+    public List<Equipo> buscarEquipos(@PathParam("nombre") String nombre) {
+        return this.testService.buscarEquipos(nombre);
     }
 
     @POST
@@ -86,8 +85,8 @@ public class Services {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createPartido(Partido partido) {
 
-        Equipo equipoLocal = testService.recuperarPorNombre(partido.getLocal().getNombre());
-        Equipo equipoVisitante = testService.recuperarPorNombre(partido.getVisitante().getNombre());
+        Equipo equipoLocal = testService.recuperarPorNombre(partido.getEquipoLocal().getNombre());
+        Equipo equipoVisitante = testService.recuperarPorNombre(partido.getEquipoVisitante().getNombre());
 
 
         try {
@@ -125,8 +124,8 @@ public class Services {
 
                 partidoRecuperado.setResultado(resultado.getGolesLocal(), resultado.getGolesVisitantes());
                 this.testService.actualizar(partidoRecuperado);
-                this.testService.actualizar(partidoRecuperado.getLocal());
-                this.testService.actualizar(partidoRecuperado.getVisitante());
+                this.testService.actualizar(partidoRecuperado.getEquipoLocal());
+                this.testService.actualizar(partidoRecuperado.getEquipoVisitante());
                 partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
                 String ok = gson.toJson(partidoRecuperado);
                 return Response.status(Response.Status.OK)
@@ -153,6 +152,7 @@ public class Services {
             if (equipoRecuperado == null) {
                 throw new Exception("No existe el equipo");
             } else {
+                this.testService.eliminarPartidosDe(equipo);
                 this.testService.eliminarEntidad(equipo);
 
                 String ok = gson.toJson("Equipo eliminado");
@@ -217,7 +217,7 @@ public class Services {
             } else {
                 this.testService.eliminarEntidad(partidoRecuperado);
 
-                String ok = gson.toJson("Partido entre " + partidoRecuperado.getLocal().getNombre() + " y " + partidoRecuperado.getVisitante().getNombre() + " eliminado con éxito");
+                String ok = gson.toJson("Partido entre " + partidoRecuperado.getEquipoLocal().getNombre() + " y " + partidoRecuperado.getEquipoVisitante().getNombre() + " eliminado con éxito");
                 return Response.status(Response.Status.OK)
                         .entity(ok)
                         .build();
@@ -229,12 +229,6 @@ public class Services {
         }
     }
 
-    @GET
-    @Path("/equipos/nombre={nombre}")
-    @Produces("application/json")
-    public List<Equipo> buscarEquipos(@PathParam("nombre") String nombre) {
-        return this.testService.buscarEquipos(nombre);
-    }
 
     private String getErrorJson(String message) {
         String msg = "\"" + message + "\"";

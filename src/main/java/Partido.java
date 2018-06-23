@@ -15,10 +15,12 @@ public class Partido {
 
     @JsonbDateFormat("yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fecha;
+
     @OneToOne
-    private Equipo local;
+    private Equipo equipoLocal;
+
     @OneToOne
-    private Equipo visitante;
+    private Equipo equipoVisitante;
 
     private String estadio;
 
@@ -39,12 +41,12 @@ public class Partido {
         this.fecha = fecha;
     }
 
-    public void setLocal(Equipo local) {
-        this.local = local;
+    public void setEquipoLocal(Equipo equipoLocal) {
+        this.equipoLocal = equipoLocal;
     }
 
-    public void setVisitante(Equipo visitante) {
-        this.visitante = visitante;
+    public void setEquipoVisitante(Equipo equipoVisitante) {
+        this.equipoVisitante = equipoVisitante;
     }
 
     public void setEstadio(String estadio) {
@@ -55,12 +57,12 @@ public class Partido {
         return resultado;
     }
 
-    public Equipo getLocal() {
-        return this.local;
+    public Equipo getEquipoLocal() {
+        return this.equipoLocal;
     }
 
-    public Equipo getVisitante() {
-        return this.visitante;
+    public Equipo getEquipoVisitante() {
+        return this.equipoVisitante;
     }
 
     public String getEstadio() {
@@ -71,8 +73,8 @@ public class Partido {
 
         this.resultado.setGolesLocal(golesLocal);
         this.resultado.setGolesVisitantes(golesVisitantes);
-        local.sumarGoles(this.resultado.getGolesLocal(), this.resultado.getGolesVisitantes());
-        visitante.sumarGoles(this.resultado.getGolesVisitantes(), this.resultado.getGolesLocal());
+        equipoLocal.sumarGoles(this.resultado.getGolesLocal(), this.resultado.getGolesVisitantes());
+        equipoVisitante.sumarGoles(this.resultado.getGolesVisitantes(), this.resultado.getGolesLocal());
         this.sumarPuntos();
 
     }
@@ -80,13 +82,13 @@ public class Partido {
 
     public void sumarPuntos() {
         if (esGanadorLocal()) {
-            local.sumarPuntos(3);
+            equipoLocal.sumarPuntos(3);
         } else {
             if (esEmpate()) {
-                local.sumarPuntos(1);
-                visitante.sumarPuntos(1);
+                equipoLocal.sumarPuntos(1);
+                equipoVisitante.sumarPuntos(1);
             } else {
-                visitante.sumarPuntos(3);
+                equipoVisitante.sumarPuntos(3);
             }
         }
 
