@@ -3,5 +3,6 @@ class Equipo {
         this.nombre = ""
         this.zona = ""
         this.esCabezaDeSerie = false
-    }
+        this.imagenSrc = ""
+        }
 }

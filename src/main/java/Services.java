@@ -15,8 +15,12 @@ public class Services {
     @GET
     @Path("/equipos")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Equipo> getEquipos() {
-        return this.testService.recuperarEquipos();
+    public Response getEquipos() {
+
+        String ok = gson.toJson(this.testService.recuperarEquipos());
+       return  Response.status(Response.Status.OK)
+                .entity(ok)
+                .build();
     }
 
     @GET

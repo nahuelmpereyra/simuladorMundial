@@ -27,7 +27,7 @@
                             <tr data-ng-repeat="equipo in ctrl.equipos" ng-show="ctrl.esEquipoDeGrupo(equipo, grupo)" ng-class="{true:'bold'}[equipo.esCabezaDeSerie]">
                                 <th class="text-center">1</th>
                                 <td>
-                                    <!-- <img src="../images/Egipto.png" width="15px"> -->
+                                    <img ng-src= "{{equipo.imagenSrc}}" width="20px"/>
                                     <b>{{equipo.nombre}}</b>
                                 </td>
                                 <td class="success bold text-center">

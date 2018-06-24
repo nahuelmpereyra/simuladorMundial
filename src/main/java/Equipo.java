@@ -9,7 +9,7 @@ public class Equipo {
     private String nombre;
 
     private Boolean esCabezaDeSerie = false;
-
+    private String imagenSrc ="";
     private Integer puntos = 0;
     private Integer golesAFavor = 0;
     private Integer golesEnContra = 0;
@@ -25,6 +25,7 @@ public class Equipo {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+        this.imagenSrc = "../../imagenes/"+nombre+".png";
     }
 
     public String getZona() {
