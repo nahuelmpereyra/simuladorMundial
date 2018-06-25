@@ -11,6 +11,7 @@ public class SimuladosStepdefs {
     private Equipo equipo1;
     private Equipo equipo2;
     private Partido partido;
+    private Resultado resultado;
     private TestService testService = new TestService();
 
 
@@ -89,10 +90,17 @@ public class SimuladosStepdefs {
         assertThat(partidoRecuperado.getEquipoVisitante().getNombre()).isEqualTo("Rusia");
     }
 
+    @Given("^Un nuevo Resultado$")
+    public void un_nuevo_Resultado() throws Throwable {
+        this.resultado = new Resultado();
+    }
+
 
     @When("^Seteo resultado del partido$")
     public void seteo_resultado_del_partido() throws Throwable {
-        partido.setResultado(2, 1);
+        this.resultado.setGolesLocal(2);
+        this.resultado.setGolesVisitantes(1);
+        partido.setResultado(resultado);
         this.testService.actualizar(partido);
     }
 
