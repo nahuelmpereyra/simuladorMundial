@@ -9,7 +9,6 @@ class CargarEquipoController {
     this.busqueda = ""
     this.zonasValidas = ["A", "B", "C", "D", "E", "F", "G", "H"]
     this.growl = growl
-    this.todosLosEquipos()
     this.errorHandler = (response) => {
       if (response.data) {
         this.notificarError(response.data.error)
@@ -17,6 +16,7 @@ class CargarEquipoController {
         this.notificarError("Error de conexión, intente nuevamente luego.")
       }
     }
+    this.resetEquipos()
   }
 
 
@@ -32,12 +32,18 @@ class CargarEquipoController {
   // BUSCAR
   buscarEquipos() {
     const promise = (this.busqueda == "") ?
-      this.listarTodos() :
+      this.cargarResultadoService.listarEquipos() :
       this.cargarResultadoService.buscar(this.busqueda)
 
     promise.then((response) => {
       this.equipos = response.data
     }, this.errorHandler)
+  }
+
+  // LISTAR
+  resetEquipos(){
+    this.busqueda = ""
+    this.buscarEquipos()
   }
 
   // CARGAR
@@ -47,7 +53,7 @@ class CargarEquipoController {
       this.cargarEquipoService.cargarEquipo(this.equipoACargar)
         .then((response) => {
           this.notificarMensaje("Agregaste a " + response.data.nombre + " exitosamente")
-          this.todosLosEquipos()
+          this.listarTodos()
           this.equipoACargar = null
         }, this.errorHandler)
     }
@@ -74,7 +80,7 @@ class CargarEquipoController {
           this.cargarEquipoService.eliminarEquipo(equipo)
             .then((response) => {
               this.notificarMensaje("Eliminaste a " + equipo.nombre + " exitosamente")
-              this.todosLosEquipos()
+              this.listarTodos()
             }, this.errorHandler)
         }
       }
@@ -92,7 +98,7 @@ class CargarEquipoController {
     this.validarZona(this.equipoParaModificar.zona)
     this.cargarEquipoService.editarEquipo(this.equipoParaModificar).then(() => {
       this.notificarMensaje('Equipo modificado!')
-      this.todosLosEquipos()
+      this.listarTodos()
     }, this.errorHandler)
 
     this.equipoParaModificar = null
@@ -112,13 +118,6 @@ class CargarEquipoController {
       this.notificarError("Zona incorrecta")
       throw 'Zona incorrecta' // Necesario para que corte la ejecución.
     }
-  }
-
-  todosLosEquipos() {
-    this.cargarResultadoService.listarEquipos()
-      .then((response) => {
-        this.equipos = response.data
-      }, this.errorHandler)
   }
 
 }

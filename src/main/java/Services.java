@@ -40,8 +40,11 @@ public class Services {
     @GET
     @Path("/equipos/nombre={nombre}")
     @Produces("application/json")
-    public List<Equipo> buscarEquipos(@PathParam("nombre") String nombre) {
-        return this.testService.buscarEquipos(nombre);
+    public Response buscarEquipos(@PathParam("nombre") String nombre) {
+        String ok = gson.toJson(this.testService.buscarEquipos(nombre));
+        return Response.status(Response.Status.OK)
+                .entity(ok)
+                .build();
     }
 
     @POST
