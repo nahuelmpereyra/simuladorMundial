@@ -13,9 +13,7 @@ public class Resultado {
     private Integer golesVisitantes = null;
 
 
-    public void setGolesLocal(Integer golesLocal) {
-        this.golesLocal = golesLocal;
-    }
+    public void setGolesLocal(Integer golesLocal) { this.golesLocal = golesLocal; }
 
     public void setGolesVisitantes(Integer golesVisitantes) {
         this.golesVisitantes = golesVisitantes;

@@ -18,7 +18,7 @@ public class Services {
     public Response getEquipos() {
 
         String ok = gson.toJson(this.testService.recuperarEquipos());
-       return  Response.status(Response.Status.OK)
+        return Response.status(Response.Status.OK)
                 .entity(ok)
                 .build();
     }
@@ -120,21 +120,36 @@ public class Services {
     public Response cargarResultado(@PathParam("idPartido") Integer id, Resultado resultado) {
 
         Partido partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
+        Integer golesLocal = partidoRecuperado.getResultado().getGolesLocal();
+        Integer golesVisitante = partidoRecuperado.getResultado().getGolesVisitantes();
 
         try {
             if (partidoRecuperado == null) {
                 throw new Exception("El partido no existe");
             } else {
 
-                partidoRecuperado.setResultado(resultado.getGolesLocal(), resultado.getGolesVisitantes());
-                this.testService.actualizar(partidoRecuperado);
-                this.testService.actualizar(partidoRecuperado.getEquipoLocal());
-                this.testService.actualizar(partidoRecuperado.getEquipoVisitante());
-                partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
-                String ok = gson.toJson(partidoRecuperado);
-                return Response.status(Response.Status.OK)
-                        .entity(ok)
-                        .build();
+                if (golesLocal != null && golesVisitante != null) {
+                    // Ya hay un resultado previo
+                    Resultado resultadoRecuperado = this.testService.recuperarEntidad(Resultado.class, partidoRecuperado.getResultado().id);
+                    partidoRecuperado.revertirUltimoResultado(resultadoRecuperado, resultado);
+                    // Cargamos nuevo resultado
+                    partidoRecuperado.setResultado(resultado);
+
+                    partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
+                    String ok = gson.toJson(partidoRecuperado);
+                    return Response.status(Response.Status.OK)
+                            .entity(ok)
+                            .build();
+                } else {
+                    // No hay un resultado previo
+                    partidoRecuperado.setResultado(resultado);
+                    partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
+                    String ok = gson.toJson(partidoRecuperado);
+                    return Response.status(Response.Status.OK)
+                            .entity(ok)
+                            .build();
+                }
+
             }
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)

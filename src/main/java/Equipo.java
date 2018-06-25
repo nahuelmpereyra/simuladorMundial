@@ -52,11 +52,8 @@ public class Equipo {
         return puntos;
     }
 
-    public void sumarGoles(Integer golesLocal, Integer golesVisitantes) {
-        golesAFavor += golesLocal;
-        golesEnContra += golesVisitantes;
-        actualizarDiferencia();
-    }
+    public void setPuntos(Integer puntos) { this.puntos = puntos; }
+
 
     public void actualizarDiferencia() {
         diferencia = golesAFavor - golesEnContra;
@@ -70,11 +67,7 @@ public class Equipo {
         return golesAFavor;
     }
 
-    public Integer getGolesEnContra() {
-        return golesEnContra;
-    }
-
-    public Integer getPartidosJugados() { return partidosJugados; }
+    public Integer getGolesEnContra() { return golesEnContra; }
 
     public void setPartidosJugados(Integer partidosJugados) { this.partidosJugados = partidosJugados; }
 
@@ -96,5 +89,23 @@ public class Equipo {
 
     public void sumarPartidosPerdidos() { this.partidosPerdidos++; }
 
-    public void sumarPartidosEmpatados() {this.partidosEmpatados++; }
+    public void sumarPartidosEmpatados() { this.partidosEmpatados++; }
+
+    public void restarPartidosJugados(){ this.partidosJugados--; }
+
+    public void restarPartidosPerdidos() { this.partidosPerdidos--; }
+
+    public void restarPartidosEmpatados() { this.partidosEmpatados--; }
+
+    public void restarPartidosGanados() { this.partidosGanados--; }
+
+    public void restarPuntos(Integer puntos) { this.puntos -= puntos; }
+
+    public void restarGolesAFavor(Integer goles) { this.golesAFavor -= goles; }
+
+    public void sumarGolesEnContra(Integer goles) { this.golesEnContra += goles; }
+
+    public void sumarGolesAFavor(Integer goles) { this.golesAFavor+= goles; }
+
+    public void restarGolesEnContra(Integer goles) { this.golesEnContra-= goles; }
 }

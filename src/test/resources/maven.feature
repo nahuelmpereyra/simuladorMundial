@@ -25,6 +25,7 @@ Feature: Cucumber integration
     Given Un nuevo Equipo
     Given Otro nuevo Equipo
     Given Un nuevo Partido
+    Given Un nuevo Resultado
     When Equipo se agrega
     When Partido se agrega
     When Seteo resultado del partido

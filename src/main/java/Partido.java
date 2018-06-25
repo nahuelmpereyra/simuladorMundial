@@ -4,6 +4,8 @@ import org.hibernate.annotations.CascadeType;
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Partido {
@@ -23,15 +25,10 @@ public class Partido {
     private Equipo equipoVisitante;
 
     private String estadio;
-
     @OneToOne
     @Cascade(CascadeType.ALL)
     private Resultado resultado = new Resultado();
 
-
-    public LocalDateTime getFecha() {
-        return this.fecha;
-    }
 
     public Integer getId() {
         return id;
@@ -65,49 +62,14 @@ public class Partido {
         return this.equipoVisitante;
     }
 
-    public String getEstadio() {
-        return this.estadio;
+    public void setResultado(Resultado resultado) {
+        this.resultado = resultado;
+        Torneo.getTorneo().cargarResultado(this);
     }
 
-    public void setResultado(Integer golesLocal, Integer golesVisitantes) {
-
-        this.resultado.setGolesLocal(golesLocal);
-        this.resultado.setGolesVisitantes(golesVisitantes);
-        equipoLocal.sumarGoles(this.resultado.getGolesLocal(), this.resultado.getGolesVisitantes());
-        equipoVisitante.sumarGoles(this.resultado.getGolesVisitantes(), this.resultado.getGolesLocal());
-        this.equipoLocal.sumarPartidosJugados();
-        this.equipoVisitante.sumarPartidosJugados();
-        this.sumarPuntos();
-
+    public void revertirUltimoResultado(Resultado resultadoAnterior, Resultado resultado) {
+        this.resultado = resultado;
+        Torneo.getTorneo().actualizarEquipos(resultadoAnterior, this);
     }
 
-
-    public void sumarPuntos() {
-        if (esGanadorLocal()) {
-            equipoLocal.sumarPuntos(3);
-            equipoLocal.sumarPartidosGanados();
-            equipoVisitante.sumarPartidosPerdidos();
-        } else {
-            if (esEmpate()) {
-                equipoLocal.sumarPuntos(1);
-                equipoVisitante.sumarPuntos(1);
-                equipoLocal.sumarPartidosEmpatados();
-                equipoVisitante.sumarPartidosEmpatados();
-            } else {
-                equipoVisitante.sumarPuntos(3);
-                equipoVisitante.sumarPartidosGanados();
-                equipoLocal.sumarPartidosPerdidos();
-            }
-        }
-
-
-    }
-
-    private boolean esEmpate() {
-        return resultado.getGolesVisitantes() == resultado.getGolesLocal();
-    }
-
-    private boolean esGanadorLocal() {
-        return resultado.getGolesLocal() > resultado.getGolesVisitantes();
-    }
 }
