@@ -4,8 +4,8 @@ class CargarEquipoController {
     this.state = $state
     this.cargarEquipoService = cargarEquipoService
     this.cargarResultadoService = cargarResultadoService
-    this.equipoACargar = null
-    this.equipoParaModificar = null
+    this.equipoACargar = new Equipo()
+    this.equipoParaModificar = new Equipo()
     this.busqueda = ""
     this.zonasValidas = ["A", "B", "C", "D", "E", "F", "G", "H"]
     this.growl = growl
@@ -53,7 +53,7 @@ class CargarEquipoController {
       this.cargarEquipoService.cargarEquipo(this.equipoACargar)
         .then((response) => {
           this.notificarMensaje("Agregaste a " + response.data.nombre + " exitosamente")
-          this.listarTodos()
+          this.resetEquipos()
           this.equipoACargar = null
         }, this.errorHandler)
     }
@@ -80,7 +80,7 @@ class CargarEquipoController {
           this.cargarEquipoService.eliminarEquipo(equipo)
             .then((response) => {
               this.notificarMensaje("Eliminaste a " + equipo.nombre + " exitosamente")
-              this.listarTodos()
+              this.resetEquipos()
             }, this.errorHandler)
         }
       }
@@ -98,7 +98,7 @@ class CargarEquipoController {
     this.validarZona(this.equipoParaModificar.zona)
     this.cargarEquipoService.editarEquipo(this.equipoParaModificar).then(() => {
       this.notificarMensaje('Equipo modificado!')
-      this.listarTodos()
+      this.resetEquipos()
     }, this.errorHandler)
 
     this.equipoParaModificar = null
@@ -108,8 +108,8 @@ class CargarEquipoController {
 
   upperCase(zona) {
     if (zona !== undefined) {
-      this.equipoACargar.zona = zona.toLocaleUpperCase()
-      this.equipoParaModificar.zona = zona.toLocaleUpperCase()
+      this.equipoACargar.zona =this.equipoACargar.zona.toLocaleUpperCase()
+      this.equipoParaModificar.zona =this.equipoParaModificar.zona.toLocaleUpperCase()
     }
   }
 
