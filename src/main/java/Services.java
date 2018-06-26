@@ -40,8 +40,11 @@ public class Services {
     @GET
     @Path("/equipos/nombre={nombre}")
     @Produces("application/json")
-    public List<Equipo> buscarEquipos(@PathParam("nombre") String nombre) {
-        return this.testService.buscarEquipos(nombre);
+    public Response buscarEquipos(@PathParam("nombre") String nombre) {
+        String ok = gson.toJson(this.testService.buscarEquipos(nombre));
+        return Response.status(Response.Status.OK)
+                .entity(ok)
+                .build();
     }
 
     @POST
@@ -203,7 +206,7 @@ public class Services {
 
                     throw new Exception("Ya existe un cabeza de serie en el grupo " + equipoAEditar.getZona());
                 } else {
-                    if (testService.recuperarEquiposPorZona(equipoAEditar.getZona()).size() == 4 && (equipoRecuperado.getZona() != equipoAEditar.getZona())) {
+                    if (testService.recuperarEquiposPorZona(equipoAEditar.getZona()).size() == 4 && !equipoRecuperado.getZona().equals(equipoAEditar.getZona())) {
                         throw new Exception("La zona " + equipoAEditar.getZona() + " ya tiene 4 equipos");
                     }
                 }

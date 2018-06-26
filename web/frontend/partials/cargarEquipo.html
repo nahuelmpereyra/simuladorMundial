@@ -42,7 +42,9 @@
                             <th>&nbsp;</th>
                         </tr>
                         <tr data-ng-repeat="equipo in cargarEquipoCtrl.equipos">
-                            <td class="col-xs-3 text-center">{{equipo.nombre}}</td>
+                            <td class="col-xs-3 text-center">
+                                <img ng-src="{{equipo.imagenSrc}}" width="20px" /> {{equipo.nombre}}
+                            </td>
                             <td class="col-xs-2 text-center">{{equipo.zona}}</td>
                             <td class="col-xs-3 text-center">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="equipo.esCabezaDeSerie"></span>
@@ -75,7 +77,7 @@
                         <div class="form-group">
                             <label for="grupo">Grupo</label>
                             <input ng-model="cargarEquipoCtrl.equipoACargar.zona" type="text" id="grupo" placeholder="Ingresá grupo" class="form-control"
-                                required="true" maxlength="1">
+                                required="true" maxlength="1" ng-keyup="cargarEquipoCtrl.upperCase(cargarEquipoCtrl.equipoACargar.zona)">
                         </div>
                         <div class="form-group">
                             <label for="esCabezaDeSerie">Es cabeza de serie</label>
@@ -100,7 +102,9 @@
                     <h4 class="modal-title">Modificar Equipo</h4>
                 </div>
                 <div class="modal-body">
-                    <h3>{{cargarEquipoCtrl.equipoParaModificar.nombre}}</h3>
+                    <h3>
+                        <img ng-src="{{cargarEquipoCtrl.equipoParaModificar.imagenSrc}}" width="30px" /> {{cargarEquipoCtrl.equipoParaModificar.nombre}}
+                    </h3>
                     <form name="modificarEquipoForm" role="form">
                         <fieldset>
                             <div class="form-group">
@@ -109,7 +113,7 @@
                                     ng-keyup="cargarEquipoCtrl.upperCase(cargarEquipoCtrl.equipoParaModificar.zona)">
                             </div>
                             <div class="form-group">
-                                <label for="defaultCheck1" class="col-sm-3 control-label">Es cabeza de serie</label>
+                                <label for="defaultCheck1" class="col-sm-4 control-label">Es cabeza de serie</label>
                                 <input ng-model="cargarEquipoCtrl.equipoParaModificar.esCabezaDeSerie" type="checkbox" id="defaultCheck1" class="form-check-input">
                             </div>
                         </fieldset>
