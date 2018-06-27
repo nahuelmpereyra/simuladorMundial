@@ -18,6 +18,10 @@ const routes = ($stateProvider, $urlRouterProvider) => {
       url: "/cargarResultados",
       templateUrl: "partials/cargarResultados.html"
     })
+    .state('cargarPartidos', {
+      url: "/cargarPartidos",
+      templateUrl: "partials/cargarPartidos.html"
+    })
 
   $urlRouterProvider.otherwise("/cargarResultados");
 

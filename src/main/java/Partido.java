@@ -4,8 +4,6 @@ import org.hibernate.annotations.CascadeType;
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Partido {
@@ -14,8 +12,7 @@ public class Partido {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-
-    @JsonbDateFormat("yyyy-MM-dd HH:mm:ss")
+    @JsonbDateFormat("dd/MM/yyyy HH:mm")
     private LocalDateTime fecha;
 
     @OneToOne
@@ -36,6 +33,10 @@ public class Partido {
 
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
     }
 
     public void setEquipoLocal(Equipo equipoLocal) {

@@ -52,7 +52,7 @@ public class HibernateTest {
         System.out.println("Terminando el Before");
     }
 
-//    @After
+    @After
     public void cleanup() {
         SessionFactoryProvider.destroy();
         System.out.println("Terminando el After");
