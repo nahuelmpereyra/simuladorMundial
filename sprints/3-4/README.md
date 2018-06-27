@@ -14,13 +14,13 @@ Nro | Nombre | Legajo | Mail
 
 ### VSM
 
-[Ir a VSM](https://realtimeboard.com/app/board/o9J_kz8U6ZE=/)
+[Ir a VSM](https://realtimeboard.com/app/board/o9J_kzFlnH0=/)
 
 
 
 ### BurnDown Chart
 
-![Screenshot](../../BD3-4.png)
+![Screenshot](../../BD3-4.PNG)
 
 ### Sprints
 

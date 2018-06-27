@@ -14,13 +14,13 @@ Nro | Nombre | Legajo | Mail
 
 ### VSM
 
-[Ir a VSM](https://realtimeboard.com/app/board/o9J_kz8U6ZE=/)
+[Ir a VSM](https://realtimeboard.com/app/board/o9J_kzFlnH0=/)
 
 
 
 ### BurnDown Chart
 
-![Screenshot](BD.png)
+![Screenshot](BD3-4.PNG)
 
 ### Sprints
 
@@ -37,3 +37,21 @@ Nro | Nombre | Legajo | Mail
 - VSM completo (sumar los user stories faltantes)
 - CI completo (con DB).
 - Cargar los grupos grupos y mostrarlos. 
+
+#### Sprint 13/06/2018
+- Burndown Chart
+- Cargar los grupos y mostrarlos. 
+
+#### Sprint 20/06/2018
+- Admin elijo cabeza de serie.
+- Carga de resutados de partidos.
+ 
+
+#### Sprint 27/06/2018
+- Como admin eliminar equipo
+- Al eliminar equipo que se eliminen sus partidos
+- No puede haber dos equipos con mismo nombre
+- No puede haber mas de 4 equipos en un grupo
+- Como admin crear un partido
+- Como usuario ver tabla de posiciones por grupo"
+ 
