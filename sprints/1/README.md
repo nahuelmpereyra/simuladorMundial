@@ -14,7 +14,7 @@ Nro | Nombre | Legajo | Mail
 
 ### VSM
 
-[Ir a VSM](https://realtimeboard.com/app/board/o9J_kz8U6ZE=/)
+[Ir a VSM](https://realtimeboard.com/app/board/o9J_kzFlnH0=/)
 
 
 
