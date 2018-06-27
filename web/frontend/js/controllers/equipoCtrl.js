@@ -1,9 +1,9 @@
-class CargarEquipoController {
+class EquipoController {
 
-  constructor($state, cargarEquipoService, cargarResultadoService, growl) {
+  constructor($state, equipoService, resultadoService, growl) {
     this.state = $state
-    this.cargarEquipoService = cargarEquipoService
-    this.cargarResultadoService = cargarResultadoService
+    this.equipoService = equipoService
+    this.resultadoService = resultadoService
     this.equipoACargar = new Equipo()
     this.equipoParaModificar = new Equipo()
     this.busqueda = ""
@@ -32,8 +32,8 @@ class CargarEquipoController {
   // BUSCAR
   buscarEquipos() {
     const promise = (this.busqueda == "") ?
-      this.cargarResultadoService.listarEquipos() :
-      this.cargarResultadoService.buscar(this.busqueda)
+      this.resultadoService.listarEquipos() :
+      this.resultadoService.buscar(this.busqueda)
 
     promise.then((response) => {
       this.equipos = response.data
@@ -50,7 +50,7 @@ class CargarEquipoController {
   cargarEquipo() {
     if (this.equipoACargar != null) {
       this.validarZona(this.equipoACargar.zona)
-      this.cargarEquipoService.cargarEquipo(this.equipoACargar)
+      this.equipoService.cargarEquipo(this.equipoACargar)
         .then((response) => {
           this.notificarMensaje("Agregaste a " + response.data.nombre + " exitosamente")
           this.resetEquipos()
@@ -77,7 +77,7 @@ class CargarEquipoController {
       },
       callback: (confirma) => {
         if (confirma) {
-          this.cargarEquipoService.eliminarEquipo(equipo)
+          this.equipoService.eliminarEquipo(equipo)
             .then((response) => {
               this.notificarMensaje("Eliminaste a " + equipo.nombre + " exitosamente")
               this.resetEquipos()
@@ -96,7 +96,7 @@ class CargarEquipoController {
 
   aplicarModificacion() {
     this.validarZona(this.equipoParaModificar.zona)
-    this.cargarEquipoService.editarEquipo(this.equipoParaModificar).then(() => {
+    this.equipoService.editarEquipo(this.equipoParaModificar).then(() => {
       this.notificarMensaje('Equipo modificado!')
       this.resetEquipos()
     }, this.errorHandler)

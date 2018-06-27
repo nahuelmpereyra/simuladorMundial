@@ -1,4 +1,4 @@
-const cargarResultadoService = ($http, $state) => {
+const resultadoService = ($http, $state) => {
   this.state = $state
   const baseurl = "http://localhost:8080/simuladorMundial_Servidor_war_exploded/"
   return {
