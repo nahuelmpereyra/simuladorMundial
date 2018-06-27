@@ -20,7 +20,7 @@
 }
 
 .fixture {
-
+  width: 1200px;
     font-size:11px;
 
 
@@ -28,6 +28,7 @@
 
 .grupom {
     color: blue; font-size:18px;width:100%;
+    text-align: center;
 }
 
 .partido {
