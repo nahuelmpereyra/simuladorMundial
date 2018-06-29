@@ -11,3 +11,40 @@
     color: white;
     background-color: crimson;
 }
+
+.columna {
+    float: left;
+    width: 14%;
+    min-height: 500px;
+    text-align: center;
+}
+
+.fixture {
+  width: 1200px;
+    font-size:11px;
+
+
+}
+
+.grupom {
+    color: blue; font-size:18px;width:100%;
+    text-align: center;
+}
+
+.partido {
+    width: 157px;
+    padding: 2px;
+    text-align: center;
+    background:lightblue;
+    height:110px;
+      margin-top:7px;
+  margin-bottom:7px;
+}
+
+.espaciopartidocuartos{
+  width: 90px;
+  height:40px;
+  padding: 2px;
+  margin-top:7px;
+  margin-bottom:7px;
+}
