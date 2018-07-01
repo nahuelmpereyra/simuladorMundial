@@ -57,7 +57,7 @@ public class TestService {
     public List<Equipo> recuperarEquiposPorZona(String zona) {
         return Runner.runInSession(() -> {
             Session session = Runner.getCurrentSession();
-            String hql = "FROM Equipo WHERE zona = :laZona";
+            String hql = "FROM Equipo WHERE zona = :laZona ORDER BY puntos DESC, diferencia DESC, golesAFavor DESC";
             Query<Equipo> query = session.createQuery(hql, Equipo.class)
                     .setParameter("laZona", zona);
 

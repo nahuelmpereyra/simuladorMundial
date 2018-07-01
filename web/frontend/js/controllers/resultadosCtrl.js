@@ -4,12 +4,25 @@ class ResultadosController {
     this.grupos = ["A", "B", "C", "D", "E", "F", "G", "H"]
     this.resultadoService = resultadoService
     this.growl = growl
+    this.primeros = []
+    this.segundos = []
     this.todosLosEquipos()
     this.todosLosPartidos()
+    this.todosLosPrimeros()
+    this.todosLosSegundos()
+  }
+
+  todosLosEquipos() {
+    this.resultadoService.listarEquipos()
+      .then((response) => {
+        this.equipos = response.data
+      }, this.errorHandler)
   }
 
   /*
-  mostrarEquipos(){
+  OTRA MANERA:
+
+  todosLosEquipos(){
     const promise = this.resultadoService.listarTodos()
         promise
             .then((response) => response.data)
@@ -17,12 +30,6 @@ class ResultadosController {
             .catch(this.errorHandler)
   }
 */
-  todosLosEquipos() {
-    this.resultadoService.listarEquipos()
-      .then((response) => {
-        this.equipos = response.data
-      }, this.errorHandler)
-  }
 
   todosLosPartidos() {
     this.resultadoService.listarPartidos()
@@ -44,7 +51,23 @@ class ResultadosController {
     }
   }
 
+  todosLosPrimeros() {
+    for (let grupo of this.grupos) {
+      this.resultadoService.listarEquiposPorGrupo(grupo)
+        .then((response) => {
+          this.primeros.push(response.data[0])
+        }, this.errorHandler)
+    }
+  }
 
+  todosLosSegundos() {
+    for (let grupo of this.grupos) {
+      this.resultadoService.listarEquiposPorGrupo(grupo)
+        .then((response) => {
+          this.segundos.push(response.data[1])
+        }, this.errorHandler)
+    }
+  }
 
 
 }
