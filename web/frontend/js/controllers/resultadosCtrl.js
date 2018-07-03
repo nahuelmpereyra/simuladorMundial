@@ -10,14 +10,11 @@ class ResultadosController {
     this.llavesCuartos = []
     this.llaveSemi = []
     this.llavesFinal = null
+    this.puedeMostrarCuadro = false
     this.todosLosEquipos()
     this.todosLosPartidos()
     this.todosLosPrimeros()
     this.todosLosSegundos()
-    this.todasLasLlaves()
-    this.listarLlavesCuartos()
-    this.listarLlavesSemi()
-    this.listarLlavesFinal()
     this.errorHandler = (response) => {
       if (response.data) {
         this.notificarError(response.data.error)
@@ -111,6 +108,7 @@ class ResultadosController {
   }
 
   armarLlaves() {
+    this.puedeMostrarCuadro = true
     this.resultadoService.armarLlaves()
       .then((response) => {
         this.todasLasLlaves()
