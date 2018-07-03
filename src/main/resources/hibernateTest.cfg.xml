@@ -30,6 +30,8 @@
         <mapping class="Equipo" />
         <mapping class="Partido" />
         <mapping class="Resultado" />
+        <mapping class="Llave" />
+
 
 
     </session-factory>

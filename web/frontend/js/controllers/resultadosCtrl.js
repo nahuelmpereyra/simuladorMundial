@@ -6,10 +6,34 @@ class ResultadosController {
     this.growl = growl
     this.primeros = []
     this.segundos = []
+    this.llaves = []
+    this.llavesCuartos = []
+    this.llaveSemi = []
+    this.llavesFinal = null
     this.todosLosEquipos()
     this.todosLosPartidos()
     this.todosLosPrimeros()
     this.todosLosSegundos()
+    this.todasLasLlaves()
+    this.listarLlavesCuartos()
+    this.listarLlavesSemi()
+    this.listarLlavesFinal()
+    this.errorHandler = (response) => {
+      if (response.data) {
+        this.notificarError(response.data.error)
+      } else {
+        this.notificarError("Error de conexión, intente nuevamente luego.")
+      }
+    }
+  }
+
+  // NOTIFICACIONES & ERRORES
+  notificarMensaje(mensaje) {
+    this.growl.info(mensaje)
+  }
+
+  notificarError(mensaje) {
+    this.growl.error(mensaje)
   }
 
   todosLosEquipos() {
@@ -69,5 +93,68 @@ class ResultadosController {
     }
   }
 
+  todasLasLlaves() {
+    this.resultadoService.listarLlaves()
+      .then((response) => {
+        this.llaves = response.data
+      }, this.errorHandler)
+  }
+
+  elegirGanador(llave, equipo) {
+    this.resultadoService.elegirGanador(llave, equipo)
+      .then((response) => {
+        this.todasLasLlaves()
+        this.listarLlavesCuartos()
+        this.listarLlavesSemi()
+        this.listarLlavesFinal()
+      }, this.errorHandler)
+  }
+
+  armarLlaves() {
+    this.resultadoService.armarLlaves()
+      .then((response) => {
+        this.todasLasLlaves()
+        this.listarLlavesCuartos()
+        this.listarLlavesSemi()
+        this.listarLlavesFinal()
+      }, this.errorHandler)
+  }
+
+  llave(numero) {
+    return this.llaves[numero]
+  }
+
+  llaveCuartos(numero) {
+    return this.llavesCuartos[numero]
+  }
+
+  llaveSemis(numero) {
+    return this.llaveSemi[numero]
+  }
+
+  llaveFinal() {
+    return this.llavesFinal
+  }
+
+  listarLlavesCuartos() {
+    this.resultadoService.listarLlavesCuartos()
+      .then((response) => {
+        this.llavesCuartos = response.data
+      }, this.errorHandler)
+  }
+
+  listarLlavesSemi() {
+    this.resultadoService.listarLlavesSemi()
+      .then((response) => {
+        this.llaveSemi = response.data
+      }, this.errorHandler)
+  }
+
+  listarLlavesFinal() {
+    this.resultadoService.listarLlavesFinal()
+      .then((response) => {
+        this.llavesFinal = response.data
+      }, this.errorHandler)
+  }
 
 }

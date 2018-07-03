@@ -32,6 +32,43 @@ const resultadoService = ($http, $state) => {
         method: "GET",
         url: baseurl + "equipos/nombre=" + busqueda
       })
+    },
+    elegirGanador: (llave, equipo) => {
+      return $http({
+        method: "PUT",
+        url: baseurl + "llaves/" + llave.id,
+        data: equipo
+      })
+    },
+    listarLlaves: () => {
+      return $http({
+        method: "GET",
+        url: baseurl + "llaves"
+      })
+    },
+    armarLlaves: () => {
+      return $http({
+        method: "POST",
+        url: baseurl + "llaves"
+      })
+    },
+    listarLlavesCuartos: () => {
+      return $http({
+        method: "GET",
+        url: baseurl + "llavescuartos"
+      })
+    },
+    listarLlavesSemi: () => {
+      return $http({
+        method: "GET",
+        url: baseurl + "llavessemi"
+      })
+    },
+    listarLlavesFinal: () => {
+      return $http({
+        method: "GET",
+        url: baseurl + "llavesfinal"
+      })
     }
   }
 

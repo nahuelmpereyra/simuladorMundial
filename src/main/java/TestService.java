@@ -103,6 +103,15 @@ public class TestService {
         });
     }
 
+    public List<Llave> recuperarLlaves() {
+        return Runner.runInSession(() -> {
+            Session session = Runner.getCurrentSession();
+            String hql = "FROM Llave";
+            Query<Llave> query = session.createQuery(hql, Llave.class);
+            return query.getResultList();
+        });
+    }
+
     public void actualizar(Object object) {
         Runner.runInSession(() -> {
             Session session = Runner.getCurrentSession();
@@ -125,4 +134,5 @@ public class TestService {
             return null;
         });
     }
+
 }
