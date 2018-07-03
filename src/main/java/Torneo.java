@@ -1,5 +1,6 @@
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -14,6 +15,16 @@ public class Torneo {
 
     @Transient
     private TestService testService = new TestService();
+
+    @Transient
+    private List<String> grupos = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H");
+
+    @Transient
+    private List<Equipo> listaPrimeros = new ArrayList();
+
+    @Transient
+    private List<Equipo> listaSegundos = new ArrayList();
+
     private static Torneo miTorneo;
 
     public static Torneo getTorneo() {
@@ -147,4 +158,44 @@ public class Torneo {
     private boolean esGanadorLocal(Resultado resultado) {
         return resultado.getGolesLocal() > resultado.getGolesVisitantes();
     }
+
+    public void armarLlaves() {
+
+        grupos.stream().forEach(grupo -> listaPrimeros.add(equipoEnPosicionDeGrupo(1, grupo)));
+        grupos.stream().forEach(grupo -> listaSegundos.add(equipoEnPosicionDeGrupo(2, grupo)));
+
+        listaPrimeros.stream().forEach(equipo -> this.crearLlave(equipo, this.buscarParejaDeEquipo(listaPrimeros.indexOf(equipo))));
+
+        this.crearLlave(null,null);
+        this.crearLlave(null,null);
+        this.crearLlave(null,null);
+        this.crearLlave(null,null);
+        this.crearLlave(null,null);
+        this.crearLlave(null,null);
+        this.crearLlave(null,null);
+
+
+    }
+
+    private Equipo buscarParejaDeEquipo(Integer indice) {
+        if (indice % 2 == 0) {
+            return listaSegundos.get(indice + 1);
+        } else {
+            return listaSegundos.get(indice - 1);
+        }
+    }
+
+    private void crearLlave(Equipo equipoLocal, Equipo equipoVisitante) {
+        Llave llave = new Llave();
+        llave.setEquipoLocal(equipoLocal);
+        llave.setEquipoVisitante(equipoVisitante);
+
+        this.testService.crearEntidad(llave);
+    }
+
+    private Equipo equipoEnPosicionDeGrupo(Integer posicion, String zona) {
+        return this.testService.recuperarEquiposPorZona(zona).get(posicion - 1);
+    }
+
+
 }

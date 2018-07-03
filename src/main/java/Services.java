@@ -3,6 +3,7 @@ import com.google.gson.Gson;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -16,8 +17,48 @@ public class Services {
     @Path("/equipos")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEquipos() {
-
         String ok = gson.toJson(this.testService.recuperarEquipos());
+        return Response.status(Response.Status.OK)
+                .entity(ok)
+                .build();
+    }
+
+    @GET
+    @Path("/llaves")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getLlaves() {
+        List<Llave> llaves = this.testService.recuperarLlaves().subList(0,8);
+        String ok = gson.toJson(llaves);
+        return Response.status(Response.Status.OK)
+                .entity(ok)
+                .build();
+    }
+
+    @GET
+    @Path("/llavescuartos")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getLlavesCuartos() {
+        String ok = gson.toJson(this.testService.recuperarLlaves().subList(8,12));
+        return Response.status(Response.Status.OK)
+                .entity(ok)
+                .build();
+    }
+
+    @GET
+    @Path("/llavessemi")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getLlavesSemi() {
+        String ok = gson.toJson(this.testService.recuperarLlaves().subList(12,14));
+        return Response.status(Response.Status.OK)
+                .entity(ok)
+                .build();
+    }
+
+    @GET
+    @Path("/llavesfinal")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getLlaveFinal() {
+        String ok = gson.toJson(this.testService.recuperarLlaves().get(14));
         return Response.status(Response.Status.OK)
                 .entity(ok)
                 .build();
@@ -190,6 +231,29 @@ public class Services {
 
     }
 
+    @POST
+    @Path("/llaves")
+    @Consumes({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response armarLlaves() {
+
+        try {
+            if (testService.recuperarEquipos().size() < 32){
+                throw new Exception("Faltan cargar equipos");
+            }
+            else {
+                Torneo.getTorneo().armarLlaves();
+                return Response.ok().build();
+            }
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(getErrorJson(e.getMessage()))
+                    .build();
+        }
+
+    }
+
 
     @PUT
     @Path("/editarequipo")
@@ -222,6 +286,26 @@ public class Services {
                     .entity(getErrorJson(e.getMessage()))
                     .build();
         }
+
+    }
+
+
+    @PUT
+    @Path("/llaves/{idLlave}")
+    @Consumes({"application/json"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response elegirGanador(@PathParam("idLlave") Integer idLlave, Equipo equipo) {
+
+        Equipo equipoRecuperado = testService.recuperarPorNombre(equipo.getNombre());
+
+        Llave llaveRecuperada = this.testService.recuperarEntidad(Llave.class, idLlave);
+        llaveRecuperada.setGanador(equipoRecuperado);
+        this.testService.actualizar(llaveRecuperada);
+
+        String ok = gson.toJson("Elegido ganador correctamente");
+        return Response.status(Response.Status.OK)
+                .entity(ok)
+                .build();
 
     }
 

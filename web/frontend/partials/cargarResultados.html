@@ -3,18 +3,6 @@
 <br>
 
 <div data-ng-controller="ResultadosController as ctrl">
-    <div data-ng-repeat="grupo in ctrl.grupos">
-
-
-        <div data ng-repeat="primero in ctrl.primeros" ng-show="ctrl.esEquipoDeGrupo(primero, grupo)">
-            Primero del grupo {{grupo}}: {{primero.nombre}}
-        </div>
-        <div data ng-repeat="segundo in ctrl.segundos" ng-show="ctrl.esEquipoDeGrupo(segundo, grupo)">
-            Segundo del grupo {{grupo}}: {{segundo.nombre}}
-        </div>
-    </div>
-
-
 
     <ul class="nav nav-pills nav-stacked">
         <li data-ng-repeat="grupo in ctrl.grupos">
@@ -38,7 +26,7 @@
                                 <th class="text-center">Dif</th>
                             </tr>
                             <tr data-ng-repeat="equipo in ctrl.equipos" ng-show="ctrl.esEquipoDeGrupo(equipo, grupo)" ng-class="{true:'bold'}[equipo.esCabezaDeSerie]">
-                                <!-- <th class="text-center">1</th> -->
+                                <!-- <th class="text-center">{{$index+1}}</th> -->
                                 <td>
                                     <img ng-src="{{equipo.imagenSrc}}" width="20px" />
                                     <b>{{equipo.nombre}}</b>
@@ -109,4 +97,207 @@
             </div>
         </li>
     </ul>
+
+    <!-- BRACKET -->
+
+
+    <button ng-click="ctrl.armarLlaves()">Armar llaves</button>
+
+
+    <div class="col-1-8">
+        <div data ng-repeat="llave in ctrl.llaves">
+            <ul class="matchup">
+                <li>
+                    <div ng-click="ctrl.elegirGanador(llave, llave.equipoLocal)">
+                        <span class="seed">
+                            <img ng-src="{{llave.equipoLocal.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{llave.equipoLocal.nombre}}</span>
+                    </div>
+                </li>
+                <li>
+                    <div ng-click="ctrl.elegirGanador(llave, llave.equipoVisitante)">
+                        <span class="seed">
+                            <img ng-src="{{llave.equipoVisitante.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{llave.equipoVisitante.nombre}}</span>
+                    </div>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="col-1-8">
+        <div class="round-two-one">
+            <ul class="matchup">
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(0), ctrl.llave(0).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llave(0).ganador.imagenSrc}}" width=20px>
+                        </span> {{ctrl.llave(0).ganador.nombre}}
+                        <span class="score"></span>
+                    </div>
+                </li>
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(0), ctrl.llave(1).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llave(1).ganador.imagenSrc}}" width=20px>
+                        </span> {{ctrl.llave(1).ganador.nombre}}
+                        <span class="score"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="round-two-two">
+            <ul class="matchup">
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(1), ctrl.llave(2).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llave(2).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llave(2).ganador.nombre}}</span>
+                    </div>
+                </li>
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(1), ctrl.llave(3).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llave(3).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llave(3).ganador.nombre}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="round-two-three">
+            <ul class="matchup round-two-bottom">
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(2), ctrl.llave(4).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llave(4).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llave(4).ganador.nombre}}</span>
+                    </div>
+                </li>
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(2), ctrl.llave(5).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llave(5).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llave(5).ganador.nombre}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="round-two-four">
+            <ul class="matchup round-two-bottom">
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(3), ctrl.llave(6).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llave(6).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llave(6).ganador.nombre}}</span>
+                    </div>
+                </li>
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(3), ctrl.llave(7).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llave(7).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llave(7).ganador.nombre}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="col-1-8">
+        <div class="round-three-one">
+            <ul class="matchup">
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveSemis(0), ctrl.llaveCuartos(0).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llaveCuartos(0).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llaveCuartos(0).ganador.nombre}}</span>
+                    </div>
+                </li>
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveSemis(0), ctrl.llaveCuartos(1).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llaveCuartos(1).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llaveCuartos(1).ganador.nombre}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="round-three-two">
+            <ul class="matchup">
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveSemis(1), ctrl.llaveCuartos(2).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llaveCuartos(2).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llaveCuartos(2).ganador.nombre}}</span>
+                    </div>
+                </li>
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveSemis(1), ctrl.llaveCuartos(3).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llaveCuartos(3).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llaveCuartos(3).ganador.nombre}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-1-8 champ">
+        <div class="round-four">
+            <ul class="matchup">
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveFinal(), ctrl.llaveSemis(0).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llaveSemis(0).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llaveSemis(0).ganador.nombre}}</span>
+                    </div>
+                </li>
+                <li>
+                    <div ng-click="ctrl.elegirGanador(ctrl.llaveFinal(), ctrl.llaveSemis(1).ganador)">
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llaveSemis(1).ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llaveSemis(1).ganador.nombre}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-1-8 champ">
+        <div class="round-four">
+            <ul class="matchup">
+                <li>
+                    <div>
+                        <span class="seed">
+                            <img ng-src="{{ctrl.llaveFinal().ganador.imagenSrc}}" width=20px>
+                        </span>
+                        <span class="score">{{ctrl.llaveFinal().ganador.nombre}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
