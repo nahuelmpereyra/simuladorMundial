@@ -1,8 +1,10 @@
 class ResultadosController {
 
-  constructor(resultadoService, growl) {
+  constructor(resultadoService, equipoService, partidoService, growl) {
     this.grupos = ["A", "B", "C", "D", "E", "F", "G", "H"]
     this.resultadoService = resultadoService
+    this.equipoService = equipoService
+    this.partidoService = partidoService
     this.growl = growl
     this.primeros = []
     this.segundos = []
@@ -34,7 +36,7 @@ class ResultadosController {
   }
 
   todosLosEquipos() {
-    this.resultadoService.listarEquipos()
+    this.equipoService.listarEquipos()
       .then((response) => {
         this.equipos = response.data
       }, this.errorHandler)
@@ -53,7 +55,7 @@ class ResultadosController {
 */
 
   todosLosPartidos() {
-    this.resultadoService.listarPartidos()
+    this.partidoService.listarPartidos()
       .then((response) => {
         this.partidos = response.data
       }, this.errorHandler)
@@ -74,7 +76,7 @@ class ResultadosController {
 
   todosLosPrimeros() {
     for (let grupo of this.grupos) {
-      this.resultadoService.listarEquiposPorGrupo(grupo)
+      this.equipoService.listarEquiposPorGrupo(grupo)
         .then((response) => {
           this.primeros.push(response.data[0])
         }, this.errorHandler)
@@ -83,7 +85,7 @@ class ResultadosController {
 
   todosLosSegundos() {
     for (let grupo of this.grupos) {
-      this.resultadoService.listarEquiposPorGrupo(grupo)
+      this.equipoService.listarEquiposPorGrupo(grupo)
         .then((response) => {
           this.segundos.push(response.data[1])
         }, this.errorHandler)
