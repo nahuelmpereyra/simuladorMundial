@@ -32,8 +32,8 @@ class EquipoController {
   // BUSCAR
   buscarEquipos() {
     const promise = (this.busqueda == "") ?
-      this.resultadoService.listarEquipos() :
-      this.resultadoService.buscar(this.busqueda)
+      this.equipoService.listarEquipos() :
+      this.equipoService.buscar(this.busqueda)
 
     promise.then((response) => {
       this.equipos = response.data
