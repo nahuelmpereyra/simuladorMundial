@@ -35,10 +35,6 @@ public class Partido {
         this.fecha = fecha;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
-    }
-
     public void setEquipoLocal(Equipo equipoLocal) {
         this.equipoLocal = equipoLocal;
     }

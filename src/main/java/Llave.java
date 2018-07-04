@@ -20,10 +20,6 @@ public class Llave {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Equipo getEquipoLocal() {
         return equipoLocal;
     }
