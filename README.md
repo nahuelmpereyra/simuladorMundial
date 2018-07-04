@@ -53,5 +53,9 @@ Nro | Nombre | Legajo | Mail
 - No puede haber dos equipos con mismo nombre
 - No puede haber mas de 4 equipos en un grupo
 - Como admin crear un partido
-- Como usuario ver tabla de posiciones por grupo"
+- Como usuario ver tabla de posiciones por grupo
  
+ 
+ #### Sprint 04/07/2018
+- Como usuario quiero que los primeros dos equipos de cada grupo figuren en 8vos
+- Como usuario quiero elegir ganador en fase de 8vos en adelante.
