@@ -28,6 +28,12 @@ const resultadoService = ($http, $state) => {
         url: baseurl + "llaves"
       })
     },
+    hayLlaves: () => {
+      return $http({
+        method: "GET",
+        url: baseurl + "hayllaves"
+      })
+    },
     listarLlavesCuartos: () => {
       return $http({
         method: "GET",

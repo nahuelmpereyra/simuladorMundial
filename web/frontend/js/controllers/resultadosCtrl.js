@@ -12,11 +12,13 @@ class ResultadosController {
     this.llavesCuartos = []
     this.llaveSemi = []
     this.llavesFinal = null
-    this.puedeMostrarCuadro = false
+    // this.puedeMostrarCuadro = this.llavesArmadas
+    this.hayLlavesArmadas()
     this.todosLosEquipos()
     this.todosLosPartidos()
     this.todosLosPrimeros()
     this.todosLosSegundos()
+    // this.todasLasLlaves()
     this.errorHandler = (response) => {
       if (response.data) {
         this.notificarError(response.data.error)
@@ -110,13 +112,14 @@ class ResultadosController {
   }
 
   armarLlaves() {
-    this.puedeMostrarCuadro = true
+    // this.puedeMostrarCuadro = true
     this.resultadoService.armarLlaves()
       .then((response) => {
         this.todasLasLlaves()
         this.listarLlavesCuartos()
         this.listarLlavesSemi()
         this.listarLlavesFinal()
+        this.hayLlavesArmadas()
       }, this.errorHandler)
   }
 
@@ -154,6 +157,14 @@ class ResultadosController {
     this.resultadoService.listarLlavesFinal()
       .then((response) => {
         this.llavesFinal = response.data
+      }, this.errorHandler)
+  }
+
+
+  hayLlavesArmadas() {
+    this.resultadoService.hayLlaves()
+      .then((response) => {
+        this.llavesArmadas = response.data
       }, this.errorHandler)
   }
 
