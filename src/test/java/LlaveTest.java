@@ -16,15 +16,15 @@ public class LlaveTest extends HibernateTest {
         super.cleanup();
     }
 
-    @Test
-    public void test_VerificarLlaveCargada() {
-        Runner.runInSession(() -> {
-            Llave llaveRecuperada = this.testService.recuperarEntidad(Llave.class, this.llave.getId());
-            assertEquals("Argentina", llaveRecuperada.getEquipoLocal().getNombre());
-            assertEquals("Islandia", llaveRecuperada.getEquipoVisitante().getNombre());
-            assertEquals("Argentina", llaveRecuperada.getGanador().getNombre());
-            return null;
-        });
-    }
+//    @Test
+//    public void test_VerificarLlaveCargada() {
+//        Runner.runInSession(() -> {
+//            Llave llaveRecuperada = this.testService.recuperarEntidad(Llave.class, this.llave.getId());
+//            assertEquals("Argentina", llaveRecuperada.getEquipoLocal().getNombre());
+//            assertEquals("Islandia", llaveRecuperada.getEquipoVisitante().getNombre());
+//            assertEquals("Argentina", llaveRecuperada.getGanador().getNombre());
+//            return null;
+//        });
+//    }
 
 }

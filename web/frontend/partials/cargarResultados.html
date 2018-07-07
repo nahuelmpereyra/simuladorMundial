@@ -14,7 +14,6 @@
                     <table class="table table-striped table-hover table-condensed">
                         <tbody>
                             <tr>
-                                <!-- <th class="text-center">Pos</th> -->
                                 <th>Equipo</th>
                                 <th class="success text-center">Pts</th>
                                 <th class="text-center">PJ</th>
@@ -26,7 +25,6 @@
                                 <th class="text-center">Dif</th>
                             </tr>
                             <tr data-ng-repeat="equipo in ctrl.equipos" ng-show="ctrl.esEquipoDeGrupo(equipo, grupo)" ng-class="{true:'bold'}[equipo.esCabezaDeSerie]">
-                                <!-- <th class="text-center">{{$index+1}}</th> -->
                                 <td>
                                     <img ng-src="{{equipo.imagenSrc}}" width="20px" />
                                     <b>{{equipo.nombre}}</b>
@@ -101,9 +99,9 @@
     <!-- BRACKET -->
 
 
-    <button ng-click="ctrl.armarLlaves()">Armar llaves</button>
+    <button ng-click="ctrl.armarLlaves()" ng-disabled="ctrl.llavesArmadas" ng-hide="ctrl.llavesArmadas">Armar llaves</button>
 
-    <div ng-show="ctrl.puedeMostrarCuadro">
+    <div ng-show="ctrl.llavesArmadas">
 
         <div class="col-1-8">
             <div data ng-repeat="llave in ctrl.llaves">

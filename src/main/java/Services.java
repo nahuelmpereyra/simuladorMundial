@@ -35,6 +35,17 @@ public class Services {
     }
 
     @GET
+    @Path("/hayllaves")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response hayLlaves() {
+        List<Llave> llaves = this.testService.recuperarLlaves();
+        String ok = gson.toJson(llaves.size()>0);
+        return Response.status(Response.Status.OK)
+                .entity(ok)
+                .build();
+    }
+
+    @GET
     @Path("/llavescuartos")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getLlavesCuartos() {
@@ -67,10 +78,12 @@ public class Services {
     @GET
     @Path("/partidos")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Partido> getPartidos() {
-        return this.testService.recuperarPartidos();
+    public Response getPartidos() {
+        String ok = gson.toJson(this.testService.recuperarPartidos());
+        return Response.status(Response.Status.OK)
+                .entity(ok)
+                .build();
     }
-
     @GET
     @Path("/equipos/{zona}")
     @Produces("application/json")

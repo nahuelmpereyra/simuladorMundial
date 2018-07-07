@@ -13,6 +13,12 @@ const partidoService = ($http) => {
                 url: baseurl + "agregarpartido",
                 data: partido
             })
+        },
+        eliminarPartido: (partido) => {
+            return $http({
+                method: "DELETE",
+                url: baseurl + "eliminarpartido/" + partido.id
+            })
         }
     }
 }
