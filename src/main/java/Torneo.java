@@ -40,6 +40,199 @@ public class Torneo {
         return this.equipos;
     }
 
+    public void armarLlavesDelTorneo() {
+
+        //Llaves octavos
+        Llave llaveOctavos1 = new Llave();
+        Llave llaveOctavos2 = new Llave();
+        Llave llaveOctavos3 = new Llave();
+        Llave llaveOctavos4 = new Llave();
+        Llave llaveOctavos5 = new Llave();
+        Llave llaveOctavos6 = new Llave();
+        Llave llaveOctavos7 = new Llave();
+        Llave llaveOctavos8 = new Llave();
+
+        //Llaves cuartos
+        Llave llaveCuartos1 = new Llave();
+        Llave llaveCuartos2 = new Llave();
+        Llave llaveCuartos3 = new Llave();
+        Llave llaveCuartos4 = new Llave();
+
+        //Llaves semi
+        Llave llaveSemi1 = new Llave();
+        Llave llaveSemi2 = new Llave();
+
+        //Llaves final
+        Llave llaveFinal = new Llave();
+
+
+        //identificando Llaves octavos
+        llaveOctavos1.setId("octavos1");
+        llaveOctavos2.setId("octavos2");
+        llaveOctavos3.setId("octavos3");
+        llaveOctavos4.setId("octavos4");
+        llaveOctavos5.setId("octavos5");
+        llaveOctavos6.setId("octavos6");
+        llaveOctavos7.setId("octavos7");
+        llaveOctavos8.setId("octavos8");
+
+        //Llaves cuartos
+        llaveCuartos1.setId("cuartos1");
+        llaveCuartos2.setId("cuartos2");
+        llaveCuartos3.setId("cuartos3");
+        llaveCuartos4.setId("cuartos4");
+
+        //Llaves semi
+        llaveSemi1.setId("semi1");
+        llaveSemi2.setId("semi2");
+
+        //Llaves final
+        llaveFinal.setId("final");
+
+        llaveOctavos1.setEquipoLocal(equipoEnPosicionDeGrupo(1,"A"));
+        llaveOctavos1.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"B"));
+        llaveOctavos2.setEquipoLocal(equipoEnPosicionDeGrupo(1,"B"));
+        llaveOctavos2.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"A"));
+
+        llaveOctavos3.setEquipoLocal(equipoEnPosicionDeGrupo(1,"C"));
+        llaveOctavos3.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"D"));
+        llaveOctavos4.setEquipoLocal(equipoEnPosicionDeGrupo(1,"D"));
+        llaveOctavos4.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"C"));
+
+        llaveOctavos5.setEquipoLocal(equipoEnPosicionDeGrupo(1,"E"));
+        llaveOctavos5.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"F"));
+        llaveOctavos6.setEquipoLocal(equipoEnPosicionDeGrupo(1,"F"));
+        llaveOctavos6.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"E"));
+
+        llaveOctavos7.setEquipoLocal(equipoEnPosicionDeGrupo(1,"G"));
+        llaveOctavos7.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"H"));
+        llaveOctavos8.setEquipoLocal(equipoEnPosicionDeGrupo(1,"H"));
+        llaveOctavos8.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"G"));
+
+        this.testService.crearEntidad(llaveOctavos1);
+        this.testService.crearEntidad(llaveOctavos2);
+        this.testService.crearEntidad(llaveOctavos3);
+        this.testService.crearEntidad(llaveOctavos4);
+        this.testService.crearEntidad(llaveOctavos5);
+        this.testService.crearEntidad(llaveOctavos6);
+        this.testService.crearEntidad(llaveOctavos7);
+        this.testService.crearEntidad(llaveOctavos8);
+        this.testService.crearEntidad(llaveCuartos1);
+        this.testService.crearEntidad(llaveCuartos2);
+        this.testService.crearEntidad(llaveCuartos3);
+        this.testService.crearEntidad(llaveCuartos4);
+        this.testService.crearEntidad(llaveSemi1);
+        this.testService.crearEntidad(llaveSemi2);
+        this.testService.crearEntidad(llaveFinal);
+
+    }
+
+    public void actualizarLlaves(){
+
+        Llave llaveOctavos1 = this.testService.recuperarEntidad(Llave.class, "octavos1");
+        llaveOctavos1.setEquipoLocal(equipoEnPosicionDeGrupo(1,"A"));
+        llaveOctavos1.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"B"));
+        this.testService.actualizar(llaveOctavos1);
+
+        Llave llaveOctavos2 = this.testService.recuperarEntidad(Llave.class, "octavos2");
+        llaveOctavos2.setEquipoLocal(equipoEnPosicionDeGrupo(1,"B"));
+        llaveOctavos2.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"A"));
+        this.testService.actualizar(llaveOctavos2);
+
+        Llave llaveOctavos3 = this.testService.recuperarEntidad(Llave.class, "octavos3");
+        llaveOctavos3.setEquipoLocal(equipoEnPosicionDeGrupo(1,"C"));
+        llaveOctavos3.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"D"));
+        this.testService.actualizar(llaveOctavos3);
+
+        Llave llaveOctavos4 = this.testService.recuperarEntidad(Llave.class, "octavos4");
+        llaveOctavos4.setEquipoLocal(equipoEnPosicionDeGrupo(1,"D"));
+        llaveOctavos4.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"C"));
+        this.testService.actualizar(llaveOctavos4);
+
+        Llave llaveOctavos5 = this.testService.recuperarEntidad(Llave.class, "octavos5");
+        llaveOctavos5.setEquipoLocal(equipoEnPosicionDeGrupo(1,"E"));
+        llaveOctavos5.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"F"));
+        this.testService.actualizar(llaveOctavos5);
+
+        Llave llaveOctavos6 = this.testService.recuperarEntidad(Llave.class, "octavos6");
+        llaveOctavos6.setEquipoLocal(equipoEnPosicionDeGrupo(1,"F"));
+        llaveOctavos6.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"E"));
+        this.testService.actualizar(llaveOctavos6);
+
+        Llave llaveOctavos7 = this.testService.recuperarEntidad(Llave.class, "octavos7");
+        llaveOctavos7.setEquipoLocal(equipoEnPosicionDeGrupo(1,"G"));
+        llaveOctavos7.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"H"));
+        this.testService.actualizar(llaveOctavos7);
+
+        Llave llaveOctavos8 = this.testService.recuperarEntidad(Llave.class, "octavos8");
+        llaveOctavos8.setEquipoLocal(equipoEnPosicionDeGrupo(1,"H"));
+        llaveOctavos8.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"G"));
+        this.testService.actualizar(llaveOctavos8);
+
+        this.resetearLlavesPosteriores();
+
+    }
+
+    private void resetearLlavesPosteriores() {
+
+        List<Llave> llavesRecuperadas = this.testService.recuperarLlaves();
+        llavesRecuperadas.stream().forEach(llave -> llave.setGanador(null));
+        llavesRecuperadas.stream().forEach(llave -> this.testService.actualizar(llave));
+    }
+
+    public void resetearLlavesPosterioresDeLlave(Llave llave) {
+
+        Llave llaveRecuperada = this.testService.recuperarEntidad(Llave.class, llave.getId());
+
+        if(llaveRecuperada.getId().equals("octavos1") || llaveRecuperada.getId().equals("octavos2")){
+
+            Llave llaveCuartos1 = this.testService.recuperarEntidad(Llave.class, "cuartos1");
+            llaveCuartos1.setGanador(null);
+            Llave llaveSemi1 = this.testService.recuperarEntidad(Llave.class, "semi1");
+            llaveSemi1.setGanador(null);
+            this.testService.actualizar(llaveRecuperada);
+            this.testService.actualizar(llaveCuartos1);
+            this.testService.actualizar(llaveSemi1);
+        }
+
+        if(llaveRecuperada.getId().equals("octavos3") || llaveRecuperada.getId().equals("octavos4")){
+
+            Llave llaveCuartos2 = this.testService.recuperarEntidad(Llave.class, "cuartos2");
+            llaveCuartos2.setGanador(null);
+            Llave llaveSemi1 = this.testService.recuperarEntidad(Llave.class, "semi1");
+            llaveSemi1.setGanador(null);
+            this.testService.actualizar(llaveRecuperada);
+            this.testService.actualizar(llaveCuartos2);
+            this.testService.actualizar(llaveSemi1);
+        }
+
+        if(llaveRecuperada.getId().equals("octavos5") || llaveRecuperada.getId().equals("octavos6")){
+
+            Llave llaveCuartos3 = this.testService.recuperarEntidad(Llave.class, "cuartos3");
+            llaveCuartos3.setGanador(null);
+            Llave llaveSemi2 = this.testService.recuperarEntidad(Llave.class, "semi2");
+            llaveSemi2.setGanador(null);
+            this.testService.actualizar(llaveRecuperada);
+            this.testService.actualizar(llaveCuartos3);
+            this.testService.actualizar(llaveSemi2);
+        }
+
+        if(llaveRecuperada.getId().equals("octavos7") || llaveRecuperada.getId().equals("octavos8")){
+
+            Llave llaveCuartos4 = this.testService.recuperarEntidad(Llave.class, "cuartos4");
+            llaveCuartos4.setGanador(null);
+            Llave llaveSemi2 = this.testService.recuperarEntidad(Llave.class, "semi2");
+            llaveSemi2.setGanador(null);
+            this.testService.actualizar(llaveRecuperada);
+            this.testService.actualizar(llaveCuartos4);
+            this.testService.actualizar(llaveSemi2);
+        }
+        Llave llaveFinal = this.testService.recuperarEntidad(Llave.class, "final");
+        llaveFinal.setGanador(null);
+        this.testService.actualizar(llaveFinal);
+    }
+
+
     public void actualizarEquipos(Resultado resultadoAnterior, Partido partido) {
 
         this.limpiarResultado(resultadoAnterior, partido.getEquipoLocal(), partido.getEquipoVisitante());
@@ -166,13 +359,13 @@ public class Torneo {
 
         listaPrimeros.stream().forEach(equipo -> this.crearLlave(equipo, this.buscarParejaDeEquipo(listaPrimeros.indexOf(equipo))));
 
-        this.crearLlave(null,null);
-        this.crearLlave(null,null);
-        this.crearLlave(null,null);
-        this.crearLlave(null,null);
-        this.crearLlave(null,null);
-        this.crearLlave(null,null);
-        this.crearLlave(null,null);
+        this.crearLlave(null, null);
+        this.crearLlave(null, null);
+        this.crearLlave(null, null);
+        this.crearLlave(null, null);
+        this.crearLlave(null, null);
+        this.crearLlave(null, null);
+        this.crearLlave(null, null);
 
 
     }

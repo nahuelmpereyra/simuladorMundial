@@ -3,7 +3,6 @@
 <br>
 
 <div data-ng-controller="ResultadosController as ctrl">
-
     <ul class="nav nav-pills nav-stacked">
         <li data-ng-repeat="grupo in ctrl.grupos">
             <div class="col-sm-5">
@@ -99,7 +98,6 @@
     <!-- BRACKET -->
 
 
-    <button ng-click="ctrl.armarLlaves()" ng-disabled="ctrl.llavesArmadas" ng-hide="ctrl.llavesArmadas">Armar llaves</button>
 
     <div ng-show="ctrl.llavesArmadas">
 
@@ -136,7 +134,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(0), ctrl.llave(0).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llave(0).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llave(0).ganador != null" ng-src="{{ctrl.llave(0).ganador.imagenSrc}}" width=20px>
                             </span> {{ctrl.llave(0).ganador.nombre}}
                             <span class="score"></span>
                         </div>
@@ -144,7 +142,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(0), ctrl.llave(1).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llave(1).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llave(1).ganador != null" ng-src="{{ctrl.llave(1).ganador.imagenSrc}}" width=20px>
                             </span> {{ctrl.llave(1).ganador.nombre}}
                             <span class="score"></span>
                         </div>
@@ -157,7 +155,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(1), ctrl.llave(2).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llave(2).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llave(2).ganador != null" ng-src="{{ctrl.llave(2).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llave(2).ganador.nombre}}</span>
                         </div>
@@ -165,7 +163,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(1), ctrl.llave(3).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llave(3).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llave(3).ganador != null" ng-src="{{ctrl.llave(3).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llave(3).ganador.nombre}}</span>
                         </div>
@@ -178,7 +176,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(2), ctrl.llave(4).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llave(4).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llave(4).ganador != null" ng-src="{{ctrl.llave(4).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llave(4).ganador.nombre}}</span>
                         </div>
@@ -186,7 +184,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(2), ctrl.llave(5).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llave(5).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llave(5).ganador != null" ng-src="{{ctrl.llave(5).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llave(5).ganador.nombre}}</span>
                         </div>
@@ -199,7 +197,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(3), ctrl.llave(6).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llave(6).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llave(6).ganador != null" ng-src="{{ctrl.llave(6).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llave(6).ganador.nombre}}</span>
                         </div>
@@ -207,7 +205,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveCuartos(3), ctrl.llave(7).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llave(7).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llave(7).ganador != null" ng-src="{{ctrl.llave(7).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llave(7).ganador.nombre}}</span>
                         </div>
@@ -224,7 +222,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveSemis(0), ctrl.llaveCuartos(0).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llaveCuartos(0).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llaveCuartos(0).ganador != null" ng-src="{{ctrl.llaveCuartos(0).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llaveCuartos(0).ganador.nombre}}</span>
                         </div>
@@ -232,7 +230,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveSemis(0), ctrl.llaveCuartos(1).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llaveCuartos(1).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llaveCuartos(1).ganador != null" ng-src="{{ctrl.llaveCuartos(1).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llaveCuartos(1).ganador.nombre}}</span>
                         </div>
@@ -245,7 +243,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveSemis(1), ctrl.llaveCuartos(2).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llaveCuartos(2).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llaveCuartos(2).ganador != null" ng-src="{{ctrl.llaveCuartos(2).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llaveCuartos(2).ganador.nombre}}</span>
                         </div>
@@ -253,7 +251,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveSemis(1), ctrl.llaveCuartos(3).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llaveCuartos(3).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llaveCuartos(3).ganador != null" ng-src="{{ctrl.llaveCuartos(3).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llaveCuartos(3).ganador.nombre}}</span>
                         </div>
@@ -268,7 +266,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveFinal(), ctrl.llaveSemis(0).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llaveSemis(0).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llaveSemis(0).ganador != null" ng-src="{{ctrl.llaveSemis(0).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llaveSemis(0).ganador.nombre}}</span>
                         </div>
@@ -276,7 +274,7 @@
                     <li>
                         <div ng-click="ctrl.elegirGanador(ctrl.llaveFinal(), ctrl.llaveSemis(1).ganador)">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llaveSemis(1).ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llaveSemis(1).ganador != null" ng-src="{{ctrl.llaveSemis(1).ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score">{{ctrl.llaveSemis(1).ganador.nombre}}</span>
                         </div>
@@ -291,7 +289,7 @@
                     <li>
                         <div class="colorCampeon">
                             <span class="seed">
-                                <img ng-src="{{ctrl.llaveFinal().ganador.imagenSrc}}" width=20px>
+                                <img ng-show="ctrl.llaveFinal().ganador != null" ng-src="{{ctrl.llaveFinal().ganador.imagenSrc}}" width=20px>
                             </span>
                             <span class="score bold">{{ctrl.llaveFinal().ganador.nombre}}</span>
                         </div>

@@ -4,9 +4,7 @@ import javax.persistence.*;
 public class Llave {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+    private String id;
     @OneToOne
     private Equipo equipoLocal;
 
@@ -16,7 +14,7 @@ public class Llave {
     @OneToOne
     private Equipo ganador;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -44,4 +42,5 @@ public class Llave {
         this.ganador = ganador;
     }
 
+    public void setId(String id) {this.id = id;}
 }

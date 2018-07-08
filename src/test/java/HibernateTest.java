@@ -205,12 +205,13 @@ public class HibernateTest {
         this.testService.crearEntidad(partido);
         this.testService.crearEntidad(resultado);
 //        this.testService.crearEntidad(llave);
+        torneo.armarLlavesDelTorneo();
         System.out.println("Terminando el Before");
     }
 
     @After
     public void cleanup() {
-//        SessionFactoryProvider.destroy();
+        SessionFactoryProvider.destroy();
         System.out.println("Terminando el After");
     }
 }

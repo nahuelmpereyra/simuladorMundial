@@ -191,7 +191,8 @@ public class Services {
                     partidoRecuperado.revertirUltimoResultado(resultadoRecuperado, resultado);
                     // Cargamos nuevo resultado
                     partidoRecuperado.setResultado(resultado);
-
+                    //actualizo las llaves
+                    Torneo.getTorneo().actualizarLlaves();
                     partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
                     String ok = gson.toJson(partidoRecuperado);
                     return Response.status(Response.Status.OK)
@@ -200,6 +201,8 @@ public class Services {
                 } else {
                     // No hay un resultado previo
                     partidoRecuperado.setResultado(resultado);
+                    //actualizo las llaves
+                    Torneo.getTorneo().actualizarLlaves();
                     partidoRecuperado = testService.recuperarEntidad(Partido.class, id);
                     String ok = gson.toJson(partidoRecuperado);
                     return Response.status(Response.Status.OK)
@@ -307,13 +310,14 @@ public class Services {
     @Path("/llaves/{idLlave}")
     @Consumes({"application/json"})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response elegirGanador(@PathParam("idLlave") Integer idLlave, Equipo equipo) {
+    public Response elegirGanador(@PathParam("idLlave") String idLlave, Equipo equipo) {
 
         Equipo equipoRecuperado = testService.recuperarPorNombre(equipo.getNombre());
 
         Llave llaveRecuperada = this.testService.recuperarEntidad(Llave.class, idLlave);
         llaveRecuperada.setGanador(equipoRecuperado);
         this.testService.actualizar(llaveRecuperada);
+        Torneo.getTorneo().resetearLlavesPosterioresDeLlave(llaveRecuperada);
 
         String ok = gson.toJson("Elegido ganador correctamente");
         return Response.status(Response.Status.OK)

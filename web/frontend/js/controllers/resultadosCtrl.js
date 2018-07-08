@@ -12,13 +12,12 @@ class ResultadosController {
     this.llavesCuartos = []
     this.llaveSemi = []
     this.llavesFinal = null
-    // this.puedeMostrarCuadro = this.llavesArmadas
     this.hayLlavesArmadas()
     this.todosLosEquipos()
     this.todosLosPartidos()
     this.todosLosPrimeros()
     this.todosLosSegundos()
-    // this.todasLasLlaves()
+    this.listarLlavesOctavos()
     this.errorHandler = (response) => {
       if (response.data) {
         this.notificarError(response.data.error)
@@ -44,17 +43,6 @@ class ResultadosController {
       }, this.errorHandler)
   }
 
-  /*
-  OTRA MANERA:
-
-  todosLosEquipos(){
-    const promise = this.resultadoService.listarTodos()
-        promise
-            .then((response) => response.data)
-            .then((data) => this.equipos = data)           
-            .catch(this.errorHandler)
-  }
-*/
 
   todosLosPartidos() {
     this.partidoService.listarPartidos()
@@ -72,6 +60,10 @@ class ResultadosController {
       this.resultadoService.actualizarResultado(partido)
         .then((response) => {
           this.todosLosEquipos()
+          this.listarLlavesOctavos()
+          this.listarLlavesCuartos()
+          this.listarLlavesSemi()
+          this.listarLlavesFinal()
         }, this.errorHandler)
     }
   }
@@ -94,8 +86,8 @@ class ResultadosController {
     }
   }
 
-  todasLasLlaves() {
-    this.resultadoService.listarLlaves()
+  listarLlavesOctavos() {
+    this.resultadoService.listarLlavesOctavos()
       .then((response) => {
         this.llaves = response.data
       }, this.errorHandler)
@@ -104,7 +96,7 @@ class ResultadosController {
   elegirGanador(llave, equipo) {
     this.resultadoService.elegirGanador(llave, equipo)
       .then((response) => {
-        this.todasLasLlaves()
+        this.listarLlavesOctavos()
         this.listarLlavesCuartos()
         this.listarLlavesSemi()
         this.listarLlavesFinal()
@@ -112,10 +104,9 @@ class ResultadosController {
   }
 
   armarLlaves() {
-    // this.puedeMostrarCuadro = true
     this.resultadoService.armarLlaves()
       .then((response) => {
-        this.todasLasLlaves()
+        this.listarLlavesOctavos()
         this.listarLlavesCuartos()
         this.listarLlavesSemi()
         this.listarLlavesFinal()

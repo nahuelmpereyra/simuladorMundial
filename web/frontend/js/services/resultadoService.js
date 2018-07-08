@@ -16,12 +16,6 @@ const resultadoService = ($http, $state) => {
         data: equipo
       })
     },
-    listarLlaves: () => {
-      return $http({
-        method: "GET",
-        url: baseurl + "llaves"
-      })
-    },
     armarLlaves: () => {
       return $http({
         method: "POST",
@@ -32,6 +26,12 @@ const resultadoService = ($http, $state) => {
       return $http({
         method: "GET",
         url: baseurl + "hayllaves"
+      })
+    },
+    listarLlavesOctavos: () => {
+      return $http({
+        method: "GET",
+        url: baseurl + "llaves"
       })
     },
     listarLlavesCuartos: () => {
