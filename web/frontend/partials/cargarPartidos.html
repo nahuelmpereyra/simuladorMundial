@@ -39,8 +39,8 @@
                             <td class="col-xs-3 text-center">
                                 <img ng-src="{{partido.equipoVisitante.imagenSrc}}" width="20px" /> {{partido.equipoVisitante.nombre}}
                             </td>
-                            <td class="col-xs-2 text-center">Resultado</td>
-                            <td class="col-xs-2 text-center">{{partido.fecha}}</td>
+                            <td class="col-xs-2 text-center">{{partido.resultado.golesLocal}} - {{partido.resultado.golesVisitantes}}</td>
+                            <td class="col-xs-2 text-center">{{partido.fecha.date.day}}/{{partido.fecha.date.month}}/{{partido.fecha.date.year}} {{partido.fecha.time.hour}}:{{partido.fecha.time.minute}}</td>
                             <td class="col-xs-2 text-center">{{partido.estadio}}</td>
                             <td nowrap class="col-xs-2">
                                 <button type="button" class="btn equipos-btn-eliminar" data-ng-click="ctrl.eliminarPartido(partido);" aria-label="Eliminar">
