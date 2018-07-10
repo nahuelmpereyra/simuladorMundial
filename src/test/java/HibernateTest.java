@@ -949,7 +949,7 @@ public class HibernateTest {
 
     @After
     public void cleanup() {
-    //    SessionFactoryProvider.destroy();
+        SessionFactoryProvider.destroy();
         System.out.println("Terminando el After");
     }
 }
