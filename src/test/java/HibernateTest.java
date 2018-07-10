@@ -9,8 +9,6 @@ public class HibernateTest {
 
 
     protected TestService testService;
-    protected Partido partido;
-    protected Resultado resultado;
     protected Llave llave;
 
     protected Equipo uruguay;
@@ -939,21 +937,11 @@ public class HibernateTest {
 
 
 
-
-//        this.partido = new Partido();
-//        this.partido.setFecha(LocalDateTime.now());
-//        this.partido.setEquipoLocal(argentina);
-//        this.partido.setEquipoVisitante(islandia);
-//        this.partido.setEstadio("Otkrytie Arena");
-//        this.partido.setCiudad("Moscú");
-//        this.resultado = new Resultado();
 //        this.llave = new Llave();
 //        this.llave.setEquipoLocal(argentina);
 //        this.llave.setEquipoVisitante(islandia);
 //        this.llave.setGanador(argentina);
 
-//        this.testService.crearEntidad(partido);
-//        this.testService.crearEntidad(resultado);
 //        this.testService.crearEntidad(llave);
         torneo.armarLlavesDelTorneo();
         System.out.println("Terminando el Before");
@@ -961,7 +949,7 @@ public class HibernateTest {
 
     @After
     public void cleanup() {
-     //   SessionFactoryProvider.destroy();
+    //    SessionFactoryProvider.destroy();
         System.out.println("Terminando el After");
     }
 }

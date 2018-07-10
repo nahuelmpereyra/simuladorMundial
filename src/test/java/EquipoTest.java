@@ -11,6 +11,12 @@ public class EquipoTest extends HibernateTest {
     @Before
     public void prepare() {
         super.prepare();
+        Equipo local = new Equipo();
+        local.setNombre("local");
+        this.testService.crearEntidad(local);
+        Equipo visitante = new Equipo();
+        visitante.setNombre("visitante");
+        this.testService.crearEntidad(visitante);
     }
 
     @After
@@ -58,13 +64,22 @@ public class EquipoTest extends HibernateTest {
     @Test
     public void test_PartidosGanadosDeUnEquipo() {
         Runner.runInSession(() -> {
-            Equipo equipo = this.testService.recuperarPorNombre("Argentina");
-            assertThat(equipo.getPartidosGanados()).isEqualTo(0);
-            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
-            this.resultado.setGolesLocal(1);
-            this.resultado.setGolesVisitantes(0);
-            partidoRecuperado.setResultado(resultado);
-            assertThat(equipo.getPartidosGanados()).isEqualTo(1);
+
+            Equipo localRecuperado = this.testService.recuperarPorNombre("local");
+            Equipo visitanteRecuperado = this.testService.recuperarPorNombre("visitante");
+
+            assertThat(localRecuperado.getPartidosGanados()).isEqualTo(0);
+
+            Partido partido = new Partido();
+            partido.setEquipoLocal(localRecuperado);
+            partido.setEquipoVisitante(visitanteRecuperado);
+            Resultado resultado = new Resultado();
+            resultado.setGolesLocal(1);
+            resultado.setGolesVisitantes(0);
+            this.testService.crearEntidad(resultado);
+            this.testService.crearEntidad(partido);
+            partido.setResultado(resultado);
+            assertThat(localRecuperado.getPartidosGanados()).isEqualTo(1);
             return null;
         });
     }
@@ -72,13 +87,22 @@ public class EquipoTest extends HibernateTest {
     @Test
     public void test_PartidosEmpatadosDeUnEquipo() {
         Runner.runInSession(() -> {
-            Equipo equipo = this.testService.recuperarPorNombre("Argentina");
-            assertThat(equipo.getPartidosEmpatados()).isEqualTo(0);
-            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
-            this.resultado.setGolesLocal(1);
-            this.resultado.setGolesVisitantes(1);
-            partidoRecuperado.setResultado(resultado);
-            assertThat(equipo.getPartidosEmpatados()).isEqualTo(1);
+
+            Equipo localRecuperado = this.testService.recuperarPorNombre("local");
+            Equipo visitanteRecuperado = this.testService.recuperarPorNombre("visitante");
+
+            assertThat(localRecuperado.getPartidosEmpatados()).isEqualTo(0);
+
+            Partido partido = new Partido();
+            partido.setEquipoLocal(localRecuperado);
+            partido.setEquipoVisitante(visitanteRecuperado);
+            Resultado resultado = new Resultado();
+            resultado.setGolesLocal(1);
+            resultado.setGolesVisitantes(1);
+            this.testService.crearEntidad(resultado);
+            this.testService.crearEntidad(partido);
+            partido.setResultado(resultado);
+            assertThat(localRecuperado.getPartidosEmpatados()).isEqualTo(1);
             return null;
         });
     }
@@ -86,13 +110,21 @@ public class EquipoTest extends HibernateTest {
     @Test
     public void test_PartidosPerdidosDeUnEquipo() {
         Runner.runInSession(() -> {
-            Equipo equipo = this.testService.recuperarPorNombre("Argentina");
-            assertThat(equipo.getPartidosPerdidos()).isEqualTo(0);
-            Partido partidoRecuperado = this.testService.recuperarEntidad(Partido.class, this.partido.getId());
-            this.resultado.setGolesLocal(0);
-            this.resultado.setGolesVisitantes(1);
-            partidoRecuperado.setResultado(resultado);
-            assertThat(equipo.getPartidosPerdidos()).isEqualTo(1);
+            Equipo localRecuperado = this.testService.recuperarPorNombre("local");
+            Equipo visitanteRecuperado = this.testService.recuperarPorNombre("visitante");
+
+            assertThat(localRecuperado.getPartidosPerdidos()).isEqualTo(0);
+
+            Partido partido = new Partido();
+            partido.setEquipoLocal(localRecuperado);
+            partido.setEquipoVisitante(visitanteRecuperado);
+            Resultado resultado = new Resultado();
+            resultado.setGolesLocal(0);
+            resultado.setGolesVisitantes(1);
+            this.testService.crearEntidad(resultado);
+            this.testService.crearEntidad(partido);
+            partido.setResultado(resultado);
+            assertThat(localRecuperado.getPartidosPerdidos()).isEqualTo(1);
             return null;
         });
     }
