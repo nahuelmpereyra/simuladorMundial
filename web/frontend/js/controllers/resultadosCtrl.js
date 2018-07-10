@@ -11,13 +11,15 @@ class ResultadosController {
     this.llaves = []
     this.llavesCuartos = []
     this.llaveSemi = []
-    this.llavesFinal = null
     this.hayLlavesArmadas()
     this.todosLosEquipos()
     this.todosLosPartidos()
     this.todosLosPrimeros()
     this.todosLosSegundos()
     this.listarLlavesOctavos()
+    this.listarLlavesCuartos()
+    this.listarLlavesSemi()
+    this.listarLlavesFinal()
     this.errorHandler = (response) => {
       if (response.data) {
         this.notificarError(response.data.error)
@@ -86,13 +88,6 @@ class ResultadosController {
     }
   }
 
-  listarLlavesOctavos() {
-    this.resultadoService.listarLlavesOctavos()
-      .then((response) => {
-        this.llaves = response.data
-      }, this.errorHandler)
-  }
-
   elegirGanador(llave, equipo) {
     this.resultadoService.elegirGanador(llave, equipo)
       .then((response) => {
@@ -128,6 +123,13 @@ class ResultadosController {
 
   llaveFinal() {
     return this.llavesFinal
+  }
+
+  listarLlavesOctavos() {
+    this.resultadoService.listarLlavesOctavos()
+      .then((response) => {
+        this.llaves = response.data
+      }, this.errorHandler)
   }
 
   listarLlavesCuartos() {
