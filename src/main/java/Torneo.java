@@ -91,21 +91,21 @@ public class Torneo {
 
         llaveOctavos1.setEquipoLocal(equipoEnPosicionDeGrupo(1,"A"));
         llaveOctavos1.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"B"));
-        llaveOctavos2.setEquipoLocal(equipoEnPosicionDeGrupo(1,"B"));
-        llaveOctavos2.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"A"));
+        llaveOctavos2.setEquipoLocal(equipoEnPosicionDeGrupo(1,"C"));
+        llaveOctavos2.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"D"));
 
-        llaveOctavos3.setEquipoLocal(equipoEnPosicionDeGrupo(1,"C"));
-        llaveOctavos3.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"D"));
-        llaveOctavos4.setEquipoLocal(equipoEnPosicionDeGrupo(1,"D"));
-        llaveOctavos4.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"C"));
+        llaveOctavos3.setEquipoLocal(equipoEnPosicionDeGrupo(1,"E"));
+        llaveOctavos3.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"F"));
+        llaveOctavos4.setEquipoLocal(equipoEnPosicionDeGrupo(1,"G"));
+        llaveOctavos4.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"H"));
 
-        llaveOctavos5.setEquipoLocal(equipoEnPosicionDeGrupo(1,"E"));
-        llaveOctavos5.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"F"));
-        llaveOctavos6.setEquipoLocal(equipoEnPosicionDeGrupo(1,"F"));
-        llaveOctavos6.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"E"));
+        llaveOctavos5.setEquipoLocal(equipoEnPosicionDeGrupo(1,"B"));
+        llaveOctavos5.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"A"));
+        llaveOctavos6.setEquipoLocal(equipoEnPosicionDeGrupo(1,"D"));
+        llaveOctavos6.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"C"));
 
-        llaveOctavos7.setEquipoLocal(equipoEnPosicionDeGrupo(1,"G"));
-        llaveOctavos7.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"H"));
+        llaveOctavos7.setEquipoLocal(equipoEnPosicionDeGrupo(1,"F"));
+        llaveOctavos7.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"E"));
         llaveOctavos8.setEquipoLocal(equipoEnPosicionDeGrupo(1,"H"));
         llaveOctavos8.setEquipoVisitante(equipoEnPosicionDeGrupo(2,"G"));
 
