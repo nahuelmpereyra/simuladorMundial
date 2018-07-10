@@ -18,7 +18,7 @@
 
     <div class="row">
 
-        <div class="col-lg-8">
+        <div class="col-lg-9">
 
             <!-- Partidos -->
             <div class="table-responsive">
@@ -28,20 +28,22 @@
                             <th class="text-center">Equipo local</th>
                             <th class="text-center">Equipo visitante</th>
                             <th class="text-center">Resultado</th>
-                            <th class="text-center">Fecha</th>
+                            <th class="text-center">Fecha y hora</th>
                             <th class="text-center">Estadio</th>
+                            <th class="text-center">Ciudad</th>
                             <th>&nbsp;</th>
                         </tr>
                         <tr data-ng-repeat="partido in ctrl.partidos">
-                            <td class="col-xs-3 text-center">
+                            <td class="col-xs-2 text-center">
                                 <img ng-src="{{partido.equipoLocal.imagenSrc}}" width="20px" /> {{partido.equipoLocal.nombre}}
                             </td>
-                            <td class="col-xs-3 text-center">
+                            <td class="col-xs-2 text-center">
                                 <img ng-src="{{partido.equipoVisitante.imagenSrc}}" width="20px" /> {{partido.equipoVisitante.nombre}}
                             </td>
-                            <td class="col-xs-2 text-center">Resultado</td>
-                            <td class="col-xs-2 text-center">{{partido.fecha}}</td>
+                            <td class="col-xs-1 text-center">{{partido.resultado.golesLocal}} - {{partido.resultado.golesVisitantes}}</td>
+                            <td class="col-xs-2 text-center">{{partido.fecha.date.day}}/{{partido.fecha.date.month}}/{{partido.fecha.date.year}} {{partido.fecha.time.hour}}:{{partido.fecha.time.minute}}</td>
                             <td class="col-xs-2 text-center">{{partido.estadio}}</td>
+                            <td class="col-xs-2 text-center">{{partido.ciudad}}</td>
                             <td nowrap class="col-xs-2">
                                 <button type="button" class="btn equipos-btn-eliminar" data-ng-click="ctrl.eliminarPartido(partido);" aria-label="Eliminar">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -55,13 +57,13 @@
 
 
         <!-- Agregar partido -->
-        <div class="col-lg-4 well well-lg">
+        <div class="col-lg-3 well well-lg">
             <h2>Agregar Partido</h2>
             <div>
                 <form name="agregarPartidoForm" role="form" ng-submit="ctrl.cargarPartido()">
                     <fieldset>
                         <div class="form-group">
-                            <label for="nombre">Fecha y hora</label>
+                            <label for="fecha">Fecha y hora</label>
                             <p class="input-group">
                                 <input type="text" class="form-control" clear-text="Limpiar" current-text="Hoy" close-text="Cerrar" datepicker-popup="dd/MM/yyyy HH:mm:ss"
                                     ng-model="ctrl.partido.fecha" is-open="ctrl.calendarioAbierto" datepicker-options="ctrl.dateOptions"
@@ -75,19 +77,24 @@
                         </div>
                         <div ng-controller="EquipoController as equipoCtrl">
                             <div class="form-group">
-                                <label for="grupo">Equipo local</label>
+                                <label for="equipoLocal">Equipo local</label>
                                 <select name="equipoLocal" class="form-control" ng-model="ctrl.partido.equipoLocal" ng-options="equipo.nombre for equipo in equipoCtrl.equipos"
                                     required="true"></select>
                             </div>
                             <div class="form-group">
-                                <label for="grupo">Equipo visitante</label>
+                                <label for="equipoVisitante">Equipo visitante</label>
                                 <select name="equipoVisitante" class="form-control" ng-model="ctrl.partido.equipoVisitante" ng-options="equipo.nombre for equipo in equipoCtrl.equipos"
                                     required="true" ng-disabled="!ctrl.partido.equipoLocal.nombre"></select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nombre">Estadio</label>
+                            <label for="estadio">Estadio</label>
                             <input type="text" id="estadio" ng-model="ctrl.partido.estadio" placeholder="Ingresá estadio" class="form-control" required="true">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ciudad">Ciudad</label>
+                            <input type="text" id="ciudad" ng-model="ctrl.partido.ciudad" placeholder="Ingresá ciudad" class="form-control" required="true">
                         </div>
                         <button type="submit" class="btn btn-primary">Cargar Partido</button>
 
