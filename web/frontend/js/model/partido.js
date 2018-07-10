@@ -4,5 +4,6 @@ class Partido {
         this.equipoLocal = new Equipo()
         this.equipoVisitante = new Equipo()
         this.estadio = ""
+        this.ciudad = ""
         }
 }

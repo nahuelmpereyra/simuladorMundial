@@ -22,6 +22,9 @@ public class Partido {
     private Equipo equipoVisitante;
 
     private String estadio;
+
+    private String ciudad;
+
     @OneToOne
     @Cascade(CascadeType.ALL)
     private Resultado resultado = new Resultado();
@@ -47,6 +50,8 @@ public class Partido {
         this.estadio = estadio;
     }
 
+    public void setCiudad(String ciudad) { this.ciudad = ciudad; }
+
     public Resultado getResultado() {
         return resultado;
     }
@@ -68,5 +73,5 @@ public class Partido {
         this.resultado = resultado;
         Torneo.getTorneo().actualizarEquipos(resultadoAnterior, this);
     }
-
+    
 }
