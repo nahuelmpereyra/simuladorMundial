@@ -12,6 +12,11 @@
     background-color: crimson;
 }
 
+.partido-btn-verInfo {
+    color: white;
+    background-color: rgb(92, 175, 92);
+}
+
 .col-1-8 {
     width: 12.5%;
     float: left;
@@ -113,4 +118,21 @@ ul.matchup li {
     .champ {
         width: 100%;
     }
+}
+
+.equipoLocal {
+    display: inline-block;
+    width: 35%;
+    text-align: left
+}
+
+.equipoVisitante {
+    display: inline-block;
+    width: 35%;
+    text-align: right
+}
+
+.resultado {
+    max-width: 25px;
+    text-align: center
 }

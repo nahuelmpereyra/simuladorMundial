@@ -5,6 +5,7 @@ class ResultadosController {
     this.resultadoService = resultadoService
     this.equipoService = equipoService
     this.partidoService = partidoService
+    this.partidoParaVer = new Partido()
     this.growl = growl
     this.primeros = []
     this.segundos = []
@@ -159,6 +160,11 @@ class ResultadosController {
       .then((response) => {
         this.llavesArmadas = response.data
       }, this.errorHandler)
+  }
+
+  verInfoDePartido(partido){
+    this.partidoParaVer = Object.assign({}, partido);
+    $("#verInfoPartidoModal").modal({})
   }
 
 }
