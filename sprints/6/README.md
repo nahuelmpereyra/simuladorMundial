@@ -20,7 +20,7 @@ Nro | Nombre | Legajo | Mail
 
 ### BurnDown Chart
 
-![Screenshot](sprints/6/BD6.PNG)
+![Screenshot](BD6.PNG)
 
 ### Sprints
 
