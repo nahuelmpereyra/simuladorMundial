@@ -1,10 +1,4 @@
-<title>Cargar Equipo</title>
-
-<!-- Sólo para pruebas -->
-<a ui-sref="cargarResultados">Ir a Cargar Resultados</a>
-<a ui-sref="cargarPartidos">Ir a Cargar Partidos</a>
-<br>
-
+<title>Gestión de Equipos</title>
 <div class="container" ng-controller="EquipoController as ctrl">
     <div class="page-header">
         <h1>Gestión de Equipos</h1>
@@ -34,7 +28,7 @@
 
             <!-- Equipos -->
             <div class="table-responsive">
-                <table class="table table-striped table-hover table-condensed">
+                <table class="table  table-hover table-condensed">
                     <tbody>
                         <tr>
                             <th class="text-center">País</th>
@@ -84,12 +78,15 @@
                             <label for="esCabezaDeSerie">Es cabeza de serie</label>
                             <input ng-model="ctrl.equipoACargar.esCabezaDeSerie" type="checkbox" id="defaultCheck1">
                         </div>
-                        <button type="submit" class="btn btn-primary" data-ng-click="ctrl.cargarEquipo()">Cargar Equipo</button>
+                        <button type="submit" class="btn btn-success" data-ng-click="ctrl.cargarEquipo()">Cargar Equipo</button>
 
                     </fieldset>
                 </form>
             </div>
         </div>
+
+        <button ui-sref="cargarPartidos" class="btn btn-success">Gestión de Partidos</button>
+
 
     </div>
 

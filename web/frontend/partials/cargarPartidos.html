@@ -1,9 +1,4 @@
-<title>Cargar Partido</title>
-
-<!-- Sólo para pruebas -->
-<a ui-sref="cargarResultados">Ir a Cargar Resultados</a>
-<a ui-sref="cargarEquipo">Ir a Cargar Equipos</a>
-<br>
+<title>Gestión de Partidos</title>
 
 <div class="container" ng-controller="PartidoController as ctrl">
     <div class="page-header">
@@ -22,7 +17,7 @@
 
             <!-- Partidos -->
             <div class="table-responsive">
-                <table class="table table-striped table-hover table-condensed">
+                <table class="table table-hover table-condensed">
                     <tbody>
                         <tr>
                             <th class="text-center">Equipo local</th>
@@ -96,10 +91,11 @@
                             <label for="ciudad">Ciudad</label>
                             <input type="text" id="ciudad" ng-model="ctrl.partido.ciudad" placeholder="Ingresá ciudad" class="form-control" required="true">
                         </div>
-                        <button type="submit" class="btn btn-primary">Cargar Partido</button>
+                        <button type="submit" class="btn btn-success">Cargar Partido</button>
 
                     </fieldset>
                 </form>
             </div>
         </div>
+        <button ui-sref="cargarEquipo" class="btn btn-success">Gestión de Equipos</button>
     </div>
