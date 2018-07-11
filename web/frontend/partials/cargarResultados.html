@@ -1,16 +1,22 @@
-<a ui-sref="cargarEquipo">Ir a Cargar Equipos</a>
-<a ui-sref="cargarPartidos">Ir a Cargar Partidos</a>
+<img align="right" src="../imagenes/logo_rusia2018.png">
+<div class="page-header">
+    <h1>
+        Simulador Mundial
+        <small>Rusia 2018</small>
+    </h1>
+</div>
+<br>
 <br>
 
 <div data-ng-controller="ResultadosController as ctrl">
     <ul class="nav nav-pills nav-stacked">
         <li data-ng-repeat="grupo in ctrl.grupos">
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <br>
                 <b>Grupo {{grupo}}</b>
                 <br>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover table-condensed">
+                <div>
+                    <table class="table-bordered table-hover table-condensed col-sm-8">
                         <tbody>
                             <tr>
                                 <th>Equipo</th>
@@ -55,33 +61,29 @@
                             </tr>
                         </tbody>
                     </table>
-
-
-                    <ul data-ng-repeat="partido in ctrl.partidos" ng-show="ctrl.esEquipoDeGrupo(partido.equipoLocal, grupo)" style="list-style-type:none">
-                        <li>
-                            <div>
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <span class="col-md-2 control-label">{{partido.equipoLocal.nombre}}</span>
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <div class="col-md-3">
-                                                    <input ng-change="ctrl.actualizarResultado(partido)" ng-model="partido.resultado.golesLocal" type="text" id="golesLocal"
-                                                        class="form-control" required>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input ng-change="ctrl.actualizarResultado(partido)" ng-model="partido.resultado.golesVisitantes" type="text" id="golesVisitante"
-                                                        class="form-control" required>
-                                                </div>
-                                                <span class="col-md-3 control-label">{{partido.equipoVisitante.nombre}}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
-
+                    <br>
+                    <div class="col-md-8">
+                        <br>
+                        <ul data-ng-repeat="partido in ctrl.partidos" ng-show="ctrl.esEquipoDeGrupo(partido.equipoLocal, grupo)" style="list-style-type:none">
+                            <li>
+                                <div>
+                                    <label class="equipoLocal">
+                                        <img ng-src="{{partido.equipoLocal.imagenSrc}}" width="20px" /> {{partido.equipoLocal.nombre}}</label>
+                                    <input class="resultado" ng-change="ctrl.actualizarResultado(partido)" ng-model="partido.resultado.golesLocal" type="text"
+                                        id="golesLocal" required>
+                                    <input class="resultado" ng-change="ctrl.actualizarResultado(partido)" ng-model="partido.resultado.golesVisitantes" type="text"
+                                        id="golesVisitantes" required>
+                                    <label class="equipoVisitante">{{partido.equipoVisitante.nombre}}
+                                        <img ng-src="{{partido.equipoVisitante.imagenSrc}}" width="20px" />
+                                    </label>
+                                    <button type="button" class="btn partido-btn-verInfo" data-ng-click="ctrl.verInfoDePartido(partido)" aria-label="verInfo">
+                                        <i class="fa fa-info" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <hr>
+                            </li>
+                        </ul>
+                    </div>
 
                 </div>
                 <br>
@@ -94,6 +96,8 @@
             </div>
         </li>
     </ul>
+
+    <hr>
 
     <!-- BRACKET -->
 
@@ -298,5 +302,52 @@
             </div>
         </div>
 
+        <div class="col-1-8 champ">
+            <div class="round-four">
+                <img ng-show="ctrl.llaveFinal().ganador != null" src="../imagenes/worldcup.png" width="20%">
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- MODEL WINDOW PARA VER INFO DE UN PARTIDO -->
+    <div id="verInfoPartidoModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Ver información de partido</h4>
+                </div>
+                <div class="modal-body">
+                    <h3>
+                        <img ng-src="{{ctrl.partidoParaVer.equipoLocal.imagenSrc}}" width="30px" /> {{ctrl.partidoParaVer.equipoLocal.nombre}}
+                        <br>
+                        <img ng-src="{{ctrl.partidoParaVer.equipoVisitante.imagenSrc}}" width="30px" /> {{ctrl.partidoParaVer.equipoVisitante.nombre}} </h3>
+                    <br>
+                    <form name="modificarEquipoForm" role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="fecha">Fecha y hora: </label>
+                                <span for="fecha">{{ctrl.partidoParaVer.fecha.date.day}}/{{ctrl.partidoParaVer.fecha.date.month}}/{{ctrl.partidoParaVer.fecha.date.year}}
+                                    {{ctrl.partidoParaVer.fecha.time.hour}}:{{ctrl.partidoParaVer.fecha.time.minute}}
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label for="estadio">Estadio: </label>
+                                <span for="estadio">{{ctrl.partidoParaVer.estadio}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ciudad">Ciudad: </label>
+                                <span for="ciudad">{{ctrl.partidoParaVer.ciudad}}</span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Volver</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

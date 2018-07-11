@@ -5,19 +5,22 @@ class ResultadosController {
     this.resultadoService = resultadoService
     this.equipoService = equipoService
     this.partidoService = partidoService
+    this.partidoParaVer = new Partido()
     this.growl = growl
     this.primeros = []
     this.segundos = []
     this.llaves = []
     this.llavesCuartos = []
     this.llaveSemi = []
-    this.llavesFinal = null
     this.hayLlavesArmadas()
     this.todosLosEquipos()
     this.todosLosPartidos()
     this.todosLosPrimeros()
     this.todosLosSegundos()
     this.listarLlavesOctavos()
+    this.listarLlavesCuartos()
+    this.listarLlavesSemi()
+    this.listarLlavesFinal()
     this.errorHandler = (response) => {
       if (response.data) {
         this.notificarError(response.data.error)
@@ -86,13 +89,6 @@ class ResultadosController {
     }
   }
 
-  listarLlavesOctavos() {
-    this.resultadoService.listarLlavesOctavos()
-      .then((response) => {
-        this.llaves = response.data
-      }, this.errorHandler)
-  }
-
   elegirGanador(llave, equipo) {
     this.resultadoService.elegirGanador(llave, equipo)
       .then((response) => {
@@ -130,6 +126,13 @@ class ResultadosController {
     return this.llavesFinal
   }
 
+  listarLlavesOctavos() {
+    this.resultadoService.listarLlavesOctavos()
+      .then((response) => {
+        this.llaves = response.data
+      }, this.errorHandler)
+  }
+
   listarLlavesCuartos() {
     this.resultadoService.listarLlavesCuartos()
       .then((response) => {
@@ -157,6 +160,11 @@ class ResultadosController {
       .then((response) => {
         this.llavesArmadas = response.data
       }, this.errorHandler)
+  }
+
+  verInfoDePartido(partido){
+    this.partidoParaVer = Object.assign({}, partido);
+    $("#verInfoPartidoModal").modal({})
   }
 
 }
